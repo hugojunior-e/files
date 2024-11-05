@@ -230,6 +230,7 @@
     }
 
     async function jsRemover(e,iid) {
+      if (confirm('confirma exclusao da musga?')) {
         const response = await fetch(url + "/" + e, {
                 method: 'DELETE',
                 headers: {
@@ -244,6 +245,7 @@
             } else {
                 document.getElementById(iid).remove();
             }
+      }
     }    
 </script>
 
