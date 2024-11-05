@@ -58,6 +58,27 @@
     const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
     const url = 'https://parseapi.back4app.com/classes/infos'; // Substitua pela URL da API
 
+
+    function dataMaior(dataString) {
+        // Divide a string em dia, mês e ano
+        const [dia, mes, ano] = dataString.split('/').map(Number);
+
+        // Cria um objeto Date com o ano, mês (subtrai 1, pois o mês é baseado em zero) e dia
+        const data = new Date(ano, mes - 1, dia);
+
+        // Cria um objeto Date para a data atual (hoje)
+        const hoje = new Date();
+
+        // Zera o horário das duas datas para comparar apenas as datas
+        hoje.setHours(0, 0, 0, 0);
+        data.setHours(0, 0, 0, 0);
+
+        // Verifica se a data é maior que hoje
+        if (data >= hoje) {
+          return 1;
+        }
+        return 0;
+    }
     async function fetchData() {
         try {
             const response = await fetch(url, {
@@ -86,13 +107,55 @@
         document.getElementById('EBD').innerHTML = '';
 
         data['results'].forEach(item => {
-            if ( item.info1 === 'LDH-REPERTORIO' ) {
-                document.getElementById(item.info4).innerHTML += "<table><tr><td><img src=lixo-32.png></td><td><a href=" + item.info3 + " target=__blank>" + item.info2 + "</a></td></tr></table>"
+            if ( item.info1 === 'LDH-REPERTORIO' && dataMaior(item.info5) == 1 ) {
+                document.all.data_repertorio.innerHTML = item.info5;
+                document.getElementById(item.info4).innerHTML += "<table><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + item.objectId + "')\"></td><td><a href=" + item.info3 + " target=__blank>" + item.info2 + "</a></td></tr></table>"
             }
         });
     }
 
-    fetchData();
+    async function jsAdicionar(e) {
+        nome = prompt('Nome da Musica');
+        linkYoutube = prompt('youtube');
+
+        data = {
+            "info1": "LDH-REPERTORIO",
+            "info2": nome,
+            "info3": linkYoutube,
+            "info4": e
+        };
+
+        const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-REST-API-Key': apiKey,
+                    'X-Parse-Application-Id': appId
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Erro: ${response.status}`);
+            }
+            window.location.reload();
+    }
+
+    async function jsRemover(e) {
+        const response = await fetch(url + "/" + e, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-REST-API-Key': apiKey,
+                    'X-Parse-Application-Id': appId
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Erro: ${response.status}`);
+            }
+            window.location.reload();
+    }    
 </script>
 
 </head>
@@ -100,29 +163,30 @@
 
 <body>
   <div class="container">
-    <h1>24/11/2024</h1>
+    <h1 id="data_repertorio"></h1>
     <div class="card">
       <h2>EBD</h2>
-      <div class="links" id=EBD>
-
-      </div>
+      <div class="links" id=EBD>      </div>
+      <div class="links"><input type="button" value="adicionar" onclick="jsAdicionar('EBD')"></div>
     </div>
 
     <hr>
     <div class="card">
       <h2>NOITE</h2>
-      <div class="links" id=CULTO>
-      </div>
+      <div class="links" id=CULTO>      </div>
+      <div class="links"><input type="button" value="adicionar" onclick="jsAdicionar('CULTO')"></div>
     </div>
     
     <hr>
     <div class="card">
       <h2>PÓS MSG</h2>
-      <div class="links" id=POS>
-      </div>
+      <div class="links" id=POS>      </div>
+      <div class="links"><input type="button" value="adicionar" onclick="jsAdicionar('POS')"></div>
     </div>
 
     
   </div>
+
+  <script> fetchData(); </script>
 </body>
 </html>
