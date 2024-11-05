@@ -52,22 +52,66 @@
       color: #ff6666;
     }
   </style>
+
+<script>
+    const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
+    const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
+    const url = 'https://parseapi.back4app.com/classes/infos'; // Substitua pela URL da API
+
+    async function fetchData() {
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-REST-API-Key': apiKey,
+                    'X-Parse-Application-Id': appId
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Erro: ${response.status}`);
+            }
+
+            const data = await response.json();
+            populateTable(data); // Chama a função para preencher a tabela com os dados
+        } catch (error) {
+            console.error('Erro ao buscar dados:', error);
+        }
+    }
+
+    function populateTable(data) {
+        document.getElementById('POS').innerHTML = '';
+        document.getElementById('CULTO').innerHTML = '';
+        document.getElementById('EBD').innerHTML = '';
+
+        data['results'].forEach(item => {
+            if ( item.info1 === 'LDH-REPERTORIO' ) {
+                document.getElementById(item.info4).innerHTML += "<a>" + item.info2 + "</a>"
+            }
+        });
+    }
+
+    fetchData();
+</script>
+
 </head>
+
+
 <body>
   <div class="container">
     <h1>24/11/2024</h1>
     <div class="card">
       <h2>EBD</h2>
-      <div class="links">
-        <a href="https://youtu.be/LoB-XgXSNv8" target="_blank">HINO 113 - Achei um bom Amigo</a>
-        <a href="https://youtu.be/KBNOL_uVMDE" target="_blank">HINO 269 - Alvo Mais que Neve</a>
+      <div class="links" id=EBD>
+
       </div>
     </div>
 
     <hr>
     <div class="card">
       <h2>NOITE</h2>
-      <div class="links">
+      <div class="links" id=CULTO>
         <a href="https://youtu.be/NYFcTj-KmvI" target="_blank">Pai Nosso</a>
         <a href="https://youtu.be/iOCCVPepUb8" target="_blank">Deus Imparavel</a>
       </div>
@@ -76,8 +120,7 @@
     <hr>
     <div class="card">
       <h2>PÓS MSG</h2>
-      <div class="links">
-        <a href="https://youtu.be/h8tOJIvCM-s" target="_blank">Digno de Gloria</a>
+      <div class="links" id=POS>
       </div>
     </div>
 
@@ -85,3 +128,6 @@
   </div>
 </body>
 </html>
+
+
+
