@@ -54,6 +54,9 @@
   </style>
 
 <script>
+    dados_global = {};
+    global_id = 0;
+
     const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
     const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
     const url = 'https://parseapi.back4app.com/classes/infos'; // Substitua pela URL da API
@@ -105,11 +108,12 @@
         document.getElementById('POS').innerHTML = '';
         document.getElementById('CULTO').innerHTML = '';
         document.getElementById('EBD').innerHTML = '';
-
         data['results'].forEach(item => {
             if ( item.info1 === 'LDH-REPERTORIO' && dataMaior(item.info5) == 1 ) {
+                global_id = global_id + 1;
                 document.all.data_repertorio.innerHTML = item.info5;
-                document.getElementById(item.info4).innerHTML += "<table><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + item.objectId + "')\"></td><td><a href=" + item.info3 + " target=__blank>" + item.info2 + "</a></td></tr></table>"
+                iid = "tb_" + String(global_id);
+                document.getElementById(item.info4).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + item.objectId + "','" + iid + "')\"></td><td><a href=" + item.info3 + " target=__blank>" + item.info2 + "</a></td></tr></table>"
             }
         });
     }
@@ -137,12 +141,18 @@
             });
 
             if (!response.ok) {
-                throw new Error(`Erro: ${response.status}`);
+                alert(`Erro: ${response.status}`);
+            } else {
+                dados_global = response.json();
+                dados_global.then(   valor => {  
+                    global_id = global_id + 1;
+                    iid = "tb_" + String(global_id);
+                    document.getElementById(e).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + valor['objectId'] + "','" + iid + "')\"></td><td><a href=" + linkYoutube + " target=__blank>" + nome + "</a></td></tr></table>"
+                });
             }
-            window.location.reload();
     }
 
-    async function jsRemover(e) {
+    async function jsRemover(e,iid) {
         const response = await fetch(url + "/" + e, {
                 method: 'DELETE',
                 headers: {
@@ -153,9 +163,10 @@
             });
 
             if (!response.ok) {
-                throw new Error(`Erro: ${response.status}`);
+                alert(`Erro: ${response.status}`);
+            } else {
+                document.getElementById(iid).remove();
             }
-            window.location.reload();
     }    
 </script>
 
