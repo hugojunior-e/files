@@ -51,6 +51,71 @@
     .links a:hover {
       color: #ff6666;
     }
+
+
+        .modal {
+            display: none; /* Esconde o modal por padrão */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com transparência */
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+
+        /* Estilos do formulário */
+        form label, form input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        form input[type="text"],
+        form input[type="email"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+
+
   </style>
 
 <script>
@@ -119,16 +184,26 @@
     }
 
     async function jsAdicionar(e) {
-        nome = prompt('Nome da Musica');
-        linkYoutube = prompt('youtube');
+        var modal = document.getElementById("modal");
+        modal.style.display = "block";
+        document.all.tipo.value = e;
+        document.all.name.value = '';
+        document.all.youtube.value = '';
+    }
 
+    async function jsSalvar() {
         data = {
             "info1": "LDH-REPERTORIO",
-            "info2": nome,
-            "info3": linkYoutube,
-            "info4": e,
+            "info2": document.all.name.value,
+            "info3": document.all.youtube.value,
+            "info4": document.all.tipo.value,
             "info5": document.all.data_repertorio.innerHTML
         };
+
+        if ( document.all.name.value == '' || document.all.youtube.value == '' ) {
+          alert('Preencha todas as informacoes...');
+          return;
+        }
 
         const response = await fetch(url, {
                 method: 'POST',
@@ -147,9 +222,11 @@
                 dados_global.then(   valor => {  
                     global_id = global_id + 1;
                     iid = "tb_" + String(global_id);
-                    document.getElementById(e).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + valor['objectId'] + "','" + iid + "')\"></td><td><a href=" + linkYoutube + " target=__blank>" + nome + "</a></td></tr></table>"
+                    document.getElementById( document.all.tipo.value ).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + valor['objectId'] + "','" + iid + "')\"></td><td><a href=" + document.all.youtube.value + " target=__blank>" + document.all.name.value + "</a></td></tr></table>"
                 });
             }
+
+            document.all.modal.style.display = 'none';
     }
 
     async function jsRemover(e,iid) {
@@ -195,9 +272,26 @@
       <div class="links" id=POS>      </div>
       <div class="links"><input type="button" value="adicionar" onclick="jsAdicionar('POS')"></div>
     </div>
-
-    
   </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.all.modal.style.display = 'none'">&times;</span>
+            <h2>Formulário de Contato</h2>
+            <form>
+                <input type=hidden id=tipo>
+
+                <label for="name">Musica:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="youtube">Email:</label>
+                <input type="text" id="youtube" name="youtube" required>
+
+                <button type="button" onclick="jsSalvar()">Enviar</button>
+            </form>
+        </div>
+    </div>
+
 
   <script> fetchData(); </script>
 </body>
