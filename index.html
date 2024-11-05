@@ -17,7 +17,7 @@
     }
     .container {
       text-align: center;
-      max-width: 600px;
+      max-width: 800px;
       padding: 20px;
       background-color: #ffffffdd;
       border-radius: 15px;
@@ -87,7 +87,7 @@
 
         data['results'].forEach(item => {
             if ( item.info1 === 'LDH-REPERTORIO' ) {
-                document.getElementById(item.info4).innerHTML += "<a href=" + item.info3 + " target=__blank>" + item.info2 + "</a>"
+                document.getElementById(item.info4).innerHTML += "<table><tr><td><img src=lixo-32.png></td><td><a href=" + item.info3 + " target=__blank>" + item.info2 + "</a></td></tr></table>"
             }
         });
     }
@@ -126,6 +126,3 @@
   </div>
 </body>
 </html>
-
-
-
