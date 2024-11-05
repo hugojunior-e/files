@@ -87,7 +87,7 @@
 
         data['results'].forEach(item => {
             if ( item.info1 === 'LDH-REPERTORIO' ) {
-                document.getElementById(item.info4).innerHTML += "<a>" + item.info2 + "</a>"
+                document.getElementById(item.info4).innerHTML += "<a href=" + item.info3 + " target=__blank>" + item.info2 + "</a>"
             }
         });
     }
@@ -112,8 +112,6 @@
     <div class="card">
       <h2>NOITE</h2>
       <div class="links" id=CULTO>
-        <a href="https://youtu.be/NYFcTj-KmvI" target="_blank">Pai Nosso</a>
-        <a href="https://youtu.be/iOCCVPepUb8" target="_blank">Deus Imparavel</a>
       </div>
     </div>
     
