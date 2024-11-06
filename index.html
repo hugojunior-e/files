@@ -181,7 +181,7 @@
             data['results'].forEach(item => {
                 if (item.info1 === 'LDH-REPERTORIO' && dataMaior(item.info5) == 1) {
                     global_id = global_id + 1;
-                    //document.all.data_repertorio.innerHTML = item.info5;
+                    document.all.data_repertorio.innerHTML = item.info5;
                     iid = "tb_" + String(global_id);
                     document.getElementById(item.info4).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + item.objectId + "','" + iid + "')\"></td><td><a href=" + item.info3 + " target=__blank>" + item.info2 + "</a></td></tr></table>"
                 }
@@ -275,7 +275,7 @@
         </fieldset>
 
         <fieldset>
-            <legend>LINKS</legend>
+            <legend>LINKS - <span id=data_repertorio></span> </legend>
             <a href="https://www.youtube.com/@MinisterioLugardeHabitacao" target="_blank" class="link-imagem">
                 <img src="yt.png" alt="Link para CANAL">
             </a>   
