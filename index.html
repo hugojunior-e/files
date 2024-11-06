@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fieldsets Verticais</title>
+    <link rel="icon" href="ldh.jpg" type="image/jpg">
+    <title>LDH-Informativos</title>
     <style>
         .links a {
             display: block;
@@ -118,6 +119,12 @@
         .close:focus {
             color: #000;
             text-decoration: none;
+        }        
+
+        .link-imagem img {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px; /* Deixa os cantos arredondados, opcional */
         }        
     </style>
 
@@ -255,7 +262,6 @@
 </head>
 
 <body>
-
     <div class="container">
         <fieldset>
             <legend><input type="button" value="adicionar" onclick="jsAdicionar('EBD')"> || EBD</legend>
@@ -271,6 +277,13 @@
         <fieldset>
             <legend><input type="button" value="adicionar" onclick="jsAdicionar('POS')"> || FINAL</legend>
             <div class="links" id="POS"></div>
+        </fieldset>
+
+        <fieldset>
+            <legend>LINKS</legend>
+            <a href="https://www.youtube.com/@MinisterioLugardeHabitacao" target="_blank" class="link-imagem">
+                <img src="yt.png" alt="Link para CANAL">
+            </a>   
         </fieldset>
     </div>
 
@@ -291,7 +304,10 @@
                 <button type="button" onclick="jsSalvar()">Enviar</button>
             </form>
         </div>
+
     </div>
+
+
 
     <script> fetchData(); </script>
 </body>
