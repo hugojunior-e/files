@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fieldsets Verticais</title>
+    <style>
+    .links a {
+      display: block;
+      color: #3366cc;
+      text-decoration: none;
+      font-size: 1.2em;
+      margin: 10px 0;
+      transition: color 0.3s;
+    }
+    .links a:hover {
+      color: #ff6666;
+    }        
+        /* Estilos básicos da página */
+        body {
+            font-family: Arial, sans-serif;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;            
+        }
+
+        /* Container para os fieldsets */
+        .container {
+            display: flex;
+            flex-direction: column; /* Coloca os fieldsets verticalmente */
+            gap: 20px; /* Espaçamento entre os fieldsets */
+            max-width: 500px;
+            width: 100%;
+        }
+
+        /* Estilos dos fieldsets */
+        fieldset {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background: #fff;
+            padding: 20px;
+        }
+
+        /* Estilos da legenda dos fieldsets */
+        legend {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #fff;
+            background-color: #4CAF50;
+            border-radius: 8px;
+            padding: 5px 15px;
+            text-transform: uppercase;
+        }
+    </style>
+
+<script>
+    dados_global = {};
+    global_id = 0;
+
+    const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
+    const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
+    const url = 'https://parseapi.back4app.com/classes/infos'; // Substitua pela URL da API
+
+
+    function dataMaior(dataString) {
+        // Divide a string em dia, mês e ano
+        const [dia, mes, ano] = dataString.split('/').map(Number);
+
+        // Cria um objeto Date com o ano, mês (subtrai 1, pois o mês é baseado em zero) e dia
+        const data = new Date(ano, mes - 1, dia);
+
+        // Cria um objeto Date para a data atual (hoje)
+        const hoje = new Date();
+
+        // Zera o horário das duas datas para comparar apenas as datas
+        hoje.setHours(0, 0, 0, 0);
+        data.setHours(0, 0, 0, 0);
+
+        // Verifica se a data é maior que hoje
+        if (data >= hoje) {
+          return 1;
+        }
+        return 0;
+    }
+    async function fetchData() {
+        try {
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-REST-API-Key': apiKey,
+                    'X-Parse-Application-Id': appId
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error(`Erro: ${response.status}`);
+            }
+
+            const data = await response.json();
+            populateTable(data); // Chama a função para preencher a tabela com os dados
+        } catch (error) {
+            console.error('Erro ao buscar dados:', error);
+        }
+    }
+
+    function populateTable(data) {
+        document.getElementById('POS').innerHTML = '';
+        document.getElementById('CULTO').innerHTML = '';
+        document.getElementById('EBD').innerHTML = '';
+        data['results'].forEach(item => {
+            if ( item.info1 === 'LDH-REPERTORIO' && dataMaior(item.info5) == 1 ) {
+                global_id = global_id + 1;
+                //document.all.data_repertorio.innerHTML = item.info5;
+                iid = "tb_" + String(global_id);
+                document.getElementById(item.info4).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + item.objectId + "','" + iid + "')\"></td><td><a href=" + item.info3 + " target=__blank>" + item.info2 + "</a></td></tr></table>"
+            }
+        });
+    }
+
+    async function jsAdicionar(e) {
+        var modal = document.getElementById("modal");
+        modal.style.display = "block";
+        document.all.tipo.value = e;
+        document.all.name.value = '';
+        document.all.youtube.value = '';
+    }
+
+    async function jsSalvar() {
+        data = {
+            "info1": "LDH-REPERTORIO",
+            "info2": document.all.name.value,
+            "info3": document.all.youtube.value,
+            "info4": document.all.tipo.value,
+            "info5": document.all.data_repertorio.innerHTML
+        };
+
+        if ( document.all.name.value == '' || document.all.youtube.value == '' ) {
+          alert('Preencha todas as informacoes...');
+          return;
+        }
+
+        const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-REST-API-Key': apiKey,
+                    'X-Parse-Application-Id': appId
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                alert(`Erro: ${response.status}`);
+            } else {
+                dados_global = response.json();
+                dados_global.then(   valor => {  
+                    global_id = global_id + 1;
+                    iid = "tb_" + String(global_id);
+                    document.getElementById( document.all.tipo.value ).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + valor['objectId'] + "','" + iid + "')\"></td><td><a href=" + document.all.youtube.value + " target=__blank>" + document.all.name.value + "</a></td></tr></table>"
+                });
+            }
+
+            document.all.modal.style.display = 'none';
+    }
+
+    async function jsRemover(e,iid) {
+      if (confirm('confirma exclusao da musga?')) {
+        const response = await fetch(url + "/" + e, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-REST-API-Key': apiKey,
+                    'X-Parse-Application-Id': appId
+                }
+            });
+
+            if (!response.ok) {
+                alert(`Erro: ${response.status}`);
+            } else {
+                document.getElementById(iid).remove();
+            }
+      }
+    }    
+</script>
+
+</head>
+<body>
+
+    <div class="container">
+        <fieldset>
+            <legend>Informações de Contato</legend>
+            <div class="links" id="EBD"></div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Detalhes da Conta</legend>
+            <div class="links" id="CULTO"></div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Outras Informações</legend>
+            <div class="links" id="POS"></div>
+        </fieldset>
+    </div>
+    <script> fetchData(); </script>
+</body>
+</html>
