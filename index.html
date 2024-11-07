@@ -16,6 +16,16 @@
             transition: color 0.3s;
         }
 
+        .blink {
+            animation: blink-animation 1s steps(5, start) infinite;
+        }
+
+        @keyframes blink-animation {
+            50% {
+                opacity: 0;
+            }
+        }
+        
         .links a:hover {
             color: #ff6666;
         }
@@ -276,9 +286,16 @@
 
         <fieldset>
             <legend>LINKS - <span id=data_repertorio></span> </legend>
-            <a href="https://www.youtube.com/@MinisterioLugardeHabitacao" target="_blank" class="link-imagem">
-                <img src="yt.png" alt="Link para CANAL">
-            </a>   
+            <TABLE>
+                <TR>
+                    <TD>
+                        <a href="https://www.youtube.com/@MinisterioLugardeHabitacao" target="_blank" class="link-imagem">
+                            <img src="yt.png" alt="Link para CANAL">
+                        </a>  
+                    </TD>
+                    <TD><p class="blink">ENSAIO HOJE</p></TD>
+                </TR>
+            </TABLE>
         </fieldset>
     </div>
 
