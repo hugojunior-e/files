@@ -188,7 +188,7 @@
             document.getElementById('CULTO').innerHTML = '';
             document.getElementById('EBD').innerHTML = '';
             data['results'].forEach(item => {
-                if (item.info1 === 'LDH-REPERTORIO' && dataMaior(item.info5) == 1) {
+                if (item.info1 === 'LDH-REPERTORIO' ) {//&& dataMaior(item.info5) == 1
                     global_id = global_id + 1;
                     document.all.data_repertorio.innerHTML = item.info5;
                     iid = "tb_" + String(global_id);
