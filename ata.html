@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Ata de Reunião</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, textarea, button, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Formulário de Ata de Reunião</h1>
+        <form>
+            <div class="form-group">
+                <label for="numero-ata">Número da Ata:</label>
+                <input type="text" id="numero-ata" name="numero-ata" placeholder="Ex: oito" required>
+            </div>
+
+            <div class="form-group">
+                <label for="data-reuniao">Data da Reunião:</label>
+                <input type="date" id="data-reuniao" name="data-reuniao" required>
+            </div>
+
+            <div class="form-group">
+                <label for="data-convocacao">Data da Convocação:</label>
+                <input type="date" id="data-convocacao" name="data-convocacao" required>
+            </div>
+
+            <div class="form-group">
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro, cidade" value="em seu templo, situado à Rua Paraná, número 1333, no Bairro Brasil, no município de Uberlândia, MG" required>
+            </div>
+
+            <div class="form-group">
+                <label for="presidente">Presidente da Reunião:</label>
+                <select  id="presidente" name="presidente" placeholder="Nome completo">
+                    <option value="Pr. Joscelino dos Santos">Pr. Joscelino dos Santos</option>
+                    <option value="Pb Joao Fernando">Pb Joao Fernando</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="participantes">Participantes:</label>
+                <textarea id="participantes" name="participantes" placeholder="Insira os nomes dos participantes separados por vírgula." rows="3" required>
+João Fernando Neves Martins, Lucas Ezer de Souza Marques, Hugo Antônio da Costa Júnior, Júlio Aparecido Gomes Santos, Carlos Roberto Gomes de Aguiar e o Reverendo Elieder Marques
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="horario-inicio">Horário de Início:</label>
+                <input type="time" id="horario-inicio" name="horario-inicio" required>
+            </div>
+            <div class="form-group">
+                <label for="atividades-iniciais">Atividades Iniciais:</label>
+                <textarea id="atividades-iniciais" name="atividades-iniciais" placeholder="Descrição das atividades iniciais." rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="assuntos-discutidos">Assuntos Discutidos:</label>
+                <textarea id="assuntos-discutidos" name="assuntos-discutidos" placeholder="Descrição dos assuntos discutidos." rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="atividades-encerramento">Atividades de Encerramento:</label>
+                <textarea id="atividades-encerramento" name="atividades-encerramento" placeholder="Descrição das atividades de encerramento." rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="horario-termino">Horário de Término:</label>
+                <input type="time" id="horario-termino" name="horario-termino" required>
+            </div>
+            <div class="form-group">
+                <label for="secretario">Secretário Responsável:</label>
+                <select  id="secretario" name="secretario" placeholder="Nome completo">
+                    <option value="Hugo Antonio da Costa Junior">Hugo Antonio da Costa Junior</option>
+                    <option value="Lucas Ezer Marques Souzar">Hugo Antonio da Costa Junior</option>
+                </select>
+            </div>
+            <button type="submit">Salvar Ata</button>
+        </form>
+    </div>
+</body>
+</html>
