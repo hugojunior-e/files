@@ -143,7 +143,9 @@
 
             if (!response.ok) {
                 alert(`Erro: ${response.status}`);
-            } 
+            } else {
+                alert('Salvo com Sucesso!');
+            }
         }
 
         async function jsRemover(e, iid) {
