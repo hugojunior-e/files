@@ -151,8 +151,8 @@
                     throw new Error(`Erro: ${response.status}`);
                 }
 
-                const data = await response.json();
-                populateTable(data);
+                //const data = await ;
+                populateTable(response.json());
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);
             }
