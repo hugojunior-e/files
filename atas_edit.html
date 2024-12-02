@@ -143,7 +143,7 @@
 
             if (!response.ok) {
                 const errorData = await response.json();
-                alert(`Erro: ${errorData.error} - ${response.status} -  ${response.statusText}`);
+                alert(`Erro: ${errorData.error}`);
             } else {
                 alert('Salvo com Sucesso!');
             }
