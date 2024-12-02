@@ -142,7 +142,8 @@
             });
 
             if (!response.ok) {
-                alert(`Erro: ${response.status}`);
+                const errorData = await response.json();
+                alert(`Erro: ${errorData.error} - ${response.status} -  ${response.statusText}`);
             } else {
                 alert('Salvo com Sucesso!');
             }
