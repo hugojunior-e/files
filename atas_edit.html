@@ -167,9 +167,10 @@
             });
 
             if (!response.ok) {
-                alert(`Erro: ${response.status}`);
+                const errorData = await response.json();
+                alert(`Erro: ${errorData.error}`);
             } else {
-                document.getElementById(iid).remove();
+                alert('Salvo com Sucesso!');
             }
         }
 
