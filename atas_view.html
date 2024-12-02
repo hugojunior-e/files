@@ -52,15 +52,6 @@
         const url = 'https://parseapi.back4app.com/classes/atas'; // Substitua pela URL da API
 
 
-        const obterDataAtual = () => {
-          const data = new Date();
-          const dia = String(data.getDate()).padStart(2, '0'); // Garantir dois dígitos
-          const mes = String(data.getMonth() + 1).padStart(2, '0'); // Meses começam em 0
-          const ano = data.getFullYear();
-          return `${dia}/${mes}/${ano}`;
-        };        
-
-
         function transcreverDataLiteralmente(dataString) {
             const [dia1, mes1, ano1] = dataString.split("/").map(Number);
             data =  new Date(ano1, mes1 - 1, dia1); 
@@ -140,8 +131,6 @@
 
         
         async function fetchData() {
-            document.all.dt_inicio.innerHTML = obterDataAtual();
-            
             try {
                 const query = {
                     where: JSON.stringify({ sociedade: "CONSELHO", numero:params.get('nro') }) // Serializando para o formato esperado
