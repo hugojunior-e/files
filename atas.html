@@ -56,7 +56,7 @@
         }
 
         /* Estilos da legenda dos fieldsets */
-        legend {
+        legend, td {
             font-weight: bold;
             font-size: 1.2em;
             color: #fff;
@@ -151,8 +151,8 @@
                     throw new Error(`Erro: ${response.status}`);
                 }
 
-                //const data = await ;
-                populateTable(response.json());
+                const data = await response.json();
+                populateTable(data);
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);
             }
@@ -168,12 +168,10 @@
             });
             items.sort();
 
-            document.getElementById('CONSELHO').innerHTML = "<table WIDTH=100% border=1>";
             items.forEach(item => {
                 document.getElementById('CONSELHO').innerHTML += 
-                    "<tr><td><input type=image src=edit.png onclick=\"jsAdicionar('CONSELHO','" + item + "')\"></td><td><a href=atas_view.html?nro=" + item + ">" + item + "</a></td></tr>";
+                    "<table><tr><td><input type=image src=edit.png onclick=\"jsAdicionar('CONSELHO','" + item + "')\"></td><td><a href=atas_view.html?nro=" + item + ">" + item + "</a></td></tr></table>";
             });
-            document.getElementById('CONSELHO').innerHTML += "</table>";
         }
 
         function jsAdicionar(sociedade, nro) {
