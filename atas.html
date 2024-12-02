@@ -170,12 +170,12 @@
 
             items.forEach(item => {
                 document.getElementById('CONSELHO').innerHTML += 
-                    "<table><tr><td><input type=image src=edit.png onclick=\"jsEditar('" + item + "')\"></td><td><a href=atas_view.html?nro=" + item + ">" + item + "</a></td></tr></table>";
+                    "<table><tr><td><input type=image src=edit.png onclick=\"jsAdicionar('CONSELHO','" + item + "')\"></td><td><a href=atas_view.html?nro=" + item + ">" + item + "</a></td></tr></table>";
             });
         }
 
-        function jsAdicionar(sociedade) {
-            window.location.href = 'atas_edit.jsp?sociedade=' + sociedade;
+        function jsAdicionar(sociedade, nro) {
+            window.location.href = 'atas_edit.jsp?sociedade=' + sociedade + '&nro=' + nro;
         }
 
     </script>
@@ -186,7 +186,7 @@
     <div class="container">
     <center>
         <fieldset>
-            <legend><input type="button" value="adicionar" onclick="jsAdicionar('CONSELHO')"> || CONSELHO</legend>
+            <legend><input type="button" value="adicionar" onclick="jsAdicionar('CONSELHO','-')"> || CONSELHO</legend>
             <div class="links" id="CONSELHO"></div>
         </fieldset>
     </center>
