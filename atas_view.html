@@ -52,6 +52,50 @@
         const url = 'https://parseapi.back4app.com/classes/atas'; // Substitua pela URL da API
 
 
+        function transcreverDataLiteralmente(dataString) {
+            const [dia, mes, ano] = dataString.split("/").map(Number);
+            data =  new Date(ano, mes - 1, dia); 
+
+            const meses = [
+                "janeiro", "fevereiro", "março", "abril",
+                "maio", "junho", "julho", "agosto",
+                "setembro", "outubro", "novembro", "dezembro"
+            ];
+        
+            const diasDaSemana = [
+                "domingo", "segunda-feira", "terça-feira", "quarta-feira",
+                "quinta-feira", "sexta-feira", "sábado"
+            ];
+        
+            const numerosPorExtenso = [
+                "zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove",
+                "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove",
+                "vinte", "vinte e um", "vinte e dois", "vinte e três", "vinte e quatro", "vinte e cinco",
+                "vinte e seis", "vinte e sete", "vinte e oito", "vinte e nove", "trinta", "trinta e um"
+            ];
+        
+            function numeroPorExtenso(num) {
+                if (num <= 31) return numerosPorExtenso[num];
+                return num.toString().split("").map(digito => numerosPorExtenso[parseInt(digito)]).join(" ");
+            }
+        
+            function anoPorExtenso(ano) {
+                const partes = ano.toString().split("");
+                const milhares = numerosPorExtenso[parseInt(partes[0])];
+                const centenas = numeroPorExtenso(parseInt(partes.slice(1).join("")));
+                return `${milhares} mil e ${centenas}`.replace(" e zero", "");
+            }
+        
+            const diaSemana = diasDaSemana[data.getDay()];
+            const dia = numeroPorExtenso(data.getDate());
+            const mes = meses[data.getMonth()];
+            const ano = anoPorExtenso(data.getFullYear());
+        
+            return `Hoje é ${diaSemana}, ${dia} de ${mes} de ${ano}.`;
+        }
+
+
+        
         async function fetchData() {
             try {
                 const query = {
@@ -83,7 +127,7 @@
         function populateTable(data) {
             data['results'].forEach(item => {
                     document.all.numero.innerHTML = item.numero;
-                    document.all.dt_inicio.innerHTML = item.dt_inicio;
+                    document.all.dt_inicio.innerHTML = transcreverDataLiteralmente( item.dt_inicio );
                     document.all.hr_inicio.innerHTML = item.hr_inicio;
                     document.all.hr_fim.innerHTML = item.hr_fim;
                     document.all.dt_convocacao.innerHTML = item.dt_convocacao;
