@@ -53,8 +53,8 @@
 
 
         function transcreverDataLiteralmente(dataString) {
-            const [dia, mes, ano] = dataString.split("/").map(Number);
-            data =  new Date(ano, mes - 1, dia); 
+            const [dia1, mes1, ano1] = dataString.split("/").map(Number);
+            data =  new Date(ano1, mes1 - 1, dia1); 
 
             const meses = [
                 "janeiro", "fevereiro", "março", "abril",
