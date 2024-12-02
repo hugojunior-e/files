@@ -168,12 +168,12 @@
             });
             items.sort();
 
-            document.getElementById('CONSELHO').innerHTML = "<table>";
+            document.getElementById('CONSELHO').innerHTML = "<table WIDTH=100% border=1>";
             items.forEach(item => {
                 document.getElementById('CONSELHO').innerHTML += 
                     "<tr><td><input type=image src=edit.png onclick=\"jsAdicionar('CONSELHO','" + item + "')\"></td><td><a href=atas_view.html?nro=" + item + ">" + item + "</a></td></tr>";
             });
-            document.getElementById('CONSELHO').innerHTML += "<table>";
+            document.getElementById('CONSELHO').innerHTML += "</table>";
         }
 
         function jsAdicionar(sociedade, nro) {
