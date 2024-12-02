@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Ata de Reunião</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input, textarea, button, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+
+
+    <script>
+        const queryString = window.location.search;
+        const params = new URLSearchParams(queryString);
+
+        dados_global = {};
+        global_id = 0;
+
+        const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
+        const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
+        const url = 'https://parseapi.back4app.com/classes/atas'; // Substitua pela URL da API
+
+
+        async function fetchData() {
+            try {
+                const query = {
+                    where: JSON.stringify({ sociedade: "CONSELHO", numero:params.get('nro') }) // Serializando para o formato esperado
+                };
+
+                const new_url = `${url}?${new URLSearchParams(query)}`;
+
+                const response = await fetch(new_url, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Parse-REST-API-Key': apiKey,
+                        'X-Parse-Application-Id': appId
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Erro: ${response.status}`);
+                }
+
+                const data = await response.json();
+                populateTable(data); // Chama a função para preencher a tabela com os dados
+            } catch (error) {
+                console.error('Erro ao buscar dados:', error);
+            }
+        }
+
+        function populateTable(data) {
+            data['results'].forEach(item => {
+                    document.all.numero.value = item.numero;
+                    document.all.dt_inicio.value = item.dt_inicio;
+                    document.all.hr_inicio.value = item.hr_inicio;
+                    document.all.hr_fim.value = item.hr_fim;
+                    document.all.dt_convocacao.value = item.dt_convocacao;
+                    document.all.secretario.value = item.secretario;
+                    document.all.endereco.value = item.endereco;
+                    document.all.presidente.value = item.presidente;
+                    document.all.participantes.value = item.participantes;
+                    document.all.atv_inicial.value = item.atv_inicial;
+                    document.all.atv_final.value = item.atv_final;
+                    document.all.assuntos.value = item.assuntos;
+            });
+        }
+
+        async function jsAdicionar(e) {
+            var modal = document.getElementById("modal");
+            modal.style.display = "block";
+            document.all.tipo.value = e;
+            document.all.name.value = '';
+            document.all.youtube.value = '';
+        }
+
+        async function jsSalvar() {
+            data = {
+                "info1": "LDH-REPERTORIO",
+                "info2": document.all.name.value,
+                "info3": document.all.youtube.value,
+                "info4": document.all.tipo.value,
+                "info5": document.all.data_repertorio.innerHTML
+            };
+
+            if (document.all.name.value == '' || document.all.youtube.value == '') {
+                alert('Preencha todas as informacoes...');
+                return;
+            }
+
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-REST-API-Key': apiKey,
+                    'X-Parse-Application-Id': appId
+                },
+                body: JSON.stringify(data)
+            });
+
+            if (!response.ok) {
+                alert(`Erro: ${response.status}`);
+            } else {
+                dados_global = response.json();
+                dados_global.then(valor => {
+                    global_id = global_id + 1;
+                    iid = "tb_" + String(global_id);
+                    document.getElementById(document.all.tipo.value).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + valor['objectId'] + "','" + iid + "')\"></td><td><a href=" + document.all.youtube.value + " target=__blank>" + document.all.name.value + "</a></td></tr></table>"
+                });
+            }
+
+            document.all.modal.style.display = 'none';
+        }
+
+        async function jsRemover(e, iid) {
+            if (confirm('confirma exclusao da musga?')) {
+                const response = await fetch(url + "/" + e, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Parse-REST-API-Key': apiKey,
+                        'X-Parse-Application-Id': appId
+                    }
+                });
+
+                if (!response.ok) {
+                    alert(`Erro: ${response.status}`);
+                } else {
+                    document.getElementById(iid).remove();
+                }
+            }
+        }
+    </script>
+
+
+</head>
+<body>
+    <div class="container">
+        <h1>Formulário de Ata de Reunião</h1>
+        <form>
+            <div class="form-group">
+                <label for="numero-ata">Número da Ata:(nro/ano)</label>
+                <input type="text" id="numero" name="numero" placeholder="Ex: oito" required>
+            </div>
+
+            <div class="form-group">
+                <label for="data-reuniao">Data da Reunião:</label>
+                <input type="text" id="dt_inicio" name="dt_inicio" required>
+            </div>
+
+            <div class="form-group">
+                <label for="data-convocacao">Data da Convocação:</label>
+                <input type="text" id="dt_convocacao" name="dt_convocacao" required>
+            </div>
+
+            <div class="form-group">
+                <label for="endereco">Endereço:</label>
+                <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro, cidade" value="em seu templo, situado à Rua Paraná, número 1333, no Bairro Brasil, no município de Uberlândia, MG" required>
+            </div>
+
+            <div class="form-group">
+                <label for="presidente">Presidente da Reunião:</label>
+                <input type="text"  id="presidente" name="presidente" placeholder="Nome completo">
+            </div>
+
+            <div class="form-group">
+                <label for="participantes">Participantes:</label>
+                <textarea id="participantes" name="participantes" placeholder="Insira os nomes dos participantes separados por vírgula." rows="3" required>
+João Fernando Neves Martins, Lucas Ezer de Souza Marques, Hugo Antônio da Costa Júnior, Júlio Aparecido Gomes Santos, Carlos Roberto Gomes de Aguiar e o Reverendo Elieder Marques
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="horario-inicio">Horário de Início:</label>
+                <input type="text" id="hr_inicio" name="hr_inicio" required>
+            </div>
+            <div class="form-group">
+                <label for="atividades-iniciais">Atividades Iniciais:</label>
+                <textarea id="atv_inicial" name="atv_inicial" placeholder="Descrição das atividades iniciais." rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="assuntos-discutidos">Assuntos Discutidos:</label>
+                <textarea id="assuntos" name="assuntos" placeholder="Descrição dos assuntos discutidos." rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="atividades-encerramento">Atividades de Encerramento:</label>
+                <textarea id="atv_final" name="atv_final" placeholder="Descrição das atividades de encerramento." rows="3" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="horario-termino">Horário de Término:</label>
+                <input type="text" id="hr_fim" name="hr_fim" required>
+            </div>
+            <div class="form-group">
+                <label for="secretario">Secretário Responsável:</label>
+                <input type="text" id="secretario" name="secretario" placeholder="Nome completo" value="Hugo Antônio da Costa Júnior, primeiro secretário">
+            </div>
+            <button type="submit">Salvar Ata</button>
+        </form>
+    </div>
+
+    <script> fetchData(); </script>
+</body>
+</html>
