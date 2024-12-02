@@ -113,27 +113,23 @@
             });
         }
 
-        async function jsAdicionar(e) {
-            var modal = document.getElementById("modal");
-            modal.style.display = "block";
-            document.all.tipo.value = e;
-            document.all.name.value = '';
-            document.all.youtube.value = '';
-        }
 
         async function jsSalvar() {
             data = {
-                "info1": "LDH-REPERTORIO",
-                "info2": document.all.name.value,
-                "info3": document.all.youtube.value,
-                "info4": document.all.tipo.value,
-                "info5": document.all.data_repertorio.innerHTML
+                "sociedade":"CONSELHO",
+                "numero":document.all.numero.value,
+                "dt_inicio":document.all.dt_inicio.value,
+                "hr_inicio":document.all.hr_inicio.value,
+                "hr_fim":document.all.hr_fim.value,
+                "dt_convocacao":document.all.dt_convocacao.value,
+                "secretario":document.all.secretario.value,
+                "endereco":document.all.endereco.value,
+                "presidente":document.all.presidente.value,
+                "participantes":document.all.participantes.value,
+                "atv_inicial":document.all.atv_inicial.value,
+                "atv_final":document.all.atv_final.value,
+                "assuntos":document.all.assuntos.value
             };
-
-            if (document.all.name.value == '' || document.all.youtube.value == '') {
-                alert('Preencha todas as informacoes...');
-                return;
-            }
 
             const response = await fetch(url, {
                 method: 'POST',
@@ -147,16 +143,7 @@
 
             if (!response.ok) {
                 alert(`Erro: ${response.status}`);
-            } else {
-                dados_global = response.json();
-                dados_global.then(valor => {
-                    global_id = global_id + 1;
-                    iid = "tb_" + String(global_id);
-                    document.getElementById(document.all.tipo.value).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + valor['objectId'] + "','" + iid + "')\"></td><td><a href=" + document.all.youtube.value + " target=__blank>" + document.all.name.value + "</a></td></tr></table>"
-                });
-            }
-
-            document.all.modal.style.display = 'none';
+            } 
         }
 
         async function jsRemover(e, iid) {
@@ -241,7 +228,7 @@ João Fernando Neves Martins, Lucas Ezer de Souza Marques, Hugo Antônio da Cost
                 <label for="secretario">Secretário Responsável:</label>
                 <input type="text" id="secretario" name="secretario" placeholder="Nome completo" value="Hugo Antônio da Costa Júnior, primeiro secretário">
             </div>
-            <button type="submit">Salvar Ata</button>
+            <button type="button" onclick="jsSalvar()">Salvar Ata</button>
         </form>
     </div>
 
