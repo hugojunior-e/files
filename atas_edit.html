@@ -60,8 +60,7 @@
         const queryString = window.location.search;
         const params = new URLSearchParams(queryString);
 
-        dados_global = {};
-        global_id = 0;
+        global_id = '';
 
         const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
         const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
@@ -110,6 +109,8 @@
                     document.all.atv_inicial.value = item.atv_inicial;
                     document.all.atv_final.value = item.atv_final;
                     document.all.assuntos.value = item.assuntos;
+
+                    global_id = item.objectId;
             });
         }
 
