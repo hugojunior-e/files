@@ -150,7 +150,8 @@
                 alert(`Erro: ${errorData.error}`);
             } else {
                 const dados = await response.json();
-                alert('Salvo com Sucesso!' +  JSON.stringify(dados)  );
+                global_id = dados.objectId;
+                alert('Salvo com Sucesso!' +  dados.objectId  );
             }
         }
 
