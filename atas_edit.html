@@ -149,7 +149,8 @@
                 const errorData = await response.json();
                 alert(`Erro: ${errorData.error}`);
             } else {
-                alert('Salvo com Sucesso!');
+                const dados = await response.json();
+                alert('Salvo com Sucesso!' +  JSON.stringify(dados)  );
             }
         }
 
