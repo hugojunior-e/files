@@ -60,7 +60,7 @@
         const queryString = window.location.search;
         const params = new URLSearchParams(queryString);
 
-        global_id = '';
+        global_id = '-';
 
         const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
         const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
@@ -114,8 +114,7 @@
             });
         }
 
-
-        async function jsSalvar() {
+        function getData() {
             data = {
                 "sociedade":"CONSELHO",
                 "numero":document.all.numero.value,
@@ -131,7 +130,11 @@
                 "atv_final":document.all.atv_final.value,
                 "assuntos":document.all.assuntos.value
             };
+            
+            return data;
+        }
 
+        async function jsInsert() {
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
@@ -139,7 +142,7 @@
                     'X-Parse-REST-API-Key': apiKey,
                     'X-Parse-Application-Id': appId
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify( getData() )
             });
 
             if (!response.ok) {
@@ -150,22 +153,29 @@
             }
         }
 
-        async function jsRemover(e, iid) {
-            if (confirm('confirma exclusao da musga?')) {
-                const response = await fetch(url + "/" + e, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Parse-REST-API-Key': apiKey,
-                        'X-Parse-Application-Id': appId
-                    }
-                });
+        async function jsUpdate() {
+            const response = await fetch(url + "/" + global_id, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Parse-REST-API-Key': apiKey,
+                    'X-Parse-Application-Id': appId
+                },
+                body: JSON.stringify( getData() )
+            });
 
-                if (!response.ok) {
-                    alert(`Erro: ${response.status}`);
-                } else {
-                    document.getElementById(iid).remove();
-                }
+            if (!response.ok) {
+                alert(`Erro: ${response.status}`);
+            } else {
+                document.getElementById(iid).remove();
+            }
+        }
+
+        function jsSalvar() {
+            if ( global_id !== "-" ) {
+                jsUpdate();
+            } else {
+                jsInsert();
             }
         }
     </script>
