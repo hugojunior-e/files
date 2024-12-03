@@ -200,6 +200,10 @@
         <span id=secretario2></span>
     </div>
 
-     <script> apiQueryData( url_atas, populateTable, { sociedade: "CONSELHO", numero:params.get('nro') } ); </script>
+     <script> 
+         parametros = { sociedade: "CONSELHO", numero:params.get('nro') };
+         
+         apiQueryData( url_atas, populateTable, parametros ); 
+     </script>
 </body>
 </html>
