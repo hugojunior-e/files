@@ -63,10 +63,6 @@
 
         global_id = '-';
 
-        //const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
-        //const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
-        //const url = 'https://parseapi.back4app.com/classes/atas'; // Substitua pela URL da API
-
         const obterDataAtual = () => {
           const data = new Date();
           const dia = String(data.getDate()).padStart(2, '0'); // Garantir dois dígitos
@@ -75,34 +71,6 @@
           return `${dia}/${mes}/${ano}`;
         };   
 
-        /*
-        async function fetchData() {
-            try {
-                const query = {
-                    where: JSON.stringify({ sociedade: "CONSELHO", numero:params.get('nro') }) // Serializando para o formato esperado
-                };
-
-                const new_url = `${url}?${new URLSearchParams(query)}`;
-
-                const response = await fetch(new_url, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Parse-REST-API-Key': apiKey,
-                        'X-Parse-Application-Id': appId
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Erro: ${response.status}`);
-                }
-
-                const data = await response.json();
-                populateTable(data); // Chama a função para preencher a tabela com os dados
-            } catch (error) {
-                console.error('Erro ao buscar dados:', error);
-            }
-        }*/
 
         function populateTable(data) {
             document.all.dt_inicio.value = obterDataAtual();
