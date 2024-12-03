@@ -35,7 +35,7 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
 }
 
 
-async function apiQueryUpdate(p_url, p_objectId, p_data) {
+async function apiQueryUpdate( p_url, p_objectId, p_data, afterUpdate ) {
     const response = await fetch(p_url + "/" + p_objectId, {
         method: 'PUT',
         headers: {
@@ -50,7 +50,9 @@ async function apiQueryUpdate(p_url, p_objectId, p_data) {
         const errorData = await response.json();
         alert(`Erro: ${errorData.error}`);
     } else {
-        alert('Salvo com Sucesso!');
+        if ( afterUpdate !== undefined) {
+            afterUpdate();
+        }        
     }
 }
 
@@ -70,7 +72,6 @@ async function apiQueryDelete(p_url, p_objectId, afterDelete) {
         const errorData = await response.json();
         alert(`Erro: ${errorData.error}`);
     } else {
-        alert('Excluido com Sucesso!');
         if ( afterDelete !== undefined) {
             afterDelete();
         }        
