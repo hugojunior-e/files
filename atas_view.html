@@ -61,33 +61,13 @@
         }
 
         function transcreverHoraLiteralmente(horaString) {
-            // Validar o formato da hora
             const regex = /^\d{2}:\d{2}$/;
             if (!regex.test(horaString)) {
                 return "Formato inválido. Use HH24:MI.";
             }
         
-            const [horas, minutos] = horaString.split(":").map(Number);
-        
-            if (horas > 23 || minutos > 59) {
-                return "Hora inválida.";
-            }
-        
-            const numerosPorExtenso = [
-                "zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove",
-                "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete",
-                "dezoito", "dezenove", "vinte", "vinte e um", "vinte e dois", "vinte e três",
-                "vinte e quatro", "vinte e cinco", "vinte e seis", "vinte e sete", "vinte e oito",
-                "vinte e nove", "trinta", "trinta e um", "trinta e dois", "trinta e três",
-                "trinta e quatro", "trinta e cinco", "trinta e seis", "trinta e sete", "trinta e oito",
-                "trinta e nove", "quarenta", "quarenta e um", "quarenta e dois", "quarenta e três",
-                "quarenta e quatro", "quarenta e cinco", "quarenta e seis", "quarenta e sete",
-                "quarenta e oito", "quarenta e nove", "cinquenta", "cinquenta e um", "cinquenta e dois",
-                "cinquenta e três", "cinquenta e quatro", "cinquenta e cinco", "cinquenta e seis",
-                "cinquenta e sete", "cinquenta e oito", "cinquenta e nove"
-            ];
-        
-            const horasPorExtenso = numerosPorExtenso[horas];
+            const [horas, minutos]  = horaString.split(":").map(Number);
+            const horasPorExtenso   = numerosPorExtenso[horas];
             const minutosPorExtenso = numerosPorExtenso[minutos];
         
             return minutos === 0
