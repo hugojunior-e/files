@@ -115,34 +115,13 @@
             return data;
         }
 
-        async function jsInsert() {
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Parse-REST-API-Key': apiKey,
-                    'X-Parse-Application-Id': appId
-                },
-                body: JSON.stringify( getData() )
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                alert(`Erro: ${errorData.error}`);
-            } else {
-                const dados = await response.json();
-                global_id = dados.objectId;
-                alert('Salvo com Sucesso! Id: ' +  dados.objectId  );
-            }
-        }
-
         function jsSalvar() {
             if ( global_id !== "-" ) {
                 document.getElementById('numero').readOnly = true;
                 apiQueryUpdate( url_atas, global_id, getData() );
             } else {
                 document.getElementById('numero').readOnly = false;
-                jsInsert();
+                apiQueryUpdate( url_atas, getData(), function(a) { global_id = a; } );
             }
         }
     </script>
