@@ -55,6 +55,29 @@ async function apiQueryUpdate(p_url, p_objectId, p_data) {
 }
 
 
+
+async function apiQueryDelete(p_url, p_objectId, afterDelete) {
+    const response = await fetch(p_url + "/" + p_objectId, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Parse-REST-API-Key': apiKey,
+            'X-Parse-Application-Id': appId
+        }
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        alert(`Erro: ${errorData.error}`);
+    } else {
+        alert('Excluido com Sucesso!');
+        if ( afterDelete !== undefined) {
+            afterDelete();
+        }        
+    }
+}
+
+
 async function apiQueryInsert(p_url, p_data, retornoObjectId) {
     const response = await fetch(p_url, {
         method: 'POST',
