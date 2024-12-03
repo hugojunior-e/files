@@ -128,7 +128,7 @@
         
         function populateTable(data) {
             data['results'].forEach(item => {
-                    document.all.numero.innerHTML = numeroPorExtenso[ parseInt(item.numero.substr(1,2)) ] + " de " + item.numero.substr(4);
+                    document.all.numero.innerHTML = numerosPorExtenso[ parseInt(item.numero.substr(1,2)) ] + " de " + item.numero.substr(4);
                     document.all.dt_inicio.innerHTML = transcreverDataLiteralmente( item.dt_inicio );
                     document.all.hr_inicio.innerHTML = transcreverHoraLiteralmente( item.hr_inicio );
                     document.all.hr_fim.innerHTML = transcreverHoraLiteralmente( item.hr_fim );
