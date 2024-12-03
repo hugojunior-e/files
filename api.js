@@ -10,7 +10,7 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
 
     if ( paramsQuery !== undefined ) {
         const query = {
-            where: JSON.stringify(paramsQuery) /
+            where: JSON.stringify(paramsQuery)
         };
     
         new_url = `${p_url}?${new URLSearchParams(query)}`;
