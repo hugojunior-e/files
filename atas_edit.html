@@ -121,7 +121,7 @@
                 apiQueryUpdate( url_atas, global_id, getData() );
             } else {
                 document.getElementById('numero').readOnly = false;
-                apiQueryUpdate( url_atas, getData(), function(a) { global_id = a; } );
+                apiQueryInsert( url_atas, getData(), function(a) { global_id = a; } );
             }
         }
     </script>
