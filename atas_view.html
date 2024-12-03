@@ -50,13 +50,12 @@
 
         function transcreverDataLiteralmente(dataString) {
             const [dia1, mes1, ano1] = dataString.split("/").map(Number);
-            data =  new Date(ano1, mes1 - 1, dia1); 
         
             const dia = numerosPorExtenso[ dia1 ];  //data.getDate() 
-            const mes = meses[data.getMonth()];
-            const ano = anoPorExtenso(data.getFullYear());
+            const mes = meses[ parseInt(mes1) - 1 ];
+            const ano = numerosPorExtenso[ ano1.substr(-2) ];
         
-            return `${dia} de ${mes} de ${ano}`;
+            return `${dia} de ${mes} de dois mil e ${ano}`;
         }
 
         function transcreverHoraLiteralmente(horaString) {
