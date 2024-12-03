@@ -52,7 +52,6 @@
             const [dia1, mes1, ano1] = dataString.split("/").map(Number);
             data =  new Date(ano1, mes1 - 1, dia1); 
         
-            const diaSemana = diasDaSemana[data.getDay()];
             const dia = numerosPorExtenso[ dia1 ];  //data.getDate() 
             const mes = meses[data.getMonth()];
             const ano = anoPorExtenso(data.getFullYear());
