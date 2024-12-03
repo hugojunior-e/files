@@ -55,6 +55,7 @@
         }
     </style>
 
+    <script src="api.js"></script> 
 
     <script>
         const queryString = window.location.search;
@@ -62,9 +63,9 @@
 
         global_id = '-';
 
-        const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
-        const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
-        const url = 'https://parseapi.back4app.com/classes/atas'; // Substitua pela URL da API
+        //const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
+        //const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
+        //const url = 'https://parseapi.back4app.com/classes/atas'; // Substitua pela URL da API
 
         const obterDataAtual = () => {
           const data = new Date();
@@ -74,7 +75,7 @@
           return `${dia}/${mes}/${ano}`;
         };   
 
-        
+        /*
         async function fetchData() {
             try {
                 const query = {
@@ -101,27 +102,27 @@
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);
             }
-        }
+        }*/
 
         function populateTable(data) {
             document.all.dt_inicio.value = obterDataAtual();
             document.getElementById('numero').readOnly = false;
             
             data['results'].forEach(item => {
-                    document.all.numero.value = item.numero;
-                    document.all.dt_inicio.value = item.dt_inicio;
-                    document.all.hr_inicio.value = item.hr_inicio;
-                    document.all.hr_fim.value = item.hr_fim;
-                    document.all.dt_convocacao.value = item.dt_convocacao;
-                    document.all.secretario.value = item.secretario;
-                    document.all.endereco.value = item.endereco;
-                    document.all.presidente.value = item.presidente;
-                    document.all.participantes.value = item.participantes;
-                    document.all.atv_inicial.value = item.atv_inicial;
-                    document.all.atv_final.value = item.atv_final;
-                    document.all.assuntos.value = item.assuntos;
+                document.all.numero.value = item.numero;
+                document.all.dt_inicio.value = item.dt_inicio;
+                document.all.hr_inicio.value = item.hr_inicio;
+                document.all.hr_fim.value = item.hr_fim;
+                document.all.dt_convocacao.value = item.dt_convocacao;
+                document.all.secretario.value = item.secretario;
+                document.all.endereco.value = item.endereco;
+                document.all.presidente.value = item.presidente;
+                document.all.participantes.value = item.participantes;
+                document.all.atv_inicial.value = item.atv_inicial;
+                document.all.atv_final.value = item.atv_final;
+                document.all.assuntos.value = item.assuntos;
 
-                    global_id = item.objectId;
+                global_id = item.objectId;
                 document.getElementById('numero').readOnly = true;
             });
         }
@@ -263,6 +264,9 @@ João Fernando Neves Martins, Lucas Ezer de Souza Marques, Hugo Antônio da Cost
         </form>
     </div>
 
-    <script> fetchData(); </script>
+    <script> 
+        parametros = { sociedade: "CONSELHO", numero:params.get('nro') };
+        apiQueryData(url_atas, populateTable, parametros); 
+    </script>
 </body>
 </html>
