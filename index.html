@@ -13,64 +13,15 @@
         dados_global = {};
         global_id = 0;
 
-        const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
-        const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
-        const url = 'https://parseapi.back4app.com/classes/infos'; // Substitua pela URL da API
-
-
-        function dataMaior(dataString) {
-            // Divide a string em dia, mês e ano
-            const [dia, mes, ano] = dataString.split('/').map(Number);
-
-            // Cria um objeto Date com o ano, mês (subtrai 1, pois o mês é baseado em zero) e dia
-            const data = new Date(ano, mes - 1, dia);
-
-            // Cria um objeto Date para a data atual (hoje)
-            const hoje = new Date();
-
-            // Zera o horário das duas datas para comparar apenas as datas
-            hoje.setHours(0, 0, 0, 0);
-            data.setHours(0, 0, 0, 0);
-
-            // Verifica se a data é maior que hoje
-            if (data >= hoje) {
-                return 1;
-            }
-            return 0;
-        }
-        async function fetchData() {
-            try {
-                const response = await fetch(url, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Parse-REST-API-Key': apiKey,
-                        'X-Parse-Application-Id': appId
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Erro: ${response.status}`);
-                }
-
-                const data = await response.json();
-                populateTable(data); // Chama a função para preencher a tabela com os dados
-            } catch (error) {
-                console.error('Erro ao buscar dados:', error);
-            }
-        }
-
         function populateTable(data) {
             document.getElementById('POS').innerHTML = '';
             document.getElementById('CULTO').innerHTML = '';
             document.getElementById('EBD').innerHTML = '';
             data['results'].forEach(item => {
-                if (item.info1 === 'LDH-REPERTORIO' ) {//&& dataMaior(item.info5) == 1
-                    global_id = global_id + 1;
-                    document.all.data_repertorio.innerHTML = item.info5;
-                    iid = "tb_" + String(global_id);
-                    document.getElementById(item.info4).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + item.objectId + "','" + iid + "')\"></td><td><a href=" + item.info3 + " target=__blank>" + item.info2 + "</a></td></tr></table>"
-                }
+                global_id = global_id + 1;
+                document.all.data_repertorio.innerHTML = item.dt_louvor;
+                iid = "tb_" + String(global_id);
+                document.getElementById(item.etapa).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + item.objectId + "','" + iid + "')\"></td><td><a href=" + item.link_youtube + " target=__blank>" + item.musica + "</a></td></tr></table>"
             });
         }
 
@@ -197,7 +148,7 @@
 
 
 
-    <script> fetchData(); </script>
+    <script> apiQueryData(url_repertorio, populateTable); </script>
 </body>
 
 </html>
