@@ -53,7 +53,7 @@
             data =  new Date(ano1, mes1 - 1, dia1); 
         
             const diaSemana = diasDaSemana[data.getDay()];
-            const dia = numeroPorExtenso(data.getDate());
+            const dia = numerosPorExtenso[ dia1 ];  //data.getDate() 
             const mes = meses[data.getMonth()];
             const ano = anoPorExtenso(data.getFullYear());
         
