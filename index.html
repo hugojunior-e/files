@@ -73,20 +73,10 @@
 
         async function jsRemover(e, iid) {
             if (confirm('confirma exclusao da musga?')) {
-                const response = await fetch(url + "/" + e, {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Parse-REST-API-Key': apiKey,
-                        'X-Parse-Application-Id': appId
-                    }
-                });
-
-                if (!response.ok) {
-                    alert(`Erro: ${response.status}`);
-                } else {
+                apiQueryDelete( url_repertorios , e , function() {
+                    alert("Excluido com Sucesso!");
                     document.getElementById(iid).remove();
-                }
+                });
             }
         }    
     </script>
