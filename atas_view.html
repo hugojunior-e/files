@@ -45,11 +45,6 @@
         const queryString = window.location.search;
         const params = new URLSearchParams(queryString);
 
-        //const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
-        //const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
-        //const url = 'https://parseapi.back4app.com/classes/atas'; // Substitua pela URL da API
-
-
         function transcreverDataLiteralmente(dataString) {
             const [dia1, mes1, ano1] = dataString.split("/").map(Number);
             data =  new Date(ano1, mes1 - 1, dia1); 
@@ -128,34 +123,6 @@
         }        
 
         
-        /*async function fetchData() {
-            try {
-                const query = {
-                    where: JSON.stringify({ sociedade: "CONSELHO", numero:params.get('nro') }) // Serializando para o formato esperado
-                };
-
-                const new_url = `${url}?${new URLSearchParams(query)}`;
-
-                const response = await fetch(new_url, {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Parse-REST-API-Key': apiKey,
-                        'X-Parse-Application-Id': appId
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error(`Erro: ${response.status}`);
-                }
-
-                const data = await response.json();
-                populateTable(data); // Chama a função para preencher a tabela com os dados
-            } catch (error) {
-                console.error('Erro ao buscar dados:', error);
-            }
-        } */
-
         function populateTable(data) {
             data['results'].forEach(item => {
                     document.all.numero.innerHTML = item.numero;
@@ -170,7 +137,6 @@
                     document.all.participantes.innerHTML = item.participantes;
                     document.all.atv_inicial.innerHTML = item.atv_inicial;
                     document.all.atv_final.innerHTML = item.atv_final;
-
                     document.all.assuntos.innerHTML = item.assuntos.replaceAll("\n","</p><p>");
             });
         }
