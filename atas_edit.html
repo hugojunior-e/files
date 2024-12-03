@@ -158,7 +158,7 @@
         function jsSalvar() {
             if ( global_id !== "-" ) {
                 document.getElementById('numero').readOnly = true;
-                jsUpdate();
+                apiQueryUpdate( url_atas, global_id, getData() );
             } else {
                 document.getElementById('numero').readOnly = false;
                 jsInsert();
