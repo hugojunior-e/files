@@ -59,7 +59,7 @@ legend {
     font-weight: bold;
     font-size: 1.2em;
     color: #fff;
-    background-color: #4CAF50;
+    background-color: #f0f2f5;  /* #4CAF50 */
     border-radius: 8px;
     padding: 5px 15px;
     text-transform: uppercase;
