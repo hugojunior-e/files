@@ -68,10 +68,15 @@
         function jsSalvar() {
             if ( global_id !== "-" ) {
                 document.getElementById('numero').readOnly = true;
-                apiQueryUpdate( url_atas, global_id, getData() );
+                apiQueryUpdate( url_atas, global_id, getData(), function() {
+                    alert("Atualizado com sucesso!")
+                });
             } else {
                 document.getElementById('numero').readOnly = false;
-                apiQueryInsert( url_atas, getData(), function(a) { global_id = a; } );
+                apiQueryInsert( url_atas, getData(), function(a) { 
+                    global_id = a; 
+                    alert("Inserido com sucesso!")
+                });
             }
         }
     </script>
