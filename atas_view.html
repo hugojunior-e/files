@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ata de Reunião</title>
     <style>
-        @media print {
                 .pagina {
                     width: 210mm; /* Largura do A4 */
                     height: 297mm; /* Altura do A4 */
@@ -29,7 +28,20 @@
                     font-family: Arial, sans-serif;
                     font-size: 14px;
                 }
-        }
+
+                @page {
+                    size: A4;
+                    margin: 20mm;
+                }
+                @media print {
+                    body {
+                        background-color: white;
+                        color: black;
+                        margin: 0;
+                        padding: 0;
+                    }
+                }
+        
     </style>
     <script src="api.js"></script>
     
