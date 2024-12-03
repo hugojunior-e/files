@@ -51,9 +51,9 @@
         function transcreverDataLiteralmente(dataString) {
             const [dia1, mes1, ano1] = dataString.split("/").map(Number);
         
-            const dia = numerosPorExtenso[ dia1 ];  //data.getDate() 
+            const dia = numerosPorExtenso[ dia1 ]; 
             const mes = meses[ parseInt(mes1) - 1 ];
-            const ano = numerosPorExtenso[ ano1.substr(-2) ];
+            const ano = numerosPorExtenso[ ano1 - 2000 ];
         
             return `${dia} de ${mes} de dois mil e ${ano}`;
         }
