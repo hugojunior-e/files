@@ -131,7 +131,6 @@
                     document.all.hr_fim.innerHTML = transcreverHoraLiteralmente( item.hr_fim );
                     document.all.dt_convocacao.innerHTML = transcreverDataLiteralmente( item.dt_convocacao );
                     document.all.secretario.innerHTML = item.secretario;
-                    document.all.secretario2.innerHTML = item.secretario.replace(",","<br>");
                     document.all.endereco.innerHTML = item.endereco;
                     document.all.presidente.innerHTML = item.presidente;
                     document.all.participantes.innerHTML = item.participantes;
@@ -148,22 +147,10 @@
 <body>
     <p>
         Ata de Número <span id=numero></span> da reunião do Conselho da Terceira Igreja Presbiteriana de Uberlândia, reunido no dia <span id=dt_inicio></span>, com edital de convocação datado em <span id=dt_convocacao></span>, <span id=endereco></span>. A reunião é presidida pelo <span id=presidente></span>, estando presentes os seguintes presbíteros: <span id=participantes></span>.
-    </p>
-    <p>
         A reunião tem início às <span id=hr_inicio></span>. <span id=atv_inicial></span>
-    </p>
-
-    <p id=assuntos>
-    </p>
-
-    <p>
+        <span id=assuntos></span>
         <span id=atv_final></span> Nada mais havendo a tratar, encerra-se a reunião às <span id=hr_fim></span>. E eu, <span id=secretario></span>, estando presente afirmo ser verdade, dato, lavro e assino a presente ata.
     </p>
-    <div class="signature">
-        ________________________________________________<br>
-        <span id=secretario2></span>
-    </div>
-
      <script> 
          parametros = { sociedade: "CONSELHO", numero:params.get('nro') };
          
