@@ -1,0 +1,133 @@
+.links a {
+    display: block;
+    color: #3366cc;
+    text-decoration: none;
+    font-size: 1.2em;
+    transition: color 0.3s;
+}
+
+.blink {
+    animation: blink-animation 1s steps(5, start) infinite;
+}
+
+@keyframes blink-animation {
+    50% {
+        opacity: 0;
+    }
+}
+
+.links a:hover {
+    color: #ff6666;
+}
+
+/* Estilos básicos da página */
+body {
+    font-family: Arial, sans-serif;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+/* Container para os fieldsets */
+.container {
+    display: grid;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Estilos dos fieldsets */
+fieldset {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    padding: 20px;
+}
+
+/* Estilos da legenda dos fieldsets */
+legend {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #fff;
+    background-color: #4CAF50;
+    border-radius: 8px;
+    padding: 5px 15px;
+    text-transform: uppercase;
+}
+
+
+td {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #fff;
+    background-color: #c0c0c0;
+    border-radius: 8px;
+    padding: 5px 15px;
+    text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+    resize: vertical;
+}
+
+input[type="button"], form button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.modal {
+    display: none; /* Esconde o modal por padrão */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com transparência */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+    border-radius: 8px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+.link-imagem img {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px; /* Deixa os cantos arredondados, opcional */
+}
