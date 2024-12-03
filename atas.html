@@ -150,7 +150,9 @@
             items = []
 
             data['results'].forEach(item => {
-                items.push(item.numero);
+                if (item.numero.length > 4) {
+                    items.push(item.numero);
+                }
             });
             items.sort();
 
