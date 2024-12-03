@@ -10,7 +10,6 @@
      <script src="api.js"></script> 
 
     <script>
-        dados_global = {};
         global_id = 0;
 
         function populateTable(data) {
@@ -35,40 +34,23 @@
 
         async function jsSalvar() {
             data = {
-                "info1": "LDH-REPERTORIO",
-                "info2": document.all.name.value,
-                "info3": document.all.youtube.value,
-                "info4": document.all.tipo.value,
-                "info5": document.all.data_repertorio.innerHTML
+                "grupo": "LDH",
+                "musica": document.all.name.value,
+                "link_youtube": document.all.youtube.value,
+                "etapa": document.all.tipo.value,
+                "dt_louvor": document.all.data_repertorio.innerHTML
             };
 
-            if (document.all.name.value == '' || document.all.youtube.value == '') {
-                alert('Preencha todas as informacoes...');
-                return;
-            }
-
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Parse-REST-API-Key': apiKey,
-                    'X-Parse-Application-Id': appId
-                },
-                body: JSON.stringify(data)
+            apiQueryInsert( url_repertorios, data, function( objectId ) {
+                global_id = global_id + 1;
+                iid       = "tb_" + String(global_id);
+                document.getElementById(document.all.tipo.value).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + objectId + "','" + iid + "')\"></td><td><a href=" + document.all.youtube.value + " target=__blank>" + document.all.name.value + "</a></td></tr></table>"
+                document.all.modal.style.display = 'none';
             });
 
-            if (!response.ok) {
-                alert(`Erro: ${response.status}`);
-            } else {
-                dados_global = response.json();
-                dados_global.then(valor => {
-                    global_id = global_id + 1;
-                    iid = "tb_" + String(global_id);
-                    document.getElementById(document.all.tipo.value).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + valor['objectId'] + "','" + iid + "')\"></td><td><a href=" + document.all.youtube.value + " target=__blank>" + document.all.name.value + "</a></td></tr></table>"
-                });
-            }
 
-            document.all.modal.style.display = 'none';
+
+            
         }
 
         async function jsRemover(e, iid) {
