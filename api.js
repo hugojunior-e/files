@@ -52,3 +52,28 @@ async function apiQueryUpdate(p_url, p_objectId, p_data) {
         alert('Salvo com Sucesso!');
     }
 }
+
+
+async function apiQueryInsert(p_url, p_data, retornoObjectId) {
+    const response = await fetch(p_url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Parse-REST-API-Key': apiKey,
+            'X-Parse-Application-Id': appId
+        },
+        body: JSON.stringify( p_data )
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        alert(`Erro: ${errorData.error}`);
+    } else {
+        const dados = await response.json();
+        alert('Salvo com Sucesso! Id: ' +  dados.objectId  );
+
+        if ( retornoObjectId !== undefined) {
+            retornoObjectId(dados.objectId);
+        }
+    }
+}
