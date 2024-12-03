@@ -32,3 +32,23 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
     const data = await response.json();
     populateTable(data);
 }
+
+
+async function apiQueryUpdate(p_url, p_objectId, p_data) {
+    const response = await fetch(p_url + "/" + p_objectId, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Parse-REST-API-Key': apiKey,
+            'X-Parse-Application-Id': appId
+        },
+        body: JSON.stringify( p_data )
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        alert(`Erro: ${errorData.error}`);
+    } else {
+        alert('Salvo com Sucesso!');
+    }
+}
