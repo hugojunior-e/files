@@ -79,7 +79,7 @@ async function apiQueryDelete(p_url, p_objectId, afterDelete) {
 }
 
 
-async function apiQueryInsert(p_url, p_data, retornoObjectId) {
+async function apiQueryInsert(p_url, p_data, afterInsert) {
     const response = await fetch(p_url, {
         method: 'POST',
         headers: {
@@ -95,10 +95,9 @@ async function apiQueryInsert(p_url, p_data, retornoObjectId) {
         alert(`Erro: ${errorData.error}`);
     } else {
         const dados = await response.json();
-        alert('Salvo com Sucesso! Id: ' +  dados.objectId  );
-
-        if ( retornoObjectId !== undefined) {
-            retornoObjectId(dados.objectId);
+        
+        if ( afterInsert !== undefined) {
+            afterInsert(dados.objectId);
         }
     }
 }
