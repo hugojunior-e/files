@@ -89,11 +89,6 @@ const meses = [
     "setembro", "outubro", "novembro", "dezembro"
 ];
 
-const diasDaSemana = [
-    "domingo", "segunda-feira", "terça-feira", "quarta-feira",
-    "quinta-feira", "sexta-feira", "sábado"
-];
-
 const numerosPorExtenso = [
     "zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", 
     "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", 
@@ -108,15 +103,3 @@ const numerosPorExtenso = [
     "cinquenta e cinco", "cinquenta e seis", "cinquenta e sete", "cinquenta e oito", 
     "cinquenta e nove"
 ];
-
-function numeroPorExtenso(num) {
-    if (num <= 31) return numerosPorExtenso[num];
-    return num.toString().split("").map(digito => numerosPorExtenso[parseInt(digito)]).join(" ");
-}
-
-function anoPorExtenso(ano) {
-    const partes = ano.toString().split("");
-    const milhares = numerosPorExtenso[parseInt(partes[0])];
-    const centenas = numeroPorExtenso(parseInt(partes.slice(1).join("")));
-    return `${milhares} mil e ${centenas}`.replace(" e zero", "");
-}
