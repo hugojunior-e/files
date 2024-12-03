@@ -140,13 +140,15 @@
             border-radius: 8px; /* Deixa os cantos arredondados, opcional */
         }
     </style>
-
+    
+    <script src="api.js"></script>
+    
     <script>
-        const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
-        const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
-        const url = 'https://parseapi.back4app.com/classes/atas'; // Substitua pela URL da API
+        //const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
+        //const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
+        //const url = 'https://parseapi.back4app.com/classes/atas'; // Substitua pela URL da API
 
-
+        /*
         async function fetchData() {
             try {
                 const response = await fetch(url, {
@@ -168,6 +170,7 @@
                 console.error('Erro ao buscar dados:', error);
             }
         }
+        */
 
         function populateTable(data) {
             document.getElementById('CONSELHO').innerHTML = '';
@@ -204,7 +207,7 @@
     </div>
 
 
-    <script> fetchData(); </script>
+    <script> apiQueryData( populateTable ); </script>
 </body>
 
 </html>
