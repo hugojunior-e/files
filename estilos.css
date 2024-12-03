@@ -85,11 +85,12 @@ textarea {
 
 input[type="button"], form button {
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #007BFF;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    font-size: 18px;
 }
 
 .modal {
