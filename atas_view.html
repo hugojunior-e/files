@@ -39,17 +39,15 @@
             }
         }
     </style>
-
+    <script src="api.js"></script>
+    
     <script>
         const queryString = window.location.search;
         const params = new URLSearchParams(queryString);
 
-        dados_global = {};
-        global_id = 0;
-
-        const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
-        const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
-        const url = 'https://parseapi.back4app.com/classes/atas'; // Substitua pela URL da API
+        //const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
+        //const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
+        //const url = 'https://parseapi.back4app.com/classes/atas'; // Substitua pela URL da API
 
 
         function transcreverDataLiteralmente(dataString) {
@@ -130,7 +128,7 @@
         }        
 
         
-        async function fetchData() {
+        /*async function fetchData() {
             try {
                 const query = {
                     where: JSON.stringify({ sociedade: "CONSELHO", numero:params.get('nro') }) // Serializando para o formato esperado
@@ -156,7 +154,7 @@
             } catch (error) {
                 console.error('Erro ao buscar dados:', error);
             }
-        }
+        } */
 
         function populateTable(data) {
             data['results'].forEach(item => {
@@ -202,6 +200,6 @@
         <span id=secretario2></span>
     </div>
 
-     <script> fetchData(); </script>
+     <script> apiQueryData( url_atas, populateTable, { sociedade: "CONSELHO", numero:params.get('nro') } ); </script>
 </body>
 </html>
