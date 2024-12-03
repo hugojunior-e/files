@@ -77,3 +77,38 @@ async function apiQueryInsert(p_url, p_data, retornoObjectId) {
         }
     }
 }
+
+
+
+
+
+
+const meses = [
+    "janeiro", "fevereiro", "março", "abril",
+    "maio", "junho", "julho", "agosto",
+    "setembro", "outubro", "novembro", "dezembro"
+];
+
+const diasDaSemana = [
+    "domingo", "segunda-feira", "terça-feira", "quarta-feira",
+    "quinta-feira", "sexta-feira", "sábado"
+];
+
+const numerosPorExtenso = [
+    "zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove",
+    "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove",
+    "vinte", "vinte e um", "vinte e dois", "vinte e três", "vinte e quatro", "vinte e cinco",
+    "vinte e seis", "vinte e sete", "vinte e oito", "vinte e nove", "trinta", "trinta e um"
+];
+
+function numeroPorExtenso(num) {
+    if (num <= 31) return numerosPorExtenso[num];
+    return num.toString().split("").map(digito => numerosPorExtenso[parseInt(digito)]).join(" ");
+}
+
+function anoPorExtenso(ano) {
+    const partes = ano.toString().split("");
+    const milhares = numerosPorExtenso[parseInt(partes[0])];
+    const centenas = numeroPorExtenso(parseInt(partes.slice(1).join("")));
+    return `${milhares} mil e ${centenas}`.replace(" e zero", "");
+}
