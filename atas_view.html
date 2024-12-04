@@ -76,7 +76,8 @@
         
         function populateTable(data) {
             data['results'].forEach(item => {
-                    document.all.numero.innerHTML = numerosPorExtenso[ parseInt(item.numero.substr(0,2)) ] + " de " + item.numero.substr(3);
+                    nro_ata = item.numero.substr(0,7);
+                    document.all.numero.innerHTML = numerosPorExtenso[ parseInt(nro_ata.substr(0,2)) ] + " de " + nro_ata.substr(3) + item.numero.substr(7);
                     document.all.dt_inicio.innerHTML = transcreverDataLiteralmente( item.dt_inicio );
                     document.all.hr_inicio.innerHTML = transcreverHoraLiteralmente( item.hr_inicio );
                     document.all.hr_fim.innerHTML = transcreverHoraLiteralmente( item.hr_fim );
