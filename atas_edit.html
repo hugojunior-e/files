@@ -47,7 +47,7 @@
 
         function getData() {
             data = {
-                "sociedade":"CONSELHO",
+                "sociedade":document.all.sociedade.value,
                 "numero":document.all.numero.value,
                 "dt_inicio":document.all.dt_inicio.value,
                 "hr_inicio":document.all.hr_inicio.value,
@@ -87,6 +87,13 @@
     <div class="container">
         <h1>Ata de Reunião</h1>
         <form>
+            <div class="form-group">
+                <label for="sociedade">Sociedade:</label>
+                <select id="sociedade" name="sociedade">
+                    <option value=CONSELHO>CONSELHO</option>
+                </select>
+            </div>
+            
             <div class="form-group">
                 <label for="numero-ata">Número da Ata:(nro/ano)</label>
                 <input type="text" id="numero" name="numero" placeholder="Ex: oito" required>
