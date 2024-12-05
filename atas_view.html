@@ -47,7 +47,9 @@
     <script>
         const queryString = window.location.search;
         const params = new URLSearchParams(queryString);
-
+        const sociedade   = params.get("sociedade");
+        const numero_ata  = params.get("numero");
+        
         function transcreverDataLiteralmente(dataString) {
             const [dia1, mes1, ano1] = dataString.split("/").map(Number);
         
@@ -106,7 +108,7 @@
     </p>
     </div>
      <script> 
-         parametros = { objectId: params.get('objectId') };
+         parametros = { sociedade: sociedade, numero: numero_ata };
          
          apiQueryData( url_atas, populateTable, parametros ); 
      </script>
