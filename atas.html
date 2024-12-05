@@ -12,7 +12,8 @@
         const sociedade = "CONSELHO";
         
         function populateTable(data) {
-            document.getElementById('LINK_ATAS').innerHTML = '';
+            obj_l = document.getElementById('LINK_ATAS');
+            obj_l.innerHTML = '';
 
             items = []
 
@@ -22,14 +23,11 @@
                 }
             });
             items.sort();
-            document.getElementById('LINK_ATAS').innerHTML = '<table>';
             
             items.forEach(item => {
-                clauseWhere = "sociedade=" + sociedade + "&numero=" + item;
-                document.getElementById("LINK_ATAS").innerHTML += 
-                    "<tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" +item + "')\"></td><td><a href=atas_view.html?" + clauseWhere + ">" + item + "</a></td></tr>";
+                clauseWhere      = "sociedade=" + sociedade + "&numero=" + item;
+                obj_l.innerHTML += "<table><tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" +item + "')\"></td><td><a href=atas_view.html?" + clauseWhere + ">" + item + "</a></td></tr></table>";
             });
-            document.getElementById('LINK_ATAS').innerHTML += '</table>';
         }
 
         function jsAddOrEdit(nro) {
