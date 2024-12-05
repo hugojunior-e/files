@@ -18,15 +18,15 @@
 
             data['results'].forEach(item => {
                 if (item.numero.length > 4) {
-                    items.push(item.numero + "@" + item.objectId);
+                    items.push(item.numero);
                 }
             });
             items.sort();
 
             items.forEach(item => {
-                const det = item.split("@");
+                clauseWhere = "sociedade=" + sociedade + "&numero=" + item;
                 document.getElementById("LINK_ATAS").innerHTML += 
-                    "<table><tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" + det[0] + "')\"></td><td><a href=atas_view.html?objectId=" + det[1] + ">" + det[0] + "</a></td></tr></table>";
+                    "<table><tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" +item + "')\"></td><td><a href=atas_view.html?" + clauseWhere + ">" + item + "</a></td></tr></table>";
             });
         }
 
