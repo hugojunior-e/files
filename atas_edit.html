@@ -39,7 +39,7 @@
                 document.all.assuntos.value = item.assuntos;
 
                 objectId = item.objectId;
-                document.all.readOnly = true;
+                document.all.numero.readOnly = true;
             });
         }
 
@@ -65,12 +65,12 @@
 
         function jsSalvar() {
             if ( objectId !== "-" ) {
-                document.getElementById('numero').readOnly = true;
+                document.all.numero.readOnly = true;
                 apiQueryUpdate( url_atas, global_id, getData(), function() {
                     alert("Atualizado com sucesso!")
                 });
             } else {
-                document.getElementById('numero').readOnly = false;
+                document.all.numero.readOnly = false;
                 apiQueryInsert( url_atas, getData(), function(a) { 
                     objectId = a; 
                     alert("Inserido com sucesso!")
@@ -147,6 +147,8 @@
 
     <script> 
         document.all.numero.readOnly          = false;
+        document.all.dt_inicio.value = obterDataAtual();
+        
         const inputs = document.all.form_campos.querySelectorAll('input, textarea');
 
         inputs.forEach(input => {
