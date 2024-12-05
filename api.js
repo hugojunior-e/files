@@ -125,3 +125,13 @@ const numerosPorExtenso = [
     "cinquenta e cinco", "cinquenta e seis", "cinquenta e sete", "cinquenta e oito", 
     "cinquenta e nove"
 ];
+
+
+
+const obterDataAtual = () => {
+  const data = new Date();
+  const dia = String(data.getDate()).padStart(2, '0'); // Garantir dois dígitos
+  const mes = String(data.getMonth() + 1).padStart(2, '0'); // Meses começam em 0
+  const ano = data.getFullYear();
+  return `${dia}/${mes}/${ano}`;
+};  
