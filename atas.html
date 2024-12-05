@@ -67,7 +67,7 @@
             document.all.formulario.style.display = '';
             document.all.listinha.style.display   = 'none';
 
-            const inputs = document.all.formulario.querySelectorAll('input[type="text"]');
+            const inputs = document.all.form_campos.querySelectorAll('input[type="text"]');
 
             inputs.forEach(input => {
                 input.value = valores_default[sociedade][input.id] ;
@@ -140,7 +140,7 @@
     <div id=formulario style="display:none">
 
         <h1>Ata de Reunião</h1>
-        <form id=formulario>
+        <form id=form_campos>
             <div class="form-group">
                 <label for="numero-ata">Número da Ata:(nro/ano)</label>
                 <input type="text" id="numero" name="numero" placeholder="Ex: oito" required>
