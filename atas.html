@@ -26,12 +26,12 @@
             items.forEach(item => {
                 const det = item.split("@");
                 document.getElementById("LINK_ATAS").innerHTML += 
-                    "<table><tr><td><input type=image src=edit.png onclick=\"jsAdicionar('" + det[0] + "')\"></td><td><a href=atas_view.html?objectId=" + det[1] + ">" + det[0] + "</a></td></tr></table>";
+                    "<table><tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" + det[0] + "')\"></td><td><a href=atas_view.html?objectId=" + det[1] + ">" + det[0] + "</a></td></tr></table>";
             });
         }
 
-        function jsAdicionar(nro) {
-            window.location.href = 'atas_edit.html?sociedade=' + sociedade + '&nro=' + nro;
+        function jsAddOrEdit(nro) {
+            window.location.href = 'atas_edit.html?sociedade=' + sociedade + '&numero=' + nro;
         }
     </script>
 
