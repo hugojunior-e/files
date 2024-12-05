@@ -11,15 +11,19 @@
         const queryString = window.location.search;
         const params      = new URLSearchParams(queryString);
         const sociedade   = params.get("sociedade");
-        const numero_ata  = params.get("numero");
+        const objectId    = params.get("objectId");
+
+        const valores_default = {
+            CONSELHO: {
+                secretario: "Hugo Antônio da Costa Júnior, primeiro secretário",
+                endereco: "em seu templo, situado à Rua Paraná, número 1333, no Bairro Brasil, no município de Uberlândia, MG",
+                presidente: "Reverendo Joscelino dos Santos, presidente do conselho",
+                participantes: "João Fernando Neves Martins, Lucas Ezer de Souza Marques, Hugo Antônio da Costa Júnior, Júlio Aparecido Gomes Santos, Carlos Roberto Gomes de Aguiar e o Reverendo Elieder Marques"
+            }
+        };
         
-        global_id = '-';
-
-
+        
         function populateTable(data) {
-            document.all.dt_inicio.value = obterDataAtual();
-            document.getElementById('numero').readOnly = false;
-            
             data['results'].forEach(item => {
                 document.all.numero.value = item.numero;
                 document.all.dt_inicio.value = item.dt_inicio;
@@ -34,8 +38,8 @@
                 document.all.atv_final.value = item.atv_final;
                 document.all.assuntos.value = item.assuntos;
 
-                global_id = item.objectId;
-                document.getElementById('numero').readOnly = true;
+                objectId = item.objectId;
+                document.all.readOnly = true;
             });
         }
 
@@ -60,7 +64,7 @@
         }
 
         function jsSalvar() {
-            if ( global_id !== "-" ) {
+            if ( objectId !== "-" ) {
                 document.getElementById('numero').readOnly = true;
                 apiQueryUpdate( url_atas, global_id, getData(), function() {
                     alert("Atualizado com sucesso!")
@@ -68,7 +72,7 @@
             } else {
                 document.getElementById('numero').readOnly = false;
                 apiQueryInsert( url_atas, getData(), function(a) { 
-                    global_id = a; 
+                    objectId = a; 
                     alert("Inserido com sucesso!")
                 });
             }
@@ -80,7 +84,7 @@
 <body>
     <div class="container">
         <h1>Ata de Reunião</h1>
-        <form>
+        <form id=form_campos>
             <div class="form-group">
                 <label for="numero-ata">Número da Ata:(nro/ano)</label>
                 <input type="text" id="numero" name="numero" placeholder="Ex: oito" required>
@@ -98,18 +102,17 @@
 
             <div class="form-group">
                 <label for="endereco">Endereço:</label>
-                <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro, cidade" value="em seu templo, situado à Rua Paraná, número 1333, no Bairro Brasil, no município de Uberlândia, MG" required>
+                <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro, cidade" value="" required>
             </div>
 
             <div class="form-group">
                 <label for="presidente">Presidente da Reunião:</label>
-                <input type="text"  id="presidente" name="presidente" placeholder="Nome completo" value="Reverendo Joscelino dos Santos, presidente do conselho">
+                <input type="text"  id="presidente" name="presidente" placeholder="Nome completo" value="">
             </div>
 
             <div class="form-group">
                 <label for="participantes">Participantes:</label>
                 <textarea id="participantes" name="participantes" placeholder="Insira os nomes dos participantes separados por vírgula." rows="5" required>
-João Fernando Neves Martins, Lucas Ezer de Souza Marques, Hugo Antônio da Costa Júnior, Júlio Aparecido Gomes Santos, Carlos Roberto Gomes de Aguiar e o Reverendo Elieder Marques
                 </textarea>
             </div>
 
@@ -135,14 +138,24 @@ João Fernando Neves Martins, Lucas Ezer de Souza Marques, Hugo Antônio da Cost
             </div>
             <div class="form-group">
                 <label for="secretario">Secretário Responsável:</label>
-                <input type="text" id="secretario" name="secretario" placeholder="Nome completo" value="Hugo Antônio da Costa Júnior, primeiro secretário">
+                <input type="text" id="secretario" name="secretario" placeholder="Nome completo" value="">
             </div>
             <center><button type="button" onclick="jsSalvar()">Salvar Ata</button></center>
+
         </form>
     </div>
 
     <script> 
-        parametros = { sociedade: sociedade, numero:numero_ata };
+        document.all.numero.readOnly          = false;
+        const inputs = document.all.form_campos.querySelectorAll('input, textarea');
+
+        inputs.forEach(input => {
+            vv = valores_default[sociedade][input.id]
+            input.value =  vv == undefined ? "" : vv;
+        });
+
+        
+        parametros = { objectId: objectId };
         apiQueryData(url_atas, populateTable, parametros); 
     </script>
 </body>
