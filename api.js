@@ -6,20 +6,12 @@ const url_repertorios = 'https://parseapi.back4app.com/classes/repertorios';
 
 
 
-async function apiQueryData( p_url, populateTable, paramsQuery, paramOrderBy ) {
+async function apiQueryData( p_url, populateTable, paramsQuery ) {
     new_url = p_url;
 
-    if ( paramsQuery !== undefined || paramOrderBy !== undefined ) {
+    if ( paramsQuery !== undefined  ) {
         const query = {};
-
-        if (paramsQuery !== undefined) {
-            query.where = JSON.stringify(paramsQuery);
-        }
-
-        if (paramOrderBy !== undefined) {
-            query.order = paramOrderBy;
-        }
-    
+        query.where = JSON.stringify(paramsQuery);
         new_url = `${p_url}?${new URLSearchParams(query)}`;
     }
     
