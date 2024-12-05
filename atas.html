@@ -22,8 +22,9 @@
             items.sort();
 
             items.forEach(item => {
+                const det = item.split("@");
                 document.getElementById('CONSELHO').innerHTML += 
-                    "<table><tr><td><input type=image src=edit.png onclick=\"jsAdicionar('CONSELHO','" + item + "')\"></td><td><a href=atas_view.html?nro=" + item + ">" + item + "</a></td></tr></table>";
+                    "<table><tr><td><input type=image src=edit.png onclick=\"jsAdicionar('CONSELHO','" + det[0] + "')\"></td><td><a href=atas_view.html?objectId=" + det[1] + ">" + det[0] + "</a></td></tr></table>";
             });
         }
 
