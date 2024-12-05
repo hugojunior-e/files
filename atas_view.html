@@ -65,7 +65,7 @@
             }
         
             const [horas, minutos]  = horaString.split(":").map(Number);
-            const horasPorExtenso   = numerosPorExtenso[horas];
+            const horasPorExtenso   = numerosPorExtenso[horas].replace("dois","duas");
             const minutosPorExtenso = numerosPorExtenso[minutos];
         
             return minutos === 0
