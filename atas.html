@@ -16,7 +16,7 @@
 
             data['results'].forEach(item => {
                 if (item.numero.length > 4) {
-                    items.push(item.numero);
+                    items.push(item.numero + "@" + item.objectId);
                 }
             });
             items.sort();
