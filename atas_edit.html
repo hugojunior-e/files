@@ -83,7 +83,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Ata de Reunião</h1>
+        <h1>Ata de Reunião - <span id=LOCAL></span></h1>
         <form id=form_campos>
             <div class="form-group">
                 <label for="numero-ata">Número da Ata:(nro/ano)</label>
@@ -146,8 +146,9 @@
     </div>
 
     <script> 
-        document.all.numero.readOnly          = false;
+        document.all.numero.readOnly = false;
         document.all.dt_inicio.value = obterDataAtual();
+        document.all.LOCAL.innerHTML = sociedade;
         
         const inputs = document.all.form_campos.querySelectorAll('input, textarea');
 
