@@ -11,39 +11,6 @@
     <script>
         const sociedade = "CONSELHO";
         
-        const valores_default = {
-            CONSELHO: {
-                secretario: "Hugo Antônio da Costa Júnior, primeiro secretário",
-                endereco: "em seu templo, situado à Rua Paraná, número 1333, no Bairro Brasil, no município de Uberlândia, MG",
-                presidente: "Reverendo Joscelino dos Santos, presidente do conselho",
-                participantes: "João Fernando Neves Martins, Lucas Ezer de Souza Marques, Hugo Antônio da Costa Júnior, Júlio Aparecido Gomes Santos, Carlos Roberto Gomes de Aguiar e o Reverendo Elieder Marques"
-            }
-        };
-
-        global_id = '-';
-
-        function getData() {
-            data = {
-                "sociedade":sociedade,
-                "numero":document.all.numero.value,
-                "dt_inicio":document.all.dt_inicio.value,
-                "hr_inicio":document.all.hr_inicio.value,
-                "hr_fim":document.all.hr_fim.value,
-                "dt_convocacao":document.all.dt_convocacao.value,
-                "secretario":document.all.secretario.value,
-                "endereco":document.all.endereco.value,
-                "presidente":document.all.presidente.value,
-                "participantes":document.all.participantes.value,
-                "atv_inicial":document.all.atv_inicial.value,
-                "atv_final":document.all.atv_final.value,
-                "assuntos":document.all.assuntos.value
-            };
-            
-            return data;
-        }
-
-        
-        
         function populateTable(data) {
             obj_l = document.getElementById('LINK_ATAS');
             obj_l.innerHTML = '';
@@ -65,64 +32,8 @@
         
 
         function jsAddOrEdit(nro) {
-            global_id = nro;
-            document.all.numero.readOnly          = false;
-            document.all.formulario.style.display = '';
-            document.all.listinha.style.display   = 'none';
-
-            const inputs = document.all.form_campos.querySelectorAll('input, textarea');
-
-            inputs.forEach(input => {
-                vv = valores_default[sociedade][input.id]
-                input.value =  vv == undefined ? "" : vv;
-            });
-            
-            
-            if ( nro !== "-" ) {
-                formParam = { objectId: nro };
-                apiQueryData(url_atas, function(data) {
-                    document.all.dt_inicio.value = obterDataAtual();
-                    document.all.numero.readOnly = true;
-                    
-                    data['results'].forEach(item => {
-                        document.all.numero.value = item.numero;
-                        document.all.dt_inicio.value = item.dt_inicio;
-                        document.all.hr_inicio.value = item.hr_inicio;
-                        document.all.hr_fim.value = item.hr_fim;
-                        document.all.dt_convocacao.value = item.dt_convocacao;
-                        document.all.secretario.value = item.secretario;
-                        document.all.endereco.value = item.endereco;
-                        document.all.presidente.value = item.presidente;
-                        document.all.participantes.value = item.participantes;
-                        document.all.atv_inicial.value = item.atv_inicial;
-                        document.all.atv_final.value = item.atv_final;
-                        document.all.assuntos.value = item.assuntos;
-                    });                
-                }, formParam); 
-            }
+            window.location.href = 'atas_edit.html?sociedade=' + sociedade + '&objectId=' + nro;
         }
-
-
-        function jsSalvar() {
-            if ( global_id !== "-" ) {
-                document.getElementById('numero').readOnly = true;
-                apiQueryUpdate( url_atas, global_id, getData(), function() {
-                    alert("Atualizado com sucesso!")
-                });
-            } else {
-                document.getElementById('numero').readOnly = false;
-                apiQueryInsert( url_atas, getData(), function(a) { 
-                    global_id = a; 
-                    alert("Inserido com sucesso!")
-                });
-            }
-        }
-        
-        function jsVoltar() {
-            document.all.formulario.style.display = 'none';
-            document.all.listinha.style.display = '';
-        }
-        
     </script>
 
 </head>
@@ -139,74 +50,7 @@
     </center>
     </div>
 
-    <!-- FORMULARIO DE EDICAO -->
-
-    <div id=formulario style="display:none">
-
-        <h1>Ata de Reunião</h1>
-        <form id=form_campos>
-            <div class="form-group">
-                <label for="numero-ata">Número da Ata:(nro/ano)</label>
-                <input type="text" id="numero" name="numero" placeholder="Ex: oito" required>
-            </div>
-
-            <div class="form-group">
-                <label for="data-reuniao">Data da Reunião:</label>
-                <input type="text" id="dt_inicio" name="dt_inicio" placeholder="dd/mm/yyyy" required>
-            </div>
-
-            <div class="form-group">
-                <label for="data-convocacao">Data da Convocação:</label>
-                <input type="text" id="dt_convocacao" name="dt_convocacao" placeholder="dd/mm/yyyy"  required>
-            </div>
-
-            <div class="form-group">
-                <label for="endereco">Endereço:</label>
-                <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro, cidade" value="" required>
-            </div>
-
-            <div class="form-group">
-                <label for="presidente">Presidente da Reunião:</label>
-                <input type="text"  id="presidente" name="presidente" placeholder="Nome completo" value="">
-            </div>
-
-            <div class="form-group">
-                <label for="participantes">Participantes:</label>
-                <textarea id="participantes" name="participantes" placeholder="Insira os nomes dos participantes separados por vírgula." rows="5" required>
-                </textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="horario-inicio">Horário de Início:</label>
-                <input type="text" id="hr_inicio" name="hr_inicio" placeholder="hh:mi" required>
-            </div>
-            <div class="form-group">
-                <label for="atividades-iniciais">Atividades Iniciais:</label>
-                <textarea id="atv_inicial" name="atv_inicial" placeholder="Descrição das atividades iniciais." rows="5" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="assuntos-discutidos">Assuntos Discutidos:</label>
-                <textarea id="assuntos" name="assuntos" placeholder="Descrição dos assuntos discutidos." rows="10" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="atividades-encerramento">Atividades de Encerramento:</label>
-                <textarea id="atv_final" name="atv_final" placeholder="Descrição das atividades de encerramento." rows="5" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="horario-termino">Horário de Término:</label>
-                <input type="text" id="hr_fim" name="hr_fim" placeholder="hh:mi" required>
-            </div>
-            <div class="form-group">
-                <label for="secretario">Secretário Responsável:</label>
-                <input type="text" id="secretario" name="secretario" placeholder="Nome completo" value="">
-            </div>
-            <center><button type="button" onclick="jsSalvar()">Salvar Ata</button> <button type="button" onclick="jsVoltar()">Voltar</button>   </center>
-
-        </form>
-
-    </div>
-    
-
+    <!-- SCRIPTS DE INIT -->
     <script> 
         document.all.SOCIEDADE.innerHTML = sociedade;
         parametros = { sociedade: sociedade };
