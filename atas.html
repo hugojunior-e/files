@@ -9,8 +9,10 @@
     <script src="api.js"></script>
     
     <script>
+        const sociedade = "CONSELHO";
+        
         function populateTable(data) {
-            document.getElementById('CONSELHO').innerHTML = '';
+            document.getElementById('LINK_ATAS').innerHTML = '';
 
             items = []
 
@@ -23,12 +25,12 @@
 
             items.forEach(item => {
                 const det = item.split("@");
-                document.getElementById('CONSELHO').innerHTML += 
-                    "<table><tr><td><input type=image src=edit.png onclick=\"jsAdicionar('CONSELHO','" + det[0] + "')\"></td><td><a href=atas_view.html?objectId=" + det[1] + ">" + det[0] + "</a></td></tr></table>";
+                document.getElementById("LINK_ATAS").innerHTML += 
+                    "<table><tr><td><input type=image src=edit.png onclick=\"jsAdicionar('" + det[0] + "')\"></td><td><a href=atas_view.html?objectId=" + det[1] + ">" + det[0] + "</a></td></tr></table>";
             });
         }
 
-        function jsAdicionar(sociedade, nro) {
+        function jsAdicionar(nro) {
             window.location.href = 'atas_edit.html?sociedade=' + sociedade + '&nro=' + nro;
         }
     </script>
@@ -39,14 +41,18 @@
     <div class="container">
     <center>
         <fieldset>
-            <legend><input type="button" value="adicionar" onclick="jsAdicionar('CONSELHO','-')"> || CONSELHO</legend>
-            <div class="links" id="CONSELHO"></div>
+            <legend><input type="button" value="adicionar" onclick="jsAdicionar('-')"> || <span id=SOCIEDADE></span></legend>
+            <div class="links" id="LINK_ATAS"></div>
         </fieldset>
     </center>
     </div>
 
 
-    <script> apiQueryData( url_atas, populateTable ); </script>
+    <script> 
+        document.all.SOCIEDADE.innerHTML = sociedde;
+        parametros = { sociedade: sociedade };
+        apiQueryData( url_atas, populateTable, parametros ); 
+    </script>
 </body>
 
 </html>
