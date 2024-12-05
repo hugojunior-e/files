@@ -10,7 +10,9 @@
     <script>
         const queryString = window.location.search;
         const params = new URLSearchParams(queryString);
-
+        const sociedade   = params.get("sociedade");
+        const numero_ata  = params.get("numero");
+        
         global_id = '-';
 
         const obterDataAtual = () => {
@@ -47,7 +49,7 @@
 
         function getData() {
             data = {
-                "sociedade":document.all.sociedade.value,
+                "sociedade":sociedade,
                 "numero":document.all.numero.value,
                 "dt_inicio":document.all.dt_inicio.value,
                 "hr_inicio":document.all.hr_inicio.value,
@@ -87,13 +89,6 @@
     <div class="container">
         <h1>Ata de Reunião</h1>
         <form>
-            <div class="form-group">
-                <label for="sociedade">Sociedade:</label>
-                <select id="sociedade" name="sociedade">
-                    <option value=CONSELHO>CONSELHO</option>
-                </select>
-            </div>
-            
             <div class="form-group">
                 <label for="numero-ata">Número da Ata:(nro/ano)</label>
                 <input type="text" id="numero" name="numero" placeholder="Ex: oito" required>
@@ -155,7 +150,7 @@ João Fernando Neves Martins, Lucas Ezer de Souza Marques, Hugo Antônio da Cost
     </div>
 
     <script> 
-        parametros = { sociedade: "CONSELHO", numero:params.get('nro') };
+        parametros = { sociedade: sociedade, numero:numero_ata };
         apiQueryData(url_atas, populateTable, parametros); 
     </script>
 </body>
