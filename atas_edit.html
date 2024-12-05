@@ -9,19 +9,11 @@
 
     <script>
         const queryString = window.location.search;
-        const params = new URLSearchParams(queryString);
+        const params      = new URLSearchParams(queryString);
         const sociedade   = params.get("sociedade");
         const numero_ata  = params.get("numero");
         
         global_id = '-';
-
-        const obterDataAtual = () => {
-          const data = new Date();
-          const dia = String(data.getDate()).padStart(2, '0'); // Garantir dois dígitos
-          const mes = String(data.getMonth() + 1).padStart(2, '0'); // Meses começam em 0
-          const ano = data.getFullYear();
-          return `${dia}/${mes}/${ano}`;
-        };   
 
 
         function populateTable(data) {
