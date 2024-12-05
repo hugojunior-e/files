@@ -70,7 +70,7 @@
             document.all.formulario.style.display = '';
             document.all.listinha.style.display   = 'none';
 
-            const inputs = document.all.form_campos.querySelectorAll('input, select');
+            const inputs = document.all.form_campos.querySelectorAll('input, textarea');
 
             inputs.forEach(input => {
                 vv = valores_default[sociedade][input.id]
