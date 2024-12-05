@@ -19,14 +19,14 @@
 
             data['results'].forEach(item => {
                 if (item.numero.length > 4) {
-                    items.push(item.numero);
+                    items.push( [item.numero, item.objectId] );
                 }
             });
-            items.sort();
+            items.sort((a, b) => a[0].localeCompare(b[0]));
             
             items.forEach(item => {
-                clauseWhere      = "sociedade=" + sociedade + "&numero=" + item;
-                obj_l.innerHTML += "<table><tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" +item + "')\"></td><td><a href=atas_view.html?" + clauseWhere + ">" + item + "</a></td></tr></table>";
+                clauseWhere      = "objectId=" + item[1];
+                obj_l.innerHTML += "<table><tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" +item + "')\"></td><td><a href=atas_view.html?" + clauseWhere + ">" + item[0] + "</a></td></tr></table>";
             });
         }
 
