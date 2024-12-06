@@ -33,7 +33,7 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
 }
 
 
-async function apiQueryUpdate( p_url, p_objectId, p_data, afterUpdate ) {
+async function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
     const response = await fetch(p_url + "/" + p_objectId, {
         method: 'PUT',
         headers: {
@@ -44,19 +44,26 @@ async function apiQueryUpdate( p_url, p_objectId, p_data, afterUpdate ) {
         body: JSON.stringify( p_data )
     });
 
+    status_cod = 0;
+    status_msg = "Sucesso";
+
+    status_cod = 0;
+    status_msg = "Sucesso";
+    
     if (!response.ok) {
         const errorData = await response.json();
-        alert(`Erro: ${errorData.error}`);
-    } else {
-        if ( afterUpdate !== undefined) {
-            afterUpdate();
-        }        
+        status_cod = 1;
+        status_msg = `Erro: ${errorData.error}`;
     }
+    
+    if ( onUpdate !== undefined) {
+        afterUpdate(status_cod, status_msg);
+    }     
 }
 
 
 
-async function apiQueryDelete(p_url, p_objectId, afterDelete) {
+async function apiQueryDelete(p_url, p_objectId, onDelete) {
     const response = await fetch(p_url + "/" + p_objectId, {
         method: 'DELETE',
         headers: {
@@ -68,12 +75,13 @@ async function apiQueryDelete(p_url, p_objectId, afterDelete) {
 
     if (!response.ok) {
         const errorData = await response.json();
-        alert(`Erro: ${errorData.error}`);
-    } else {
-        if ( afterDelete !== undefined) {
-            afterDelete();
-        }        
-    }
+        status_cod = 1;
+        status_msg = `Erro: ${errorData.error}`;
+    } 
+    
+    if ( onDelete !== undefined) {
+        onDelete(status_cod, status_msg);
+    }        
 }
 
 
