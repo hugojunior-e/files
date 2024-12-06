@@ -57,7 +57,7 @@ async function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
     }
     
     if ( onUpdate !== undefined) {
-        afterUpdate(status_cod, status_msg);
+        onUpdate(status_cod, status_msg);
     }     
 }
 
