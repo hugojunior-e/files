@@ -27,7 +27,9 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
     if (!response.ok) {
         throw new Error(`Erro: ${response.status}`);
     }
-    await populateTable(response.json());
+
+    const data = await response.json();
+    populateTable(data);
 }
 
 
