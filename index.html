@@ -41,7 +41,7 @@
                 "dt_louvor": document.all.data_repertorio.innerHTML
             };
 
-            apiQueryInsert( url_repertorios, data, function( objectId ) {
+            apiQueryInsert( url_repertorios, data, function( cod, objectId ) {
                 global_id = global_id + 1;
                 iid       = "tb_" + String(global_id);
                 document.getElementById(document.all.tipo.value).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + objectId + "','" + iid + "')\"></td><td><a href=" + document.all.youtube.value + " target=__blank>" + document.all.name.value + "</a></td></tr></table>"
