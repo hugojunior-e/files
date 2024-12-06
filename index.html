@@ -51,8 +51,8 @@
 
         async function jsRemover(e, iid) {
             if (confirm('confirma exclusao da musga?')) {
-                apiQueryDelete( url_repertorios , e , function() {
-                    alert("Excluido com Sucesso!");
+                apiQueryDelete( url_repertorios , e , function(cod, msg) {
+                    alert("Excluido: " + msg);
                     document.getElementById(iid).remove();
                 });
             }
