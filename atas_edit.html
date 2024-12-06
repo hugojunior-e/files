@@ -69,8 +69,8 @@
         function jsSalvar() {
             if ( objectId !== "-" ) {
                 document.all.numero.readOnly = true;
-                apiQueryUpdate( url_atas, global_id, getData(), function() {
-                    alert("Atualizado com sucesso!")
+                apiQueryUpdate( url_atas, global_id, getData(), function(cod, msg) {
+                    alert("Atualizado: " + msg)
                 });
             } else {
                 document.all.numero.readOnly = false;
