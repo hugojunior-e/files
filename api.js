@@ -5,6 +5,7 @@ const url_atas  = 'https://parseapi.back4app.com/classes/atas';
 const url_repertorios = 'https://parseapi.back4app.com/classes/repertorios';
 
 
+//--------------  consulta dados
 
 async function apiQueryData( p_url, populateTable, paramsQuery ) {
     new_url = p_url;
@@ -32,6 +33,7 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
     populateTable(data);
 }
 
+//--------------  atualizando dados
 
 async function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
     const response = await fetch(p_url + "/" + p_objectId, {
@@ -47,9 +49,6 @@ async function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
     status_cod = 0;
     status_msg = "Sucesso";
 
-    status_cod = 0;
-    status_msg = "Sucesso";
-    
     if (!response.ok) {
         const errorData = await response.json();
         status_cod = 1;
@@ -62,6 +61,7 @@ async function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
 }
 
 
+//--------------  excluido dados
 
 async function apiQueryDelete(p_url, p_objectId, onDelete) {
     const response = await fetch(p_url + "/" + p_objectId, {
@@ -73,6 +73,9 @@ async function apiQueryDelete(p_url, p_objectId, onDelete) {
         }
     });
 
+    status_cod = 0;
+    status_msg = "Sucesso";
+    
     if (!response.ok) {
         const errorData = await response.json();
         status_cod = 1;
@@ -85,7 +88,9 @@ async function apiQueryDelete(p_url, p_objectId, onDelete) {
 }
 
 
-async function apiQueryInsert(p_url, p_data, afterInsert) {
+//--------------  inserindo dados
+
+async function apiQueryInsert(p_url, p_data, onInsert) {
     const response = await fetch(p_url, {
         method: 'POST',
         headers: {
@@ -96,15 +101,20 @@ async function apiQueryInsert(p_url, p_data, afterInsert) {
         body: JSON.stringify( p_data )
     });
 
+    status_cod = 0;
+    status_msg = "Sucesso";
+    
     if (!response.ok) {
         const errorData = await response.json();
-        alert(`Erro: ${errorData.error}`);
+        status_cod = 1;
+        status_msg = `Erro: ${errorData.error}`;
     } else {
         const dados = await response.json();
-        
-        if ( afterInsert !== undefined) {
-            afterInsert(dados.objectId);
-        }
+        status_msg = dados.objectId;
+    }
+    
+    if ( onInsert !== undefined) {
+        onInsert(status_cod, status_msg);
     }
 }
 
