@@ -74,9 +74,11 @@
                 });
             } else {
                 document.all.numero.readOnly = false;
-                apiQueryInsert( url_atas, getData(), function(a) { 
-                    objectId = a; 
-                    alert("Inserido com sucesso!")
+                apiQueryInsert( url_atas, getData(), function(cod, msg) { 
+                    if (cod == 0) {
+                        objectId = msg; 
+                    }
+                    alert("Inserido: " + msg)
                 });
             }
         }
