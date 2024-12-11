@@ -92,6 +92,9 @@
                     document.all.assuntos.innerHTML = item.assuntos;
                 
                     if ( item.sociedade === "CONSELHO" ) document.all.sociedade.innerHTML = 'do Conselho';
+                    if ( item.sociedade === "UMP" ) document.all.sociedade.innerHTML = 'da UMP (União de Mocidade Presbiteriana)';
+                    if ( item.sociedade === "UCP" ) document.all.sociedade.innerHTML = 'da UCP (União de Crianças Presbiterianas)';
+                    if ( item.sociedade === "UPH" ) document.all.sociedade.innerHTML = 'da UPH (União Presbiteriana de Homens)';
             });
         }
     </script>
