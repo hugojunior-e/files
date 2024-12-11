@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela Inicial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+        .container {
+            text-align: center;
+        }
+        .menu {
+            margin: 10px 0;
+        }
+        .menu button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .menu button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo</h1>
+        <p>Escolha uma das opções abaixo:</p>
+        <div class="menu">
+            <button onclick="location.href='atas_conselho.html'">Atas Conselho</button>
+        </div>
+        <div class="menu">
+            <button onclick="location.href='atas_mocidade.html'">Atas da Mocidade</button>
+        </div>
+        <div class="menu">
+            <button onclick="location.href='atas_uph.html'">Atas da UPH</button>
+        </div>
+        <div class="menu">
+            <button onclick="location.href='atas_ucp.html'">Atas da UCP</button>
+        </div>
+    </div>
+</body>
+</html>
