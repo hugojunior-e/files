@@ -90,11 +90,18 @@
                     document.all.atv_inicial.innerHTML = item.atv_inicial;
                     document.all.atv_final.innerHTML = item.atv_final;
                     document.all.assuntos.innerHTML = item.assuntos;
+                    document.all.p_partic.innerHTML = "membros";
                 
-                    if ( item.sociedade === "CONSELHO" ) document.all.sociedade.innerHTML = 'do Conselho';
+                    if ( item.sociedade === "CONSELHO" ) {
+                        document.all.sociedade.innerHTML = 'do Conselho';
+                        document.all.p_partic.innerHTML = "presbiteros";
+                    }
+                
                     if ( item.sociedade === "UMP" ) document.all.sociedade.innerHTML = 'da UMP (União de Mocidade Presbiteriana)';
                     if ( item.sociedade === "UCP" ) document.all.sociedade.innerHTML = 'da UCP (União de Crianças Presbiterianas)';
                     if ( item.sociedade === "UPH" ) document.all.sociedade.innerHTML = 'da UPH (União Presbiteriana de Homens)';
+
+                
             });
         }
     </script>
@@ -105,7 +112,7 @@
 <body>
     <div>
     <p>
-        Ata de Número <span id=numero></span> da reunião <span id=sociedade></span> da Terceira Igreja Presbiteriana de Uberlândia, reunido no dia <span id=dt_inicio></span>, com edital de convocação datado em <span id=dt_convocacao></span>, <span id=endereco></span>. A reunião é presidida pelo <span id=presidente></span>, estando presentes os seguintes presbíteros: <span id=participantes></span>.
+        Ata de Número <span id=numero></span> da reunião <span id=sociedade></span> da Terceira Igreja Presbiteriana de Uberlândia, reunido no dia <span id=dt_inicio></span>, com edital de convocação datado em <span id=dt_convocacao></span>, <span id=endereco></span>. A reunião é presidida pelo <span id=presidente></span>, estando presentes os seguintes <span id=p_partic></span>: <span id=participantes></span>.
         A reunião tem início às <span id=hr_inicio></span>. <span id=atv_inicial></span>
         <span id=assuntos></span>
         <span id=atv_final></span> Nada mais havendo a tratar, encerra-se a reunião às <span id=hr_fim></span>. E eu, <span id=secretario></span>, estando presente afirmo ser verdade, dato, lavro e assino a presente ata.
