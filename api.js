@@ -1,6 +1,8 @@
 const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
 const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
 
+const validateHash = '459d311e53524b5da176ebd1c856bbf6';
+
 const url_atas  = 'https://parseapi.back4app.com/classes/atas';
 const url_repertorios = 'https://parseapi.back4app.com/classes/repertorios';
 
