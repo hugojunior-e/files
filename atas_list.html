@@ -9,7 +9,9 @@
     <script src="api.js"></script>
     
     <script>
-        const sociedade = "CONSELHO";
+        const queryString = window.location.search;
+        const params      = new URLSearchParams(queryString);
+        const sociedade   = params.get("sociedade");        
         
         function populateTable(data) {
             obj_l = document.getElementById('LINK_ATAS');
