@@ -86,7 +86,7 @@ textarea {
     resize: vertical;
 }
 
-input[type="button"], form button {
+input[type="button"], button {
     padding: 10px;
     background-color: #007BFF;
     color: white;
@@ -107,7 +107,7 @@ input[type="button"], form button {
     background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com transparência */
 }
 
-input[type="button"], button : hover {
+button:hover {
     background-color: #45a049;
 }
 
