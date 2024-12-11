@@ -107,6 +107,10 @@ input[type="button"], form button {
     background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro com transparência */
 }
 
+input[type="button"], button : hover {
+    background-color: #45a049;
+}
+
 .modal-content {
     background-color: #fff;
     margin: 10% auto;
