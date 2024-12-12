@@ -4,21 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="ldh.jpg" type="image/jpg">
-    <title>LDH-Informativos</title>
+    <title>Repertorio</title>
      <link rel="stylesheet" href="estilos.css"> 
      <script src="api.js"></script> 
 
     <script>
         global_id = 0;
+        dt_louvor = "2025";
+        grupo_louvor = "LDH";
 
         function populateTable(data) {
-            document.getElementById('POS').innerHTML = '';
+            document.getElementById('POS').innerHTML   = '';
             document.getElementById('CULTO').innerHTML = '';
-            document.getElementById('EBD').innerHTML = '';
+            document.getElementById('EBD').innerHTML   = '';
+            document.all.data_repertorio.innerHTML = grupo_louvor + " || " + dt_louvor;
+            
             data['results'].forEach(item => {
                 global_id = global_id + 1;
-                document.all.data_repertorio.innerHTML = item.dt_louvor;
+                
                 iid = "tb_" + String(global_id);
                 document.getElementById(item.etapa).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + item.objectId + "','" + iid + "')\"></td><td><a href=" + item.link_youtube + " target=__blank>" + item.musica + "</a></td></tr></table>"
             });
@@ -34,11 +37,10 @@
 
         async function jsSalvar() {
             data = {
-                "grupo": "LDH",
+                "grupo": grupo_louvor,
                 "musica": document.all.name.value,
                 "link_youtube": document.all.youtube.value,
-                "etapa": document.all.tipo.value,
-                "dt_louvor": document.all.data_repertorio.innerHTML
+                "etapa": document.all.tipo.value
             };
 
             apiQueryInsert( url_repertorios, data, function( cod, objectId ) {
@@ -106,7 +108,10 @@
 
 
 
-    <script> apiQueryData(url_repertorios, populateTable); </script>
+    <script> 
+        parametros = { grupo: grupo_louvor };
+        apiQueryData( url_repertorios, populateTable, parametros ); 
+    </script>
 </body>
 
 </html>
