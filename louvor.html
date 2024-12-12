@@ -11,11 +11,13 @@
     <script>
         global_id = 0;
         dt_louvor = "31/12/2025";
+        grupo_louvor = "FIM_DE_ANO";
 
         function populateTable(data) {
-            document.getElementById('POS').innerHTML = '';
+            document.getElementById('POS').innerHTML   = '';
             document.getElementById('CULTO').innerHTML = '';
-            document.getElementById('EBD').innerHTML = '';
+            document.getElementById('EBD').innerHTML   = '';
+            
             data['results'].forEach(item => {
                 global_id = global_id + 1;
                 document.all.data_repertorio.innerHTML = dt_louvor;
@@ -34,11 +36,10 @@
 
         async function jsSalvar() {
             data = {
-                "grupo": "LDH",
+                "grupo": grupo_louvor,
                 "musica": document.all.name.value,
                 "link_youtube": document.all.youtube.value,
-                "etapa": document.all.tipo.value,
-                "dt_louvor": dt_louvor
+                "etapa": document.all.tipo.value
             };
 
             apiQueryInsert( url_repertorios, data, function( cod, objectId ) {
@@ -106,7 +107,10 @@
 
 
 
-    <script> apiQueryData(url_repertorios, populateTable); </script>
+    <script> 
+        parametros = { grupo: grupo_louvor };
+        apiQueryData( url_repertorios, populateTable, parametros ); 
+    </script>
 </body>
 
 </html>
