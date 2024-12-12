@@ -17,10 +17,11 @@
             document.getElementById('POS').innerHTML   = '';
             document.getElementById('CULTO').innerHTML = '';
             document.getElementById('EBD').innerHTML   = '';
+            document.all.data_repertorio.innerHTML = dt_louvor + " | " + grupo_louvor;
             
             data['results'].forEach(item => {
                 global_id = global_id + 1;
-                document.all.data_repertorio.innerHTML = dt_louvor;
+                
                 iid = "tb_" + String(global_id);
                 document.getElementById(item.etapa).innerHTML += "<table id=" + iid + "><tr><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + item.objectId + "','" + iid + "')\"></td><td><a href=" + item.link_youtube + " target=__blank>" + item.musica + "</a></td></tr></table>"
             });
