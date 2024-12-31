@@ -186,6 +186,18 @@ function desencriptarCesar(textoEncriptado) {
     }).join('');
 }
 
-function login(soc, sen) {
-    return desencriptarCesar( sen.toLowerCase() ) == s_keys[ soc.toLowerCase() ];
+function login() {
+    soc = window.sessionStorage.getItem("login");
+    sen = window.sessionStorage.getItem("secret");
+    
+    if ( soc == null ) {
+        alert("Faça Login no App de Atas");
+        window.location.href = 'atas.html';
+        return;
+    }
+    if ( desencriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
+        alert("Senha invalida para sociedade " + soc);
+        window.location.href = 'atas.html';
+        return;
+    }
 }
