@@ -8,8 +8,16 @@
     
     <script>
         function jsAbrirAtas(soc) {
-            window.location.href = 'atas_list.html?sociedade=' + soc;
+            var modal = document.getElementById("modal");
+            document.all.bloco_ata.innerHTML = soc;
+            modal.style.display = "block";                
+            //window.location.href = 'atas_list.html?sociedade=' + soc;
         }
+
+        function jsLogin() {
+           
+        }
+        
     </script>
 </head>
 <body>
@@ -35,5 +43,19 @@
             <button onclick="jsAbrirAtas('SAF')">Atas da SAF</button>
         </div>        
     </div>
+
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.all.modal.style.display = 'none'">&times;</span>
+            <h2>Digite a Senha:</h2>
+            <form>
+                <label for="name">Senha para <span id=bloco_ata></span>:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="button" onclick="jsLogin()">Login</button>
+            </form>
+        </div>
+    </div>
+    
 </body>
 </html>
