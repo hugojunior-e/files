@@ -161,7 +161,12 @@ const obterDataAtual = () => {
 
 const chave  = 3;
 const s_keys = {
-    "conselho":"ljuhmd5358&"
+    "conselho":'ljuhmd5358&',
+    "ump":'xpsC5358&',
+    "uph":'Cxsk47:',
+    "ucp":'xfsnlgv5358',
+    "junta_diaconal":'plvhulfrugldC5358',
+    "saf":'dx{loldgrudvClse'
 };
 
 function encriptarCesar(texto) {
