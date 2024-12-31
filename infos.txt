@@ -1,1 +1,23 @@
-encriptarCesar("igreja2025#")  conselho
+encriptarCesar("igreja2025#") 
+'ljuhmd5358&'
+
+
+encriptarCesar("ump@2025#")
+'xpsC5358&'
+
+
+encriptarCesar("@uph147")
+'Cxsk47:'
+
+
+encriptarCesar("ucpkids2025")
+'xfsnlgv5358'
+
+
+
+encriptarCesar("misericordia@2025")
+'plvhulfrugldC5358'
+
+
+encriptarCesar("auxiliadoras@ipb")
+'dx{loldgrudvClse'
