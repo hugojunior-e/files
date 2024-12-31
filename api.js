@@ -155,3 +155,24 @@ const obterDataAtual = () => {
   const ano = data.getFullYear();
   return `${dia}/${mes}/${ano}`;
 };  
+
+
+// Função para encriptar o texto
+function encriptarTexto(texto, chave) {
+    const textoCharCodes = texto.split('').map((char, index) => {
+        const charCode = char.charCodeAt(0);
+        const chaveCode = chave.charCodeAt(index % chave.length);
+        return charCode ^ chaveCode; // XOR do caractere com a chave
+    });
+    return textoCharCodes.join('-'); // Retorna os códigos encriptados separados por '-'
+}
+
+// Função para desencriptar o texto
+function desencriptarTexto(textoEncriptado, chave) {
+    const textoCharCodes = textoEncriptado.split('-').map((code, index) => {
+        const charCode = parseInt(code, 10);
+        const chaveCode = chave.charCodeAt(index % chave.length);
+        return String.fromCharCode(charCode ^ chaveCode); // XOR para recuperar o caractere original
+    });
+    return textoCharCodes.join('');
+}
