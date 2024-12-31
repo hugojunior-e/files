@@ -159,7 +159,8 @@ const obterDataAtual = () => {
 
 //--------------  criptografias
 
-const chave = 3; // Quantidade de deslocamento na tabela ASCII
+const chave      = 3;
+const s_conselho = "ljuhmd5358&";
 
 function encriptarCesar(texto) {
     return texto.split('').map(char => {
