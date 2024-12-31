@@ -186,7 +186,7 @@ function desencriptarCesar(textoEncriptado) {
     }).join('');
 }
 
-function login() {
+function login( f ) {
     soc = window.sessionStorage.getItem("login");
     sen = window.sessionStorage.getItem("secret");
     
@@ -200,4 +200,6 @@ function login() {
         window.location.href = 'atas.html';
         return;
     }
+
+    f();
 }
