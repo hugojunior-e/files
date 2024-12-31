@@ -157,22 +157,23 @@ const obterDataAtual = () => {
 };  
 
 
-// Função para encriptar o texto
-function encriptarTexto(texto, chave) {
-    const textoCharCodes = texto.split('').map((char, index) => {
-        const charCode = char.charCodeAt(0);
-        const chaveCode = chave.charCodeAt(index % chave.length);
-        return charCode ^ chaveCode; // XOR do caractere com a chave
-    });
-    return textoCharCodes.join('-'); // Retorna os códigos encriptados separados por '-'
+//--------------  criptografias
+
+const chave = 3; // Quantidade de deslocamento na tabela ASCII
+
+function encriptarCesar(texto) {
+    return texto.split('').map(char => {
+        const codigo = char.charCodeAt(0);
+        // Aplica o deslocamento na tabela ASCII
+        return String.fromCharCode(codigo + chave);
+    }).join('');
 }
 
-// Função para desencriptar o texto
-function desencriptarTexto(textoEncriptado, chave) {
-    const textoCharCodes = textoEncriptado.split('-').map((code, index) => {
-        const charCode = parseInt(code, 10);
-        const chaveCode = chave.charCodeAt(index % chave.length);
-        return String.fromCharCode(charCode ^ chaveCode); // XOR para recuperar o caractere original
-    });
-    return textoCharCodes.join('');
+// Função para desencriptar texto usando a Cifra de César
+function desencriptarCesar(textoEncriptado) {
+    return textoEncriptado.split('').map(char => {
+        const codigo = char.charCodeAt(0);
+        // Reverte o deslocamento na tabela ASCII
+        return String.fromCharCode(codigo - chave);
+    }).join('');
 }
