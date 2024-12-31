@@ -195,7 +195,7 @@ function login( f ) {
         window.location.href = 'atas.html';
         return;
     }
-    if ( desencriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
+    if ( encriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
         alert("Senha invalida para sociedade " + soc);
         window.location.href = 'atas.html';
         return;
