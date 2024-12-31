@@ -159,8 +159,10 @@ const obterDataAtual = () => {
 
 //--------------  criptografias
 
-const chave      = 3;
-const s_conselho = "ljuhmd5358&";
+const chave  = 3;
+const s_keys = {
+    "conselho":"ljuhmd5358&"
+};
 
 function encriptarCesar(texto) {
     return texto.split('').map(char => {
@@ -177,4 +179,8 @@ function desencriptarCesar(textoEncriptado) {
         // Reverte o deslocamento na tabela ASCII
         return String.fromCharCode(codigo - chave);
     }).join('');
+}
+
+function login(soc, sen) {
+    return desencriptarCesar( sen.toLowerCase() ) == s_keys[ soc.toLowerCase() ];
 }
