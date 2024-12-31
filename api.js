@@ -166,7 +166,8 @@ const s_keys = {
     "uph":'Cxsk47:',
     "ucp":'xfsnlgv5358',
     "junta_diaconal":'plvhulfrugldC5358',
-    "saf":'dx{loldgrudvClse'
+    "saf":'dx{loldgrudvClse',
+    "upj":'ydlCxsm&'
 };
 
 function encriptarCesar(texto) {
