@@ -120,9 +120,10 @@
     </p>
     </div>
      <script> 
-         parametros = { objectId: objectId };
-         
-         apiQueryData( url_atas, populateTable, parametros ); 
+         login( function() {
+             parametros = { objectId: objectId };
+             apiQueryData( url_atas, populateTable, parametros ); 
+         });
      </script>
 </body>
 </html>
