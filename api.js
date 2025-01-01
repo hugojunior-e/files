@@ -202,7 +202,7 @@ function login( soc_page, f ) {
         return;
     }
     
-    if ( soc_page.toLowerCase() != soc.toLowerCase() ) {
+    if ( soc_page.toLowerCase() != soc.toLowerCase() && soc_page != '-' ) {
         alert("Pagina nao compativel com login. Faça Login Novamente...");
         window.location.href = 'atas.html';
         return;
