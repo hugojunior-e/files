@@ -10,7 +10,7 @@
     <script>
         const queryString = window.location.search;
         const params      = new URLSearchParams(queryString);
-        const sociedade   = params.get("sociedade");
+        const sociedade   = window.sessionStorage.getItem("login");;
         const objectId    = params.get("objectId");
 
         const valores_default = {
@@ -170,7 +170,7 @@
 
     <script> 
 
-        login( sociedade, function() {
+        login( function() {
 
             document.all.numero.readOnly = false;
             document.all.LOCAL.innerHTML = sociedade;
