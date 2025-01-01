@@ -18,9 +18,8 @@
             window.sessionStorage.setItem("login"  , document.all.bloco_ata.innerHTML);
             window.sessionStorage.setItem("secret" , document.all.password.value);
             
-            var modal = document.getElementById("modal");
-            modal.style.display = ""; 
-            window.location.href = 'atas_list.html?sociedade=' + document.all.bloco_ata.innerHTML;           
+            document.getElementById("modal").style.display = ""; 
+            window.location.href = 'atas_list.html';
         }
         
     </script>
