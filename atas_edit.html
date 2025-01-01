@@ -169,19 +169,27 @@
     </div>
 
     <script> 
-        document.all.numero.readOnly = false;
-        document.all.LOCAL.innerHTML = sociedade;
-        
-        const inputs = document.all.form_campos.querySelectorAll('input, textarea');
 
-        inputs.forEach(input => {
-            vv = valores_default[sociedade][input.id]
-            input.value =  vv == undefined ? "" : vv;
+        login( function() {
+
+            document.all.numero.readOnly = false;
+            document.all.LOCAL.innerHTML = sociedade;
+            
+            const inputs = document.all.form_campos.querySelectorAll('input, textarea');
+    
+            inputs.forEach(input => {
+                vv = valores_default[sociedade][input.id]
+                input.value =  vv == undefined ? "" : vv;
+            });
+    
+            
+            parametros = { objectId: objectId };
+            apiQueryData(url_atas, populateTable, parametros); 
+            
+        
         });
 
         
-        parametros = { objectId: objectId };
-        apiQueryData(url_atas, populateTable, parametros); 
     </script>
 </body>
 </html>
