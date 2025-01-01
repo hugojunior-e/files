@@ -9,9 +9,7 @@
     <script src="api.js"></script>
     
     <script>
-        const queryString = window.location.search;
-        const params      = new URLSearchParams(queryString);
-        const sociedade   = params.get("sociedade");        
+        const sociedade   = window.sessionStorage.getItem("login");
         
         function populateTable(data) {
             obj_l = document.getElementById('LINK_ATAS');
@@ -55,7 +53,7 @@
     <!-- SCRIPTS DE INIT -->
     
     <script> 
-        login( sociedade, function() {
+        login( function() {
             document.all.SOCIEDADE.innerHTML = sociedade;
             parametros = { sociedade: sociedade };
             apiQueryData( url_atas, populateTable, parametros ); 
