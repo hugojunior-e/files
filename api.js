@@ -187,7 +187,7 @@ function desencriptarCesar(textoEncriptado) {
     }).join('');
 }
 
-function login( soc_page, f ) {
+function login( f ) {
     soc = window.sessionStorage.getItem("login");
     sen = window.sessionStorage.getItem("secret");
     
@@ -196,17 +196,7 @@ function login( soc_page, f ) {
         window.location.href = 'atas.html';
         return;
     }
-    if ( soc_page == null ) {
-        alert("Pagina Invalida. Faça Login");
-        window.location.href = 'atas.html';
-        return;
-    }
     
-    if ( soc_page.toLowerCase() != soc.toLowerCase() && soc_page != '-' ) {
-        alert("Pagina nao compativel com login. Faça Login Novamente...");
-        window.location.href = 'atas.html';
-        return;
-    }    
     if ( encriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
         alert("Senha invalida para sociedade " + soc);
         window.location.href = 'atas.html';
