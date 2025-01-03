@@ -34,9 +34,6 @@
                     @page {
                         size: A4;
                         margin: 20mm;
-                        @bottom-right {
-                          content: "Página " counter(page);
-                        }
                     }
                     
                     body {
@@ -44,18 +41,7 @@
                         color: black;
                         margin: 0;
                         padding: 0;
-                        counter-reset: page; /* Reseta o contador de página */
-                    }
-
-                    body::after {
-                        content: "Página " counter(page);
-                        position: fixed;
-                        bottom: 10px;
-                        right: 10px;
-                        font-size: 12px;
-                        color: gray;
-                      }
-                    
+                    }                   
                 }
         
     </style>
