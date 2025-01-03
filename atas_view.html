@@ -22,17 +22,20 @@
                     background-color: #f9f9f9;
                     color: #333;                    
                 }
+        
                 p {
                     text-align: justify;
                     font-family: Arial, sans-serif;
                     font-size: 14px;
                 }
 
-                @page {
-                    size: A4;
-                    margin: 20mm;
-                }
+
                 @media print {
+                    @page {
+                        size: A4;
+                        margin: 20mm;
+                    }
+                    
                     body {
                         background-color: white;
                         color: black;
