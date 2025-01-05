@@ -57,7 +57,16 @@
                 });
             }
         }
-        
+
+        function populateTable(data) {
+            data['results'].forEach(item => {
+                document.all.programacao.value = item.titulo;
+                document.all.data_programacao.value = item.criado_em;
+                document.all.responsavel_programacao.value = item.criado_por;
+
+                objectId = item.objectId;
+            });
+        }        
         
     </script>
     
