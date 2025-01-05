@@ -10,6 +10,46 @@
         const queryString = window.location.search;
         const params      = new URLSearchParams(queryString);
         const objectId    = params.get("objectId");
+
+
+        function getData() {
+            data = {
+                "data_programacao":document.all.data_programacao.value,
+                "horario_inicio":document.all.horario_inicio.value,
+                "horario_final":document.all.horario_final.value,
+                "hr_inicio":document.all.hr_inicio.value,
+                "hr_fim":document.all.hr_fim.value,
+                "dt_convocacao":document.all.dt_convocacao.value,
+                "secretario":document.all.secretario.value,
+                "endereco":document.all.endereco.value,
+                "presidente":document.all.presidente.value,
+                "participantes":document.all.participantes.value,
+                "atv_inicial":document.all.atv_inicial.value,
+                "atv_final":document.all.atv_final.value,
+                "assuntos":document.all.assuntos.value
+            };
+            
+            return data;
+        }
+
+        function jsSalvar() {
+            if ( objectId !== "-" ) {
+                document.all.numero.readOnly = true;
+                apiQueryUpdate( url_atas, objectId, getData(), function(cod, msg) {
+                    alert("Atualizado: " + msg)
+                });
+            } else {
+                document.all.numero.readOnly = false;
+                apiQueryInsert( url_atas, getData(), function(cod, msg) { 
+                    if (cod == 0) {
+                        objectId = msg; 
+                    }
+                    alert("Inserido: " + msg)
+                });
+            }
+        }
+        
+        
     </script>
     
 </head>
@@ -18,50 +58,50 @@
     <form>
         <div class="section">
             <label for="data-programacao">01) Data da programação:</label>
-            <input type="date" id="data-programacao" name="data-programacao">
+            <input type="date" id="data_programacao" name="data_programacao">
         </div>
 
         <div class="section">
             <label>02) Horário:</label>
             <div class="inline">
                 <label for="horario-inicio">Início:</label>
-                <input type="time" id="horario-inicio" name="horario-inicio">
+                <input type="time" id="horario_inicio" name="horario_inicio">
             </div>
             <div class="inline">
                 <label for="horario-final">Final:</label>
-                <input type="time" id="horario-final" name="horario-final">
+                <input type="time" id="horario_final" name="horario_final">
             </div>
         </div>
 
         <div class="section">
             <label>03) Precisa de diácono?</label>
-            <input type="radio" id="diacono-nao" name="diacono" value="nao">Não
-            <input type="radio" id="diacono-sim" name="diacono" value="sim">Sim
+            <input type="radio" id="diacono_nao" name="diacono" value="nao">Não
+            <input type="radio" id="diacono_sim" name="diacono" value="sim">Sim
 
             <div>
                 <label for="responsavel-abertura">Responsável por abrir a igreja:</label>
-                <input type="text" id="responsavel-abertura" name="responsavel-abertura">
+                <input type="text" id="responsavel_abertura" name="responsavel_abertura">
             </div>
 
             <div>
                 <label>Quantos?</label>
-                <input type="radio" id="diacono-1" name="quantidade-diacono" value="1">1
-                <input type="radio" id="diacono-2" name="quantidade-diacono" value="2">2
+                <input type="radio" id="diacono_1" name="quantidade_diacono" value="1">1
+                <input type="radio" id="diacono_2" name="quantidade_diacono" value="2">2
             </div>
         </div>
 
         <div class="section">
             <label>04) Precisa de apoio do Ministério de Recepção?</label>
-            <input type="radio" id="recepcao-sim" name="recepcao" value="sim">Sim
-            <input type="radio" id="recepcao-nao" name="recepcao" value="nao">Não
+            <input type="radio" id="recepcao_sim" name="recepcao" value="sim">Sim
+            <input type="radio" id="recepcao_nao" name="recepcao" value="nao">Não
         </div>
 
         <div class="section">
             <label>05) Precisa de sonoplastia?</label>
-            <input type="radio" id="sonoplastia-sim" name="sonoplastia" value="sim">Sim
-            <input type="radio" id="sonoplastia-nao" name="sonoplastia" value="nao">Não
+            <input type="radio" id="sonoplastia_sim" name="sonoplastia" value="sim">Sim
+            <input type="radio" id="sonoplastia_nao" name="sonoplastia" value="nao">Não
 
-            <textarea name="sonoplastia-detalhes" placeholder="Descreva resumidamente: quantos microfones? Grupo musical? Etc."></textarea>
+            <textarea name="sonoplastia_detalhes" placeholder="Descreva resumidamente: quantos microfones? Grupo musical? Etc."></textarea>
         </div>
 
         <div class="section">
@@ -73,18 +113,18 @@
         <div class="section">
             <label>07) Quais setores da estrutura da igreja serão utilizados:</label>
             <div>
-                <input type="checkbox" id="nave-templo" name="setores" value="nave">Nave do Templo<br>
-                <input type="checkbox" id="salao-social" name="setores" value="salao">Salão Social<br>
+                <input type="checkbox" id="nave_templo" name="setores" value="nave">Nave do Templo<br>
+                <input type="checkbox" id="salao_social" name="setores" value="salao">Salão Social<br>
                 <input type="checkbox" id="cozinha" name="setores" value="cozinha">Cozinha<br>
                 <input type="checkbox" id="quadra" name="setores" value="quadra">Quadra<br>
-                <input type="checkbox" id="casa-pastoral" name="setores" value="casa-pastoral">Casa Pastoral<br>
-                <input type="checkbox" id="salas-ebd" name="setores" value="salas-ebd">Salas EBD
+                <input type="checkbox" id="casa_pastoral" name="setores" value="casa-pastoral">Casa Pastoral<br>
+                <input type="checkbox" id="salas_ebd" name="setores" value="salas-ebd">Salas EBD
             </div>
         </div>
 
         <div class="section">
             <label for="responsavel-programacao">08) Responsável pela programação:</label>
-            <input type="text" id="responsavel-programacao" name="responsavel-programacao">
+            <input type="text" id="responsavel_programacao" name="responsavel_programacao">
         </div>
         <hr>
         <div class="instructions">
