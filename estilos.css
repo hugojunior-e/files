@@ -158,12 +158,9 @@ button:hover {
   grid-template-columns: repeat(3, 1fr); /* 3 colunas de tamanhos iguais */
   gap: 10px; /* Espaço entre os itens */
   padding: 10px; /* Espaço interno no container */
-  background-color: #f0f0f0; /* Cor de fundo do grid */
 }
 
 .grid-item {
-  background-color: #4caf50; /* Cor de fundo do item */
-  color: white; /* Cor do texto */
   text-align: center; /* Centraliza o texto */
   padding: 20px; /* Espaço interno do item */
   border-radius: 5px; /* Bordas arredondadas */
