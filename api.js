@@ -52,7 +52,7 @@ function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
             status_msg = "Sucesso";
         
             if (!response.ok) {
-                const errorData = await response.json();
+                const errorData = response.json();
                 status_cod = 1;
                 status_msg = `Erro: ${errorData.error}`;
             }
