@@ -3,8 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SEF - Solicitação de Espaço Físico</title>
+    <title>SEF</title>
     <link rel="stylesheet" href="estilos.css">
+
+    <script>
+        const queryString = window.location.search;
+        const params      = new URLSearchParams(queryString);
+        const objectId    = params.get("objectId");
+    </script>
+    
 </head>
 <body>
     <h1>S.E.F. - Solicitação de Espaço Físico</h1>
@@ -93,5 +100,10 @@
             <p><em>"Alegrei-me quando me disseram: Vamos à Casa do SENHOR" – Salmos 122:1</em></p>
         </div>
     </form>
+
+    <script>
+            parametros = { objectId: objectId };
+            apiQueryData(url_doc_sef, populateTable, parametros); 
+    </script>
 </body>
 </html>
