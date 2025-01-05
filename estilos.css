@@ -71,7 +71,15 @@ td {
     padding: 5px 15px;
 }
 
-.fundo_azul,
+.fundo_azul {
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"],
