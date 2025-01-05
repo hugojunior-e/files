@@ -38,8 +38,8 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
 
 //--------------  atualizando dados
 
-function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
-    fetch(p_url + "/" + p_objectId, {
+async function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
+    const response = await fetch(p_url + "/" + p_objectId, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -47,24 +47,22 @@ function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
             'X-Parse-Application-Id': appId
         },
         body: JSON.stringify( p_data )
-    }).then( response => {
-            status_cod = 0;
-            status_msg = "Sucesso";
+    });
+    
+    
         
-            if (!response.ok) {
-                const errorData = response.json();
-                status_cod = 1;
-                status_msg = `Erro: ${errorData.error}`;
-            }
+    if (!response.ok) {
+        const errorData = await response.json();
+        status_cod = 1;
+        status_msg = `Erro: ${errorData.error}`;
+    } else {
+        status_cod = 0;
+        status_msg = "Sucesso";
+    }        
 
-            if ( onUpdate !== undefined) {
-                onUpdate(status_cod, status_msg);
-            }           
-        
-            return response.json();
-          }
-    );
-  
+    if ( onUpdate !== undefined) {
+        onUpdate(status_cod, status_msg);
+    }           
 }
 
 
