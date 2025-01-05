@@ -48,9 +48,7 @@ async function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
         },
         body: JSON.stringify( p_data )
     });
-    
-    
-        
+    /*        
     if (!response.ok) {
         const errorData = await response.json();
         status_cod = 1;
@@ -62,7 +60,7 @@ async function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
 
     if ( onUpdate !== undefined) {
         onUpdate(status_cod, status_msg);
-    }           
+    } */          
 }
 
 
