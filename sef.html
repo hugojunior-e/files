@@ -16,8 +16,7 @@
             items = []
 
             data['results'].forEach(item => {
-                dados = JSON.parse( item.informacoes );
-                items.push( [dados.criado_em, dados.titulo, item.objectId] );
+                items.push( [item.criado_em, item.titulo, item.objectId] );
             });
             items.sort(  (a, b) => a[0].localeCompare(b[0])  );
             
