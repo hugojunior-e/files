@@ -66,8 +66,15 @@
 
                 infos = JSON.parse( item.informacoes );
 
-                document.all.horario_inicio = infos.horario_inicio;
-                document.all.horario_final = infos.horario_final;
+                document.all.horario_inicio.value = infos.horario_inicio;
+                document.all.horario_final.value = infos.horario_final;
+                document.all.diacono_sim.checked = infos.diacono == "sim";
+                document.all.diacono_nao.checked = infos.diacono == "nao";
+
+                document.all.responsavel_abertura.value = infos.responsavel_abertura;
+                document.all.diacono_1.checked = infos.quantidade_diacono == "1";
+                document.all.diacono_2.checked = infos.quantidade_diacono == "2";
+                
 
                 objectId = item.objectId;
             });
