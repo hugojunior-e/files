@@ -152,8 +152,43 @@ button:hover {
 
 
 
+/*---------------------------------------------------------*/
+/*---------------------------------------------------------*/
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.styled-table {
+  border-collapse: collapse; /* Remove espaços entre bordas */
+  margin: 20px 0; /* Espaçamento superior e inferior */
+  font-size: 18px; /* Tamanho da fonte */
+  font-family: Arial, sans-serif; /* Fonte da tabela */
+  text-align: left; /* Alinha texto à esquerda */
+  border: 1px solid #ddd; /* Bordas finas */
+}
+
+.styled-table thead tr {
+  background-color: #4CAF50; /* Cor de fundo do cabeçalho */
+  color: white; /* Cor do texto no cabeçalho */
+  text-align: left; /* Alinha o texto à esquerda */
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px; /* Espaçamento interno das células */
+  border: 1px solid #ddd; /* Bordas entre as células */
+}
+
+.styled-table tbody tr {
+  background-color: #f9f9f9; /* Cor de fundo alternada */
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f1f1f1; /* Outra cor para linhas pares */
+}
+
+.styled-table tbody tr:hover {
+  background-color: #ddd; /* Efeito de hover */
+  cursor: pointer; /* Muda o cursor ao passar o mouse */
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #4CAF50; /* Destaca a última linha */
 }
