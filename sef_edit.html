@@ -8,9 +8,9 @@
     <script src="api.js"></script>
     
     <script>
-        const queryString = window.location.search;
-        const params      = new URLSearchParams(queryString);
-        const objectId    = params.get("objectId");
+        queryString = window.location.search;
+        params      = new URLSearchParams(queryString);
+        objectId    = params.get("objectId");
 
 
         function getData() {
