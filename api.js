@@ -5,6 +5,7 @@ const validateHash = '459d311e53524b5da176ebd1c856bbf6';
 
 const url_atas  = 'https://parseapi.back4app.com/classes/atas';
 const url_repertorios = 'https://parseapi.back4app.com/classes/repertorios';
+const url_doc_sef = 'https://parseapi.back4app.com/classes/doc_sef';
 
 
 //--------------  consulta dados
