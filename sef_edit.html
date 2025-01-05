@@ -64,6 +64,11 @@
                 document.all.data_programacao.value = item.criado_em;
                 document.all.responsavel_programacao.value = item.criado_por;
 
+                infos = JSON.parse( item.informacoes );
+
+                document.all.horario_inicio = infos.horario_inicio;
+                document.all.horario_final = infos.horario_final;
+
                 objectId = item.objectId;
             });
         }        
