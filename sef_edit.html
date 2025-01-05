@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEF - Solicitação de Espaço Físico</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <h1>S.E.F. - Solicitação de Espaço Físico</h1>
+    <form>
+        <div class="section">
+            <label for="data-programacao">01) Data da programação:</label>
+            <input type="date" id="data-programacao" name="data-programacao">
+        </div>
+
+        <div class="section">
+            <label>02) Horário:</label>
+            <div class="inline">
+                <label for="horario-inicio">Início:</label>
+                <input type="time" id="horario-inicio" name="horario-inicio">
+            </div>
+            <div class="inline">
+                <label for="horario-final">Final:</label>
+                <input type="time" id="horario-final" name="horario-final">
+            </div>
+        </div>
+
+        <div class="section">
+            <label>03) Precisa de diácono?</label>
+            <input type="radio" id="diacono-nao" name="diacono" value="nao">Não
+            <input type="radio" id="diacono-sim" name="diacono" value="sim">Sim
+
+            <div>
+                <label for="responsavel-abertura">Responsável por abrir a igreja:</label>
+                <input type="text" id="responsavel-abertura" name="responsavel-abertura">
+            </div>
+
+            <div>
+                <label>Quantos?</label>
+                <input type="radio" id="diacono-1" name="quantidade-diacono" value="1">1
+                <input type="radio" id="diacono-2" name="quantidade-diacono" value="2">2
+            </div>
+        </div>
+
+        <div class="section">
+            <label>04) Precisa de apoio do Ministério de Recepção?</label>
+            <input type="radio" id="recepcao-sim" name="recepcao" value="sim">Sim
+            <input type="radio" id="recepcao-nao" name="recepcao" value="nao">Não
+        </div>
+
+        <div class="section">
+            <label>05) Precisa de sonoplastia?</label>
+            <input type="radio" id="sonoplastia-sim" name="sonoplastia" value="sim">Sim
+            <input type="radio" id="sonoplastia-nao" name="sonoplastia" value="nao">Não
+
+            <textarea name="sonoplastia-detalhes" placeholder="Descreva resumidamente: quantos microfones? Grupo musical? Etc."></textarea>
+        </div>
+
+        <div class="section">
+            <label>06) Utilizará equipamento de mídia?</label>
+            <input type="checkbox" id="datashow" name="midia" value="datashow">Datashow
+            <input type="checkbox" id="televisao" name="midia" value="televisao">Televisao
+        </div>
+
+        <div class="section">
+            <label>07) Quais setores da estrutura da igreja serão utilizados:</label>
+            <div>
+                <input type="checkbox" id="nave-templo" name="setores" value="nave">Nave do Templo<br>
+                <input type="checkbox" id="salao-social" name="setores" value="salao">Salão Social<br>
+                <input type="checkbox" id="cozinha" name="setores" value="cozinha">Cozinha<br>
+                <input type="checkbox" id="quadra" name="setores" value="quadra">Quadra<br>
+                <input type="checkbox" id="casa-pastoral" name="setores" value="casa-pastoral">Casa Pastoral<br>
+                <input type="checkbox" id="salas-ebd" name="setores" value="salas-ebd">Salas EBD
+            </div>
+        </div>
+
+        <div class="section">
+            <label for="responsavel-programacao">08) Responsável pela programação:</label>
+            <input type="text" id="responsavel-programacao" name="responsavel-programacao">
+        </div>
+        <hr>
+        <div class="instructions">
+            <strong>Orientações:</strong>
+            <ul>
+                <li>Ao término da programação, verifique:</li>
+                <li>Se deixou o alarme armado;</li>
+                <li>Apagou todas as luzes e não deixou nenhuma torneira aberta;</li>
+                <li>Nenhuma porta de acesso externo aberta;</li>
+                <li>Fechou válvula do botijão de gás;</li>
+                <li>Mantenha a igreja limpa e organizada.</li>
+            </ul>
+            <p><em>"Alegrei-me quando me disseram: Vamos à Casa do SENHOR" – Salmos 122:1</em></p>
+        </div>
+    </form>
+</body>
+</html>
