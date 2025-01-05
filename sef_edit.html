@@ -13,34 +13,41 @@
 
 
         function getData() {
-            data = {
-                "data_programacao":document.all.data_programacao.value,
+            informacoes = {
                 "horario_inicio":document.all.horario_inicio.value,
                 "horario_final":document.all.horario_final.value,
-                "hr_inicio":document.all.hr_inicio.value,
-                "hr_fim":document.all.hr_fim.value,
-                "dt_convocacao":document.all.dt_convocacao.value,
-                "secretario":document.all.secretario.value,
-                "endereco":document.all.endereco.value,
-                "presidente":document.all.presidente.value,
-                "participantes":document.all.participantes.value,
-                "atv_inicial":document.all.atv_inicial.value,
-                "atv_final":document.all.atv_final.value,
-                "assuntos":document.all.assuntos.value
+                "diacono": (document.all.diacono_sim.checked ? "sim" : "nao" ),
+                "responsavel_abertura":document.all.responsavel_abertura.value,
+                "quantidade_diacono": (document.all.diacono_1.checked ? "1" : "2" ),
+                "recepcao": (document.all.recepcao_sim.checked ? "sim" : "nao" ),
+                "sonoplastia": (document.all.sonoplastia_sim.checked ? "sim" : "nao" ) ,
+                "sonoplastia_detalhes":document.all.sonoplastia_detalhes.value,
+                "datashow":document.all.datashow.checked,
+                "televisao":document.all.televisao.checked,
+                "nave_templo":document.all.nave_templo.checked,
+                "salao_social":document.all.salao_social.checked,
+                "cozinha":document.all.cozinha.checked,
+                "quadra":document.all.quadra.checked,
+                "casa_pastoral":document.all.casa_pastoral.checked,
+                "salas_ebd":document.all.salas_ebd.checked
             };
             
+            data = {
+                "criado_em":document.all.data_programacao.value,
+                "criado_por":document.all.responsavel_programacao.value,
+                "titulo":document.all.programacao.value,
+                "informacoes": JSON.stringify( informacoes )
+            };
             return data;
         }
 
         function jsSalvar() {
             if ( objectId !== "-" ) {
-                document.all.numero.readOnly = true;
-                apiQueryUpdate( url_atas, objectId, getData(), function(cod, msg) {
+                apiQueryUpdate( url_doc_sef, objectId, getData(), function(cod, msg) {
                     alert("Atualizado: " + msg)
                 });
             } else {
-                document.all.numero.readOnly = false;
-                apiQueryInsert( url_atas, getData(), function(cod, msg) { 
+                apiQueryInsert( url_doc_sef , getData(), function(cod, msg) { 
                     if (cod == 0) {
                         objectId = msg; 
                     }
@@ -56,6 +63,11 @@
 <body>
     <h1>S.E.F. - Solicitação de Espaço Físico</h1>
     <form>
+        <div class="section">
+            <label for="programacao">00) Titulo programação:</label>
+            <input type="text" id="programacao" name="programacao">
+        </div>
+        
         <div class="section">
             <label for="data-programacao">01) Data da programação:</label>
             <input type="date" id="data_programacao" name="data_programacao">
