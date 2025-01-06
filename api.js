@@ -206,3 +206,18 @@ function login( f ) {
 
     f();
 }
+
+function logged() {
+    soc = window.sessionStorage.getItem("login");
+    sen = window.sessionStorage.getItem("secret");
+    
+    if ( soc == null || soc.toLowerCase() != 'conselho' ) {
+        return 0;
+    }
+    
+    if ( encriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
+        return 0;
+    }    
+    
+    return 1;
+}
