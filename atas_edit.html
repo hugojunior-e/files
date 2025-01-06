@@ -8,10 +8,10 @@
     <script src="api.js"></script> 
 
     <script>
-        const queryString = window.location.search;
-        const params      = new URLSearchParams(queryString);
-        const sociedade   = window.sessionStorage.getItem("login");;
-        const objectId    = params.get("objectId");
+        queryString = window.location.search;
+        params      = new URLSearchParams(queryString);
+        sociedade   = window.sessionStorage.getItem("login");;
+        objectId    = params.get("objectId");
 
         const valores_default = {
             CONSELHO: {
