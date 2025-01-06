@@ -41,7 +41,15 @@
                         color: black;
                         margin: 0;
                         padding: 0;
-                    }                   
+                    }    
+                    
+                    @media print {
+                        .footer {
+                            position: fixed;
+                            bottom: 0;
+                            page-break-before: auto; /* Certifica-se de que o rodapé apareça corretamente em cada página impressa */
+                        }
+                    }                    
                 }
         
     </style>
@@ -122,6 +130,17 @@
             <span id=atv_final></span> Nada mais havendo a tratar, encerra-se a reunião às <span id=hr_fim></span>. E eu, <span id=secretario></span>, estando presente afirmo ser verdade, dato, lavro e assino a presente ata.
         </p>
     </div>
+
+
+    <div class="footer">
+        <p><strong>Número da ata e data:</strong> 01/01/2025</p>
+        <p><strong>Chamada e quórum</strong></p>
+        <p><strong>Início e devocional</strong></p>
+        <p><strong>Leitura e aprovação da ata anterior</strong></p>
+        <p><strong>Decisões</strong></p>
+        <p><strong>Encerramento</strong></p>
+    </div>
+
     
      <script> 
          const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
