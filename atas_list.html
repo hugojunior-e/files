@@ -26,7 +26,7 @@
             
             items.forEach(item => {
                 clauseWhere      = "objectId=" + item[1];
-                obj_l.innerHTML += "<table><tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" + item[1] + "')\"></td><td><a href=atas_view.html?" + clauseWhere + ">" + item[0] + "</a></td></tr></table>";
+                obj_l.innerHTML += "<tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" + item[1] + "')\"></td><td><a href=atas_view.html?" + clauseWhere + ">" + item[0] + "</a></td></tr>";
             });
         }
         
@@ -42,12 +42,10 @@
     <!-- LISTA DE ATAS PARA EXIBIR -->
     
     <div class="container" id=listinha>
-    <center>
         <fieldset>
             <legend><input type="button" value="adicionar" onclick="jsAddOrEdit('-')"> || <span id=SOCIEDADE></span></legend>
-            <div class="links" id="LINK_ATAS"></div>
+            <table class="links" id="LINK_ATAS"></table>
         </fieldset>
-    </center>
     </div>
 
     <!-- SCRIPTS DE INIT -->
