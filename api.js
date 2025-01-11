@@ -208,7 +208,7 @@ function login( f ) {
 }
 
 function logged() {
-    soc = window.sessionStorage.getItem("soc_name");
+    soc = window.sessionStorage.getItem("soc_user");
     sen = window.sessionStorage.getItem("soc_pass");
     
     if ( soc == null || soc.toLowerCase() != 'conselho' ) {
