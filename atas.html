@@ -15,9 +15,9 @@
         }
 
         function jsLogin() {
-            window.sessionStorage.setItem("login"     , document.all.bloco_ata.innerHTML);
             
             window.sessionStorage.setItem("soc_name"  , document.all.bloco_ata.innerHTML);
+            window.sessionStorage.setItem("soc_user"  , document.all.bloco_ata.innerHTML);
             window.sessionStorage.setItem("soc_pass"  , document.all.password.value);
             
             document.getElementById("modal").style.display = ""; 
