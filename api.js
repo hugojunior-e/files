@@ -208,8 +208,8 @@ function login( f ) {
 }
 
 function logged() {
-    soc = window.sessionStorage.getItem("login");
-    sen = window.sessionStorage.getItem("secret");
+    soc = window.sessionStorage.getItem("soc_name");
+    sen = window.sessionStorage.getItem("soc_pass");
     
     if ( soc == null || soc.toLowerCase() != 'conselho' ) {
         return 0;
