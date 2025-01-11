@@ -8,14 +8,18 @@
     
     <script>
         function jsAbrirAtas(soc) {
-            var modal = document.getElementById("modal");
-            document.all.bloco_ata.innerHTML = soc;
-            modal.style.display = "block";                
-            document.all.password.focus()
+            if ( logged() == 1 ) {
+                window.sessionStorage.setItem("soc_name"  , document.all.bloco_ata.innerHTML);
+                window.location.href = 'atas_list.html';
+            } else {
+                var modal = document.getElementById("modal");
+                document.all.bloco_ata.innerHTML = soc;
+                modal.style.display = "block";                
+                document.all.password.focus()
+            }
         }
 
         function jsLogin() {
-            
             window.sessionStorage.setItem("soc_name"  , document.all.bloco_ata.innerHTML);
             window.sessionStorage.setItem("soc_user"  , document.all.bloco_ata.innerHTML);
             window.sessionStorage.setItem("soc_pass"  , document.all.password.value);
