@@ -189,8 +189,8 @@ function desencriptarCesar(textoEncriptado) {
 }
 
 function login( f ) {
-    soc = window.sessionStorage.getItem("login");
-    sen = window.sessionStorage.getItem("secret");
+    soc = window.sessionStorage.getItem("soc_user");
+    sen = window.sessionStorage.getItem("soc_pass");
     
     if ( soc == null ) {
         alert("Faça Login no App de Atas");
