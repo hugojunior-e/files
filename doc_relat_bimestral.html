@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3ªIPB - Udia</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="api.js"></script>
+    
+    <script>
+        function populateTable(data) {
+            obj_l = document.getElementById('LINK_ATAS');
+            obj_l.innerHTML = '';
+
+            items = []
+
+            data['results'].forEach(item => {
+                if (item.numero.length > 4) {
+                    items.push( [item.numero, item.objectId] );
+                }
+            });
+            items.sort((a, b) => a[0].localeCompare(b[0]));
+            
+            items.forEach(item => {
+                obj_l.innerHTML += "<tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" + item[1] + "')\"></td><td>" + item[0] + "</td></tr>";
+            });
+        }
+        
+
+        function jsAddOrEdit(nro) {
+            window.location.href = 'doc_relat_bimestral_edit.html?objectId=' + nro;
+        }
+    </script>
+
+</head>
+
+<body>
+    <div class="container" id=listinha>
+        <fieldset>
+            <legend><input type="button" value="adicionar" onclick="jsAddOrEdit('-')"> || Relatorios Bimestrais</legend>
+            <table class="links" id="LINK_ATAS"></table>
+        </fieldset>
+    </div>
+
+    <script> 
+        login( function() {
+            apiQueryData( url_doc_relat_bimestral, populateTable ); 
+        });
+    </script>
+</body>
+
+</html>
