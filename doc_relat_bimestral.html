@@ -11,6 +11,44 @@
         queryString = window.location.search;
         params      = new URLSearchParams(queryString);
         objectId    = params.get("objectId");
+
+        function getData() {
+            v_documento = {
+                "numero_socios":document.all.numero_socios.value,
+                "visitantes":document.all.visitantes.value,
+                "socios_grupos":document.all.socios_grupos.value,
+                "media_membros":document.all.media_membros.value,
+                "visitas_recebidas":document.all.visitas_recebidas.value,
+                "visitas_realizadas":document.all.visitas_realizadas.value,
+                "cultos_especiais":document.all.cultos_especiais.value,
+                "programacoes_evangelisticas":document.all.programacoes_evangelisticas.value,
+                "observacoes":document.all.observacoes.value                
+            };
+            
+            data = {
+                "sociedade":document.all.sociedade.value,
+                "numero":document.all.bimestre.value,
+                "documento": JSON.stringify(v_documento)
+            };
+            
+            return data;
+        }
+
+        function jsSalvar() {
+            if ( objectId !== "-" ) {
+                apiQueryUpdate( url_doc_relat_bimestral, objectId, getData(), function(cod, msg) {
+                    alert("Atualizado: " + msg)
+                });
+            } else {
+                apiQueryInsert( url_doc_relat_bimestral, getData(), function(cod, msg) { 
+                    if (cod == 0) {
+                        objectId = msg; 
+                    }
+                    alert("Inserido: " + msg)
+                });
+            }
+        }
+        
     </script>
 </head>
 <body>
@@ -28,10 +66,15 @@
                 <option value="JUNTA_DIACONAL">JUNTA_DIACONAL</option>
             </select>
         </div>
+
+        <div class="form-group">
+            <label for="sociedade">Bimestre/Ano:</label>
+            <input type="text" id="bimestre" name="bimestre">
+        </div>
         
         <div class="form-group">
             <label for="numero-socios">Número de Sócios até entrega do relatório:</label>
-            <input type="number" id="numero-socios" name="numero-socios">
+            <input type="number" id="numero_socios" name="numero_socios">
 
         </div>
 
@@ -42,32 +85,32 @@
 
         <div class="form-group">
             <label for="socios-grupos">Número de Sócios que participam frequentemente de Pequenos Grupos da Igreja:</label>
-            <input type="number" id="socios-grupos" name="socios-grupos">
+            <input type="number" id="socios_grupos" name="socios_grupos">
         </div>div>
 
         <div class="form-group">
             <label for="media-membros">Média aproximada de membros que participaram das programações:</label>
-            <input type="text" id="media-membros" name="media-membros">
+            <input type="text" id="media_membros" name="media_membros">
         </div>
 
         <div class="form-group">
             <label for="visitas-recebidas">Visitas Recebidas (Outras igrejas) – Citar as programações:</label>
-            <textarea id="visitas-recebidas" name="visitas-recebidas" rows="3"></textarea>
+            <textarea id="visitas_recebidas" name="visitas_recebidas" rows="3"></textarea>
         </div>
 
         <div class="form-group">
             <label for="visitas-realizadas">Visitas Realizadas (Outras igrejas ou sócios) – Citar as programações:</label>
-            <textarea id="visitas-realizadas" name="visitas-realizadas" rows="3"></textarea>
+            <textarea id="visitas_realizadas" name="visitas_realizadas" rows="3"></textarea>
         </div>
 
         <div class="form-group">
             <label for="cultos-especiais">Cultos Especiais: Detalhes:</label>
-            <textarea id="cultos-especiais" name="cultos-especiais" rows="3"></textarea>
+            <textarea id="cultos_especiais" name="cultos_especiais" rows="3"></textarea>
         </div>
 
         <div class="form-group">
             <label for="programacoes-evangelisticas">Programações Evangelisticas: Detalhes:</label>
-            <textarea id="programacoes-evangelisticas" name="programacoes-evangelisticas" rows="3"></textarea>
+            <textarea id="programacoes_evangelisticas" name="programacoes_evangelisticas" rows="3"></textarea>
         </div>
 
         <div class="form-group">
