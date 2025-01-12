@@ -14,45 +14,47 @@
     </script>
 </head>
 <body>
-    <h2>Relatorio Bimestral Sociedades Internas</h2>
-    
-    <div class="section">
-        <label for="sociedade">Sociedade Interna:</label>
-        <select name="sociedade" id="sociedade">
-            <option value="UPJ">UPJ</option>
-            <option value="UCP">UCP</option>
-            <option value="SAF">SAF</option>
-            <option value="UPH">UPH</option>
-            <option value="UMP">UMP</option>
-            <option value="JUNTA_DIACONAL">JUNTA_DIACONAL</option>
-        </select>
+    <div class="container">
+        <h2>Relatorio Bimestral Sociedades Internas</h2>
         
-        <label for="numero-socios">Número de Sócios até entrega do relatório:</label>
-        <input type="number" id="numero-socios" name="numero-socios">
-
-        <label for="visitantes">Visitantes:</label>
-        <input type="text" id="visitantes" name="visitantes">
-
-        <label for="socios-grupos">Número de Sócios que participam frequentemente de Pequenos Grupos da Igreja:</label>
-        <input type="number" id="socios-grupos" name="socios-grupos">
-
-        <label for="media-membros">Média aproximada de membros que participaram das programações:</label>
-        <input type="text" id="media-membros" name="media-membros">
-
-        <label for="visitas-recebidas">Visitas Recebidas (Outras igrejas) – Citar as programações:</label>
-        <textarea id="visitas-recebidas" name="visitas-recebidas" rows="3"></textarea>
-
-        <label for="visitas-realizadas">Visitas Realizadas (Outras igrejas ou sócios) – Citar as programações:</label>
-        <textarea id="visitas-realizadas" name="visitas-realizadas" rows="3"></textarea>
-
-        <label for="cultos-especiais">Cultos Especiais: Detalhes:</label>
-        <textarea id="cultos-especiais" name="cultos-especiais" rows="3"></textarea>
-
-        <label for="programacoes-evangelisticas">Programações Evangelisticas: Detalhes:</label>
-        <textarea id="programacoes-evangelisticas" name="programacoes-evangelisticas" rows="3"></textarea>
-
-        <label for="observacoes">Observações: Detalhes:</label>
-        <textarea id="observacoes" name="observacoes" rows="3"></textarea>
+            <label for="sociedade">Sociedade Interna:</label>
+            <select name="sociedade" id="sociedade">
+                <option value="UPJ">UPJ</option>
+                <option value="UCP">UCP</option>
+                <option value="SAF">SAF</option>
+                <option value="UPH">UPH</option>
+                <option value="UMP">UMP</option>
+                <option value="JUNTA_DIACONAL">JUNTA_DIACONAL</option>
+            </select>
+            
+            <label for="numero-socios">Número de Sócios até entrega do relatório:</label>
+            <input type="number" id="numero-socios" name="numero-socios">
+    
+            <label for="visitantes">Visitantes:</label>
+            <input type="text" id="visitantes" name="visitantes">
+    
+            <label for="socios-grupos">Número de Sócios que participam frequentemente de Pequenos Grupos da Igreja:</label>
+            <input type="number" id="socios-grupos" name="socios-grupos">
+    
+            <label for="media-membros">Média aproximada de membros que participaram das programações:</label>
+            <input type="text" id="media-membros" name="media-membros">
+    
+            <label for="visitas-recebidas">Visitas Recebidas (Outras igrejas) – Citar as programações:</label>
+            <textarea id="visitas-recebidas" name="visitas-recebidas" rows="3"></textarea>
+    
+            <label for="visitas-realizadas">Visitas Realizadas (Outras igrejas ou sócios) – Citar as programações:</label>
+            <textarea id="visitas-realizadas" name="visitas-realizadas" rows="3"></textarea>
+    
+            <label for="cultos-especiais">Cultos Especiais: Detalhes:</label>
+            <textarea id="cultos-especiais" name="cultos-especiais" rows="3"></textarea>
+    
+            <label for="programacoes-evangelisticas">Programações Evangelisticas: Detalhes:</label>
+            <textarea id="programacoes-evangelisticas" name="programacoes-evangelisticas" rows="3"></textarea>
+    
+            <label for="observacoes">Observações: Detalhes:</label>
+            <textarea id="observacoes" name="observacoes" rows="3"></textarea>
+        <center><button onclick="jsSalvar()">Salvar Ata</button></center>
+        
     </div>
 </body>
 </html>
