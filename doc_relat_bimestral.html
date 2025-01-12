@@ -16,6 +16,18 @@
             data['results'].forEach(item => {
                 document.all.sociedade.value = item.sociedade;
                 document.all.bimestre.value = item.numero;
+
+                dados = JSON.parse( item.documento );
+
+                document.all.numero_socios.value                = dados.numero_socios;
+                document.all.visitantes.value                   = dados.visitantes;
+                document.all.socios_grupos.value                = dados.socios_grupos;
+                document.all.media_membros.value                = dados.media_membros;
+                document.all.visitas_recebidas.value            = dados.visitas_recebidas;
+                document.all.visitas_realizadas.value           = dados.visitas_realizadas;
+                document.all.cultos_especiais.value             = dados.cultos_especiais;
+                document.all.programacoes_evangelisticas.value  = dados.programacoes_evangelisticas;
+                document.all.observacoes.value                  = dados.observacoes;                
                 
                 objectId = item.objectId;
             });
