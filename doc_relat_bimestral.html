@@ -17,13 +17,13 @@
 
             data['results'].forEach(item => {
                 if (item.numero.length > 4) {
-                    items.push( [item.numero, item.objectId] );
+                    items.push( [item.numero, item.objectId, item.sociedade] );
                 }
             });
             items.sort((a, b) => a[0].localeCompare(b[0]));
             
             items.forEach(item => {
-                obj_l.innerHTML += "<tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" + item[1] + "')\"></td><td>" + item[0] + "</td></tr>";
+                obj_l.innerHTML += "<tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" + item[1] + "')\"></td><td>" +  item[2]  + "</td><td>" + item[0] + "</td></tr>";
             });
         }
         
