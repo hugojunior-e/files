@@ -73,8 +73,7 @@ td {
     padding: 5px 15px;
 }
 
-.fundo_azul {
-    display: block;
+.td_blue {
     color: #3366cc;
     text-decoration: none;
     font-size: 18px;
