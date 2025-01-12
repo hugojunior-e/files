@@ -5,11 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3ªIPB - Udia</title>
     <link rel="stylesheet" href="estilos.css">
+    <script src="api.js"></script> 
+
+    <script>
+        queryString = window.location.search;
+        params      = new URLSearchParams(queryString);
+        objectId    = params.get("objectId");
+    </script>
 </head>
 <body>
     <h2>Relatorio Bimestral Sociedades Internas</h2>
     
     <div class="section">
+        <label for="sociedade">Sociedade Interna:</label>
+        <select name="sociedade" id="sociedade">
+            <option value="UPJ">UPJ</option>
+            <option value="UCP">UCP</option>
+            <option value="SAF">SAF</option>
+            <option value="UPH">UPH</option>
+            <option value="UMP">UMP</option>
+            <option value="JUNTA_DIACONAL">JUNTA_DIACONAL</option>
+        </select>
+        
         <label for="numero-socios">Número de Sócios até entrega do relatório:</label>
         <input type="number" id="numero-socios" name="numero-socios">
 
