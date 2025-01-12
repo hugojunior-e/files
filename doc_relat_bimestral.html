@@ -23,7 +23,7 @@
             items.sort((a, b) => a[0].localeCompare(b[0]));
             
             items.forEach(item => {
-                obj_l.innerHTML += "<tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" + item[1] + "')\"></td><td  class=fundo_azul>" +  item[2]  + "</td><td  class=fundo_azul>" + item[0] + "</td></tr>";
+                obj_l.innerHTML += "<tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" + item[1] + "')\"></td><td  class=td_blue>" +  item[2]  + "</td><td  class=td_blue>" + item[0] + "</td></tr>";
             });
         }
         
