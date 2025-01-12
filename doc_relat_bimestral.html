@@ -12,6 +12,15 @@
         params      = new URLSearchParams(queryString);
         objectId    = params.get("objectId");
 
+        function populateTable(data) {
+            data['results'].forEach(item => {
+                document.all.sociedade.value = item.sociedade;
+                document.all.bimestre.value = item.numero;
+                
+                objectId = item.objectId;
+            });
+        }
+        
         function getData() {
             v_documento = {
                 "numero_socios":document.all.numero_socios.value,
@@ -121,5 +130,10 @@
         <center><button onclick="jsSalvar()">Salvar Ata</button></center>
         
     </div>
+
+    <script>
+            parametros = { objectId: objectId };
+            apiQueryData( url_doc_relat_bimestral, populateTable, parametros);         
+    </script>
 </body>
 </html>
