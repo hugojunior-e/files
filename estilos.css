@@ -96,6 +96,7 @@ textarea {
 }
 
 input[type="number"],
+input[type="tel"],
 input[type="date"],
 input[type="time"],
 input[type="radio"],
