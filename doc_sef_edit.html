@@ -104,6 +104,7 @@
 <body>
     <h1>S.E.F. - Solicitação de Espaço Físico</h1>
     <div id=formulario>
+        
         <table>
             <tr>
                 <td class="section">
@@ -118,6 +119,7 @@
             </tr>
         </table>
 
+        
         <div class="section">
             <label>02) Horário:</label>
             <table>
@@ -133,15 +135,11 @@
             </table>
         </div>
 
+        
         <div class="section">
             <label>03) Precisa de diácono?</label>
             <input type="radio" id="diacono_sim" name="diacono" value="sim">Sim
             <input type="radio" id="diacono_nao" name="diacono" value="nao" checked>Não
-
-            <div>
-                <label for="responsavel-abertura">Responsável por abrir a igreja:</label>
-                <input type="text" id="responsavel_abertura" name="responsavel_abertura">
-            </div>
 
             <div>
                 <label>Quantos?</label>
@@ -186,11 +184,23 @@
             </table>
         </div>
 
-        <div class="section">
-            <label for="responsavel-programacao">08) Responsável pela programação:</label>
-            <input type="text" id="responsavel_programacao" name="responsavel_programacao">
-        </div>
+        <table>
+            <tr>
+                <td class="section">
+                    <label for="responsavel-abertura">08) Responsável por abrir a igreja:</label>
+                    <input type="text" id="responsavel_abertura" name="responsavel_abertura">
+                </td>
+                
+                <td class="section">
+                    <label for="responsavel-programacao">09) Responsável pela programação:</label>
+                    <input type="text" id="responsavel_programacao" name="responsavel_programacao">
+                </td>
+            </tr>
+        </table>
+        
         <hr>
+
+        
         <div class="instructions">
             <strong>Orientações:</strong>
             <ul>
