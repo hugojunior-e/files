@@ -37,14 +37,11 @@
 <body>
     <h2>Solicitacoes de Espaço Fisico</h2> 
     
-    <div class="container" id=listinha>
-        <fieldset>
-            <legend><input type="button" value="adicionar" onclick="jsAddOrEdit('-')"> || SEF</legend>
-            <table class="table_rounded" id="LINK_SEF"></table>
-        </fieldset>
-    </div>
+    <fieldset>
+        <legend><input type="button" value="adicionar" onclick="jsAddOrEdit('-')"> || SEF</legend>
+        <table class="table_rounded" id="LINK_SEF"></table>
+    </fieldset>
 
-    <!-- SCRIPTS DE INIT -->
     
     <script> 
         apiQueryData( url_doc_sef, populateTable ); 
