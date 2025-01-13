@@ -173,16 +173,16 @@ const s_keys = {
 };
 
 
-function setFormEditable(rOnly) {
+function setFormEditable(is_editable) {
     // Seleciona todos os elementos de formulário
     const formElements = document.querySelectorAll("input, textarea, select, button");
 
     // Itera sobre os elementos e aplica o atributo 'readonly' ou 'disabled'
     formElements.forEach(element => {
         if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
-            element.readOnly = rOnly;
+            element.readOnly = !is_editable;
         } else if (element.tagName === "SELECT" || element.tagName === "BUTTON") {
-            element.disabled = rOnly;
+            element.disabled = !is_editable;
         }
     });    
 }
