@@ -102,25 +102,26 @@
     
 </head>
 <body>
-    <h1>S.E.F. - Solicitação de Espaço Físico</h1>
+    <h2>S.E.F. - Solicitação de Espaço Físico</h2>
     <div id=formulario>
 
-        <fieldset>
-            <legend>01) Titulo:</legend>
+        <div>
+            <label>01) Titulo:</label>
             <input type="text" id="programacao" name="programacao">
-        </fieldset>
+        </div>
                 
-        <fieldset>
-            <legend>02) Data (dd/mm/yyyy)</legend>
-            <input type="text" id="data_programacao" name="data_programacao">
+        <div>
+            <label>02) Data (dd/mm/yyyy)</label>
+            <input type="date" id="data_programacao" name="data_programacao">
             &nbsp;horario&nbsp;
             <input type="time" id="horario_inicio" name="horario_inicio">
             &nbsp;até&nbsp; 
             <input type="time" id="horario_final" name="horario_final">
-        </fieldset>
+        </div>
 
-        <div class="section">
-            <label>04) Precisa de diácono?</label>
+
+        <div>
+            <label>03) Precisa de diácono?</label>
             <input type="radio" id="diacono_sim" name="diacono" value="sim">Sim
             <input type="radio" id="diacono_nao" name="diacono" value="nao" checked>Não
             &nbsp;&nbsp;-&nbsp;&nbsp;Quantos?
@@ -128,29 +129,29 @@
             <input type="radio" id="diacono_2" name="quantidade_diacono" value="2">2
         </div>
 
-        <div class="section">
-            <label>05) Precisa de apoio do Ministério de Recepção?</label>
+        <div>
+            <label>04) Precisa de apoio do Ministério de Recepção?</label>
             <input type="radio" id="recepcao_sim" name="recepcao" value="sim">Sim
             <input type="radio" id="recepcao_nao" name="recepcao" value="nao"  checked>Não
         </div>
 
         
-        <div class="section">
-            <label>06) Precisa de sonoplastia?</label>
+        <div>
+            <label>05) Precisa de sonoplastia?</label>
             <input type="radio" id="sonoplastia_sim" name="sonoplastia" value="sim">Sim
             <input type="radio" id="sonoplastia_nao" name="sonoplastia" value="nao"  checked>Não
             <textarea name="sonoplastia_detalhes" placeholder="Descreva resumidamente: quantos microfones? Grupo musical? Etc."></textarea>
         </div>
 
         
-        <div class="section">
-            <label>07) Utilizará equipamento de mídia?</label>
+        <div>
+            <label>06) Utilizará equipamento de mídia?</label>
             <input type="checkbox" id="datashow" name="midia" value="datashow">Datashow
             <input type="checkbox" id="televisao" name="midia" value="televisao">Televisao
         </div>
 
-        <div class="section">
-            <label>08) Quais setores da estrutura da igreja serão utilizados:</label>
+        <div>
+            <label>07) Quais setores da estrutura da igreja serão utilizados:</label>
             <table>
                  <tr>
                     <td><input type="checkbox" id="nave_templo" name="setores" value="nave">Nave Templo</td>
@@ -165,15 +166,14 @@
             </table>
         </div>
 
-        <table>
+        <table width=100%>
             <tr>
                 <td class="section">
-                    <label for="responsavel-abertura">09) Responsável por abrir a igreja:</label>
+                    <label for="responsavel-abertura">08) Resp. Abrir Igreja:</label>
                     <input type="text" id="responsavel_abertura" name="responsavel_abertura">
                 </td>
-                
                 <td class="section">
-                    <label for="responsavel-programacao">10) Responsável pela programação:</label>
+                    <label for="responsavel-programacao">09) Resp. Pela Programação:</label>
                     <input type="text" id="responsavel_programacao" name="responsavel_programacao">
                 </td>
             </tr>
@@ -182,7 +182,7 @@
         <hr>
 
         
-        <div class="instructions">
+        <div>
             <strong>Orientações:</strong>
             <ul>
                 <li>Ao término da programação, verifique:</li>
