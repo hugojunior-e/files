@@ -36,12 +36,10 @@
 </head>
 
 <body>
-    <div class="container" id=listinha>
-        <fieldset>
-            <legend><input type="button" value="adicionar" onclick="jsAddOrEdit('-')"> || Relat.Bimestral</legend>
-            <table class="table_rounded" id="LINK_ATAS"></table>
-        </fieldset>
-    </div>
+    <fieldset>
+        <legend><input type="button" value="adicionar" onclick="jsAddOrEdit('-')"> || Relat.Bimestral</legend>
+        <table class="table_rounded" id="LINK_ATAS"></table>
+    </fieldset>
 
     <script> 
         apiQueryData( url_doc_relat_bimestral, populateTable ); 
