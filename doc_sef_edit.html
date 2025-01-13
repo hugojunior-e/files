@@ -103,54 +103,44 @@
 </head>
 <body>
     <h2>S.E.F. - Solicitação de Espaço Físico</h2>
-    <div id=formulario>
-
-        <div>
+    <fieldset id=formulario>
+        <legend>DADOS</legend>
+        
+        
             <label>01) Titulo:</label>
             <input type="text" id="programacao" name="programacao">
-        </div>
+        
                 
-        <div>
             <label>02) Data (dd/mm/yyyy)</label>
             <input type="date" id="data_programacao" name="data_programacao">
             &nbsp;de&nbsp;
             <input type="time" id="horario_inicio" name="horario_inicio">
             &nbsp;até&nbsp; 
             <input type="time" id="horario_final" name="horario_final">
-        </div>
 
-
-        <div>
             <label>03) Precisa de diácono?</label>
             <input type="radio" id="diacono_sim" name="diacono" value="sim">Sim
             <input type="radio" id="diacono_nao" name="diacono" value="nao" checked>Não
             &nbsp;&nbsp;-&nbsp;&nbsp;Quantos?
             <input type="radio" id="diacono_1" name="quantidade_diacono" value="1"  checked>1
             <input type="radio" id="diacono_2" name="quantidade_diacono" value="2">2
-        </div>
 
-        <div>
             <label>04) Precisa de apoio do Ministério de Recepção?</label>
             <input type="radio" id="recepcao_sim" name="recepcao" value="sim">Sim
             <input type="radio" id="recepcao_nao" name="recepcao" value="nao"  checked>Não
-        </div>
 
         
-        <div>
             <label>05) Precisa de sonoplastia?</label>
             <input type="radio" id="sonoplastia_sim" name="sonoplastia" value="sim">Sim
             <input type="radio" id="sonoplastia_nao" name="sonoplastia" value="nao"  checked>Não
             <textarea name="sonoplastia_detalhes" placeholder="Descreva resumidamente: quantos microfones? Grupo musical? Etc."></textarea>
-        </div>
 
         
-        <div>
             <label>06) Utilizará equipamento de mídia?</label>
             <input type="checkbox" id="datashow" name="midia" value="datashow">Datashow
             <input type="checkbox" id="televisao" name="midia" value="televisao">Televisao
-        </div>
 
-        <div>
+        
             <label>07) Quais setores da estrutura da igreja serão utilizados:</label>
             <table>
                  <tr>
@@ -164,39 +154,38 @@
                     <td><input type="checkbox" id="salas_ebd" name="setores" value="salas-ebd">Salas EBD</td>
                 </tr>                    
             </table>
-        </div>
 
-        <table width=100%>
-            <tr>
-                <td class="section">
-                    <label for="responsavel-abertura">08) Resp. Abrir Igreja:</label>
-                    <input type="text" id="responsavel_abertura" name="responsavel_abertura">
-                </td>
-                <td class="section">
-                    <label for="responsavel-programacao">09) Resp. Programação:</label>
-                    <input type="text" id="responsavel_programacao" name="responsavel_programacao">
-                </td>
-            </tr>
-        </table>
+            <table width=100%>
+                <tr>
+                    <td class="section">
+                        <label for="responsavel-abertura">08) Resp. Abrir Igreja:</label>
+                        <input type="text" id="responsavel_abertura" name="responsavel_abertura">
+                    </td>
+                    <td class="section">
+                        <label for="responsavel-programacao">09) Resp. Programação:</label>
+                        <input type="text" id="responsavel_programacao" name="responsavel_programacao">
+                    </td>
+                </tr>
+            </table>
         
-        <hr>
+            <hr>
 
         
-        <div>
-            <strong>Orientações:</strong>
-            <ul>
-                <li>Ao término da programação, verifique:</li>
-                <li>Se deixou o alarme armado;</li>
-                <li>Apagou todas as luzes e não deixou nenhuma torneira aberta;</li>
-                <li>Nenhuma porta de acesso externo aberta;</li>
-                <li>Fechou válvula do botijão de gás;</li>
-                <li>Mantenha a igreja limpa e organizada.</li>
-            </ul>
-            <p><em>"Alegrei-me quando me disseram: Vamos à Casa do SENHOR" – Salmos 122:1</em></p>
-        </div>
+            <div>
+                <strong>Orientações:</strong>
+                <ul>
+                    <li>Ao término da programação, verifique:</li>
+                    <li>Se deixou o alarme armado;</li>
+                    <li>Apagou todas as luzes e não deixou nenhuma torneira aberta;</li>
+                    <li>Nenhuma porta de acesso externo aberta;</li>
+                    <li>Fechou válvula do botijão de gás;</li>
+                    <li>Mantenha a igreja limpa e organizada.</li>
+                </ul>
+                <p><em>"Alegrei-me quando me disseram: Vamos à Casa do SENHOR" – Salmos 122:1</em></p>
+            </div>
 
-        <center><button onclick="jsSalvar()">Salvar SEF</button></center>
-    </div>
+            <center><button onclick="jsSalvar()">Salvar SEF</button></center>
+    </fieldset>
 
     <script>
         parametros = { objectId: objectId };
