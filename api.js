@@ -172,6 +172,21 @@ const s_keys = {
     "upj":'ydlCxsm&'
 };
 
+
+function setFormEditable(rOnly) {
+    // Seleciona todos os elementos de formulário
+    const formElements = document.querySelectorAll("input, textarea, select, button");
+
+    // Itera sobre os elementos e aplica o atributo 'readonly' ou 'disabled'
+    formElements.forEach(element => {
+        if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
+            element.readOnly = rOnly;
+        } else if (element.tagName === "SELECT" || element.tagName === "BUTTON") {
+            element.disabled = rOnly;
+        }
+    });    
+}
+
 function encriptarCesar(texto) {
     return texto.split('').map(char => {
         const codigo = char.charCodeAt(0);
