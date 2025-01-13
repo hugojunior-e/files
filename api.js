@@ -179,7 +179,7 @@ function setFormEditable(is_editable) {
 
     // Itera sobre os elementos e aplica o atributo 'readonly' ou 'disabled'
     formElements.forEach(element => {
-        if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
+        if (element.tagName === "TEXTAREA") {
             element.readOnly = !is_editable;
         } else if (element.tagName === "SELECT" || element.tagName === "BUTTON") {
             element.disabled = !is_editable;
