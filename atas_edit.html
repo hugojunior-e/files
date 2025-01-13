@@ -125,61 +125,67 @@
     <div class="container">
         <h1>Ata de Reunião - <span id=LOCAL></span></h1>
         <div id=form_campos>
-            <div class="form-group">
+            <div>
                 <label for="numero-ata">Número da Ata:(nro/ano)</label>
                 <input type="text" id="numero" name="numero" placeholder="Ex: oito" required>
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="data-reuniao">Data da Reunião:</label>
                 <input type="text" id="dt_inicio" name="dt_inicio" placeholder="dd/mm/yyyy" required>
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="data-convocacao">Data da Convocação:</label>
                 <input type="text" id="dt_convocacao" name="dt_convocacao" placeholder="dd/mm/yyyy"  required>
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="endereco">Endereço:</label>
                 <input type="text" id="endereco" name="endereco" placeholder="Rua, número, bairro, cidade" value="" required>
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="presidente">Presidente da Reunião:</label>
                 <input type="text"  id="presidente" name="presidente" placeholder="Nome completo" value="">
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="participantes">Participantes:</label>
                 <textarea id="participantes" name="participantes" placeholder="Insira os nomes dos participantes separados por vírgula." rows="5" required>
                 </textarea>
             </div>
 
-            <div class="form-group">
+            <div>
                 <label for="horario-inicio">Horário de Início:</label>
                 <input type="text" id="hr_inicio" name="hr_inicio" placeholder="hh:mi" required>
             </div>
-            <div class="form-group">
+            
+            <div>
                 <label for="atividades-iniciais">Atividades Iniciais:</label>
                 <textarea id="atv_inicial" name="atv_inicial" placeholder="Descrição das atividades iniciais." rows="5" required></textarea>
             </div>
-            <div class="form-group">
+            
+            <div>
                 <label for="assuntos-discutidos">Assuntos Discutidos:</label>
                 <textarea id="assuntos" name="assuntos" placeholder="Descrição dos assuntos discutidos." rows="10" required></textarea>
             </div>
-            <div class="form-group">
+            
+            <div>
                 <label for="atividades-encerramento">Atividades de Encerramento:</label>
                 <textarea id="atv_final" name="atv_final" placeholder="Descrição das atividades de encerramento." rows="5" required></textarea>
             </div>
-            <div class="form-group">
+            
+            <div>
                 <label for="horario-termino">Horário de Término:</label>
                 <input type="text" id="hr_fim" name="hr_fim" placeholder="hh:mi" required>
             </div>
-            <div class="form-group">
+            
+            <div>
                 <label for="secretario">Secretário Responsável:</label>
                 <input type="text" id="secretario" name="secretario" placeholder="Nome completo" value="">
             </div>
+            
             <center><button onclick="jsSalvar()">Salvar Ata</button></center>
 
         </div>
