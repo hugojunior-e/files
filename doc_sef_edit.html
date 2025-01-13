@@ -60,6 +60,8 @@
 
         function populateTable(data) {
             data['results'].forEach(item => {
+                setObjEditable("formulario", document.all.status == "PENDENTE");
+                
                 document.all.programacao.value = item.titulo;
                 document.all.data_programacao.value = item.criado_em;
                 document.all.responsavel_programacao.value = item.criado_por;
@@ -197,7 +199,6 @@
     <script>
         parametros = { objectId: objectId };
         apiQueryData(url_doc_sef, populateTable, parametros); 
-        setObjEditable("formulario", false);
     </script>
 </body>
 </html>
