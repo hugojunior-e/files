@@ -173,18 +173,9 @@ const s_keys = {
 };
 
 
-function setFormEditable(is_editable) {
-    // Seleciona todos os elementos de formulário
-    const formElements = document.querySelectorAll("input, textarea, select, button");
-
-    // Itera sobre os elementos e aplica o atributo 'readonly' ou 'disabled'
-    formElements.forEach(element => {
-        if (element.tagName === "TEXTAREA") {
-            element.readOnly = !is_editable;
-        } else {
-            element.disabled = !is_editable;
-        }
-    });    
+function setObjEditable(obj, is_editable) {
+    document.getElementById(obj).style.pointerEvents = is_editable ? "auto" : "none";
+    document.getElementById(obj).style.userSelect    = is_editable ? "auto" : "none";
 }
 
 function encriptarCesar(texto) {
