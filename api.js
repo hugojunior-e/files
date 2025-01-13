@@ -181,7 +181,7 @@ function setFormEditable(is_editable) {
     formElements.forEach(element => {
         if (element.tagName === "TEXTAREA") {
             element.readOnly = !is_editable;
-        } else if (element.tagName === "SELECT" || element.tagName === "BUTTON") {
+        } else {
             element.disabled = !is_editable;
         }
     });    
