@@ -204,3 +204,16 @@ button:hover {
 .styled-table tbody tr:last-of-type {
   border-bottom: 2px solid #4CAF50; /* Destaca a última linha */
 }
+
+
+
+.form_cad fieldset {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+}
+
+.form_cad legend {
+            font-weight: bold;
+        }
