@@ -101,7 +101,7 @@
 </head>
 <body>
     <h1>S.E.F. - Solicitação de Espaço Físico</h1>
-
+    <div id=formulario>
         <div class="section">
             <label for="programacao">00) Titulo programação:</label>
             <input type="text" id="programacao" name="programacao">
@@ -192,11 +192,12 @@
         </div>
 
         <center><button onclick="jsSalvar()">Salvar SEF</button></center>
-
+    </div>
 
     <script>
-            parametros = { objectId: objectId };
-            apiQueryData(url_doc_sef, populateTable, parametros); 
+        parametros = { objectId: objectId };
+        apiQueryData(url_doc_sef, populateTable, parametros); 
+        setObjEditable("formulario", false);
     </script>
 </body>
 </html>
