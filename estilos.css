@@ -5,22 +5,10 @@ label {
     color: #555;
 }
 
-.links a {
-    display: block;
-    color: #3366cc;
-    text-decoration: none;
-    font-size: 18px;
-    transition: color 0.3s;
-}
-
 @keyframes blink-animation {
     50% {
         opacity: 0;
     }
-}
-
-.links a:hover {
-    color: #ff6666;
 }
 
 /* Estilos básicos da página */
@@ -71,6 +59,19 @@ legend {
     border-radius: 8px;
     padding: 5px 15px;
 }
+
+.table_rounded a {
+    display: block;
+    color: #3366cc;
+    text-decoration: none;
+    font-size: 18px;
+    transition: color 0.3s;
+}
+
+.table_rounded a:hover {
+    color: #ff6666;
+}
+
 
 .td_blue {
     color: #3366cc;
