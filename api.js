@@ -257,7 +257,7 @@ function doLoginForm(pUsuario, fun) {
         <form>
             <label for="name">${pUsuario}</label>
             <input type="password" id="password" name="password" required>
-            <button type="button" onclick="doLoginValidade("${pUsuario}", document.all.password.value)">Login</button>
+            <button type="button" onclick="doLoginValidade('${pUsuario}', document.all.password.value)">Login</button>
         </form>
     </div>`;
     
