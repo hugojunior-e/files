@@ -49,10 +49,11 @@
     <!-- SCRIPTS DE INIT -->
     
     <script> 
-        forceLogin();
-        document.all.SOCIEDADE.innerHTML = sociedade;
-        parametros = { sociedade: sociedade };
-        apiQueryData( url_atas, populateTable, parametros ); 
+        login( function() {
+            document.all.SOCIEDADE.innerHTML = sociedade;
+            parametros = { sociedade: sociedade };
+            apiQueryData( url_atas, populateTable, parametros ); 
+        });
     </script>
 </body>
 
