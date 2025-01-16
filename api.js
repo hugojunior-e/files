@@ -228,3 +228,29 @@ function logged() {
     
     return 1;
 }
+
+
+
+function doLogin(pVisivel) {
+    const htmlString = `
+    <div class="modal-content">
+        <span class="close" onclick="document.all.modal.style.display = 'none'">&times;</span>
+        <h2>Digite a Senha:</h2>
+        <form>
+            <label for="name"><span id="bloco_ata"></span>:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="button" onclick="jsLogin()">Login</button>
+        </form>
+    </div>`;
+    
+    obj = document.getElementById("FormDoLogin");
+    if ( obj == null ) {
+        obj = document.createElement('div');
+        novoDiv.id = "modal";
+        novoDiv.className = "modal";
+        document.body.appendChild(novoDiv);
+        obj.innerHTML = htmlString;
+    }
+
+    obj.style.visibiity = pVisivel ? "" : "";
+}
