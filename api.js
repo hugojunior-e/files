@@ -243,7 +243,7 @@ function doLoginValidade(soc, sen) {
     document.getElementById("modal").style.display = "none";
     window.sessionStorage.setItem("soc_user"  , soc);
     window.sessionStorage.setItem("soc_pass"  , sen);    
-    doLoginValidadeFunction(1);
+    doLoginValidadeFunction();
 }
 
 
