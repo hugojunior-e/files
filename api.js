@@ -228,7 +228,7 @@ function logged() {
 
 
 
-var doLoginValidadeFunction = null;
+let doLoginValidadeFunction;
 
 function doLoginValidade(soc, sen) {
     if ( soc == null || sen == null ) {
