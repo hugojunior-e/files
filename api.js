@@ -221,7 +221,7 @@ function login( f ) {
     f();
 }
 
-function logged() {
+function logged3() {
     soc = window.sessionStorage.getItem("soc_user");
     sen = window.sessionStorage.getItem("soc_pass");
     
@@ -234,4 +234,31 @@ function logged() {
     }    
     
     return 1;
+}
+
+
+
+function logged( sociedade, funcOnLogin ) {
+    islogged = 1;
+    
+    soc = window.sessionStorage.getItem("soc_user");
+    sen = window.sessionStorage.getItem("soc_pass");
+    
+    if ( soc == null ) {
+        islogged = 0;
+    }
+    
+    if ( encriptarCesar( sen.toLowerCase() ) !== s_keys[ soc.toLowerCase() ] ) {
+        islogged = 0;
+    }    
+    
+    if ( soc.toLowerCase() != sociedade.toLowerCase() && soc.toLowerCase() !== "conselho" ) {
+        islogged = 0;
+    }    
+
+    if ( islogged == 0 ) {
+        window.location.href = 'login.html';
+    } else {
+        funcOnLogin();
+    }
 }
