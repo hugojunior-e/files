@@ -240,7 +240,7 @@ function doLoginValidade(soc, sen) {
         alert('Senha Errada!');
         return;
     }    
-    document.getElementById("FormDoLogin").style.display = "none";
+    document.getElementById("modal").style.display = "none";
     window.sessionStorage.setItem("soc_user"  , soc);
     window.sessionStorage.setItem("soc_pass"  , sen);    
     doLoginValidadeFunction(1);
