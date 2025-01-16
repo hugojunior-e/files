@@ -252,5 +252,5 @@ function doLogin(pVisivel) {
         obj.innerHTML = htmlString;
     }
 
-    obj.style.visibiity = pVisivel ? "" : "";
+    obj.style.display = pVisivel ? "" : "block";
 }
