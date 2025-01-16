@@ -235,7 +235,3 @@ function logged() {
     
     return 1;
 }
-
-
-    obj.style.display = "block";
-}
