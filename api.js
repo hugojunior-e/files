@@ -207,35 +207,19 @@ function login( f ) {
     sen = window.sessionStorage.getItem("soc_pass");
     
     if ( soc == null ) {
-        alert("Faça Login no App de Atas");
-        window.location.href = 'atas.html';
+        alert("Faça Login no App");
+        window.location.href = 'login.html';
         return;
     }
     
     if ( encriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
         alert("Senha invalida para sociedade " + soc);
-        window.location.href = 'atas.html';
+        window.location.href = 'login.html';
         return;
     }
 
     f();
 }
-
-function logged3() {
-    soc = window.sessionStorage.getItem("soc_user");
-    sen = window.sessionStorage.getItem("soc_pass");
-    
-    if ( soc == null || soc.toLowerCase() != 'conselho' ) {
-        return 0;
-    }
-    
-    if ( encriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
-        return 0;
-    }    
-    
-    return 1;
-}
-
 
 
 function logged( sociedade, funcOnLogin ) {
