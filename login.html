@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3ªIPB - Udia</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="api.js"></script>
+
+    <script>
+        function jsLogin() {
+            soc = document.all.sociedade.value;
+            sen = document.all.password.value;
+
+            if ( encriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
+                alert("Senha invalida para sociedade " + soc);
+                return;
+            }
+            alert("Autenticado com sucesso!");
+            window.sessionStorage.setItem("soc_user"  , soc);
+            window.sessionStorage.setItem("soc_pass"  , sen);
+
+            window.location.href = 'index.html';
+
+      }
+
+    </script>
+</head>
+<body>
+        <div class="modal-content">
+            <span class="close" onclick="window.location.href='index.html'">&times;</span>
+            <h2>Autentique-se:</h2>
+
+            <label for="name">Sociedade:</label>
+            <form>
+                <select id=sociedade>
+                  <option value=CONSELHO>CONSELHO</option>
+                  <option value=UMP>UMP</option>
+                  <option value=UPH>UPH</option>
+                  <option value=UCP>UCP</option>
+                  <option value=JUNTA_DIACONAL>JUNTA_DIACONAL</option>
+                  <option value=SAF>SAF</option>
+                  <option value=UPJ>UPJ</option>
+                </select>
+                <label for="name">Senha:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="button" onclick="jsLogin()">Login</button>
+            </form>
+        </div>
+</body>
+</html>
