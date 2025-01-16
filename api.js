@@ -202,13 +202,24 @@ function desencriptarCesar(textoEncriptado) {
 //------------------------------------------------------------------------
 
 
-function forceLogin() {
-    if ( logged() == 0 ) {
-        alert("Faça Login primeiro!");
-        window.location.href = 'index.html';
+function login( f ) {
+    soc = window.sessionStorage.getItem("soc_user");
+    sen = window.sessionStorage.getItem("soc_pass");
+    
+    if ( soc == null ) {
+        alert("Faça Login no App de Atas");
+        window.location.href = 'atas.html';
+        return;
     }
-}
+    
+    if ( encriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
+        alert("Senha invalida para sociedade " + soc);
+        window.location.href = 'atas.html';
+        return;
+    }
 
+    f();
+}
 
 function logged() {
     soc = window.sessionStorage.getItem("soc_user");
@@ -225,50 +236,6 @@ function logged() {
     return 1;
 }
 
-
-
-
-let doLoginValidadeFunction;
-
-function doLoginValidade(soc, sen) {
-    if ( soc == null || sen == null ) {
-        alert('Campos nao pode ser em branco!');
-        return;
-    }
-    
-    else if ( encriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
-        alert('Senha Errada!');
-        return;
-    }    
-    document.getElementById("modal").style.display = "none";
-    window.sessionStorage.setItem("soc_user"  , soc);
-    window.sessionStorage.setItem("soc_pass"  , sen);    
-    doLoginValidadeFunction();
-}
-
-
-function doLoginForm(pUsuario, fun) {
-    doLoginValidadeFunction = fun;
-    
-    const htmlString = `
-    <div class="modal-content">
-        <span class="close" onclick="document.all.modal.style.display = 'none'">&times;</span>
-        <h2>Digite a Senha:</h2>
-        <form>
-            <label for="name">${pUsuario}</label>
-            <input type="password" id="password" name="password" required>
-            <button type="button" onclick="doLoginValidade('${pUsuario}', document.all.password.value)">Login</button>
-        </form>
-    </div>`;
-    
-    obj = document.getElementById("modal");
-    if ( obj == null ) {
-        obj = document.createElement('div');
-        obj.id = "modal";
-        obj.className = "modal";
-        document.body.appendChild(obj);
-        obj.innerHTML = htmlString;
-    }
 
     obj.style.display = "block";
 }
