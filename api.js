@@ -231,7 +231,30 @@ function logged() {
 
 
 
-function doLoginForm(pVisivel, pUsuario) {
+//------------------------------------------------------------------------
+// formulario de login generico
+//------------------------------------------------------------------------
+
+
+var doLoginValidadeFunction = null;
+
+function doLoginValidade(soc, sen) {
+    if ( soc == null || sen == null ) {
+        alert('Campos nao pode ser em branco!');
+        return;
+    }
+    
+    else if ( encriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
+        alert('Senha Errada!');
+        return;
+    }    
+    document.getElementById("FormDoLogin").style.display = "none";
+    doLoginValidadeFunction(1);
+}
+
+function doLoginForm(pUsuario, fun) {
+    doLoginValidadeFunction = fun;
+    
     const htmlString = `
     <div class="modal-content">
         <span class="close" onclick="document.all.modal.style.display = 'none'">&times;</span>
@@ -239,7 +262,7 @@ function doLoginForm(pVisivel, pUsuario) {
         <form>
             <label for="name">${pUsuario}</label>
             <input type="password" id="password" name="password" required>
-            <button type="button" onclick="jsLogin()">Login</button>
+            <button type="button" onclick="doLoginValidade("${pUsuario}", document.all.password.value)">Login</button>
         </form>
     </div>`;
     
@@ -252,5 +275,5 @@ function doLoginForm(pVisivel, pUsuario) {
         obj.innerHTML = htmlString;
     }
 
-    obj.style.display = pVisivel ? "" : "none";
+    obj.style.display = "";
 }
