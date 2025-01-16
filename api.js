@@ -249,8 +249,11 @@ function doLoginValidade(soc, sen) {
         return;
     }    
     document.getElementById("FormDoLogin").style.display = "none";
+    window.sessionStorage.setItem("soc_user"  , soc);
+    window.sessionStorage.setItem("soc_pass"  , sen);    
     doLoginValidadeFunction(1);
 }
+
 
 function doLoginForm(pUsuario, fun) {
     doLoginValidadeFunction = fun;
