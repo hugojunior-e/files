@@ -269,7 +269,7 @@ function doLoginForm(pUsuario, fun) {
         </form>
     </div>`;
     
-    obj = document.getElementById("FormDoLogin");
+    obj = document.getElementById("modal");
     if ( obj == null ) {
         obj = document.createElement('div');
         obj.id = "modal";
