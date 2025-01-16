@@ -278,5 +278,5 @@ function doLoginForm(pUsuario, fun) {
         obj.innerHTML = htmlString;
     }
 
-    obj.style.display = "";
+    obj.style.display = "block";
 }
