@@ -241,6 +241,7 @@ function logged( sociedade, funcOnLogin ) {
     }    
 
     if ( islogged == 0 ) {
+        alert("Necessario efetuar login como " + sociedade);
         window.location.href = 'login.html';
     } else {
         funcOnLogin();
