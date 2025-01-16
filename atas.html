@@ -9,26 +9,11 @@
     
     <script>
         function jsAbrirAtas(soc) {
-            if ( logged() == 1 ) {
+            logged( soc, function() {
                 window.sessionStorage.setItem("soc_name"  , soc);
                 window.location.href = 'atas_list.html';
-            } else {
-                var modal = document.getElementById("modal");
-                document.all.bloco_ata.innerHTML = soc;
-                modal.style.display = "block";                
-                document.all.password.focus()
-            }
+            });
         }
-
-        function jsLogin() {
-            window.sessionStorage.setItem("soc_name"  , document.all.bloco_ata.innerHTML);
-            window.sessionStorage.setItem("soc_user"  , document.all.bloco_ata.innerHTML);
-            window.sessionStorage.setItem("soc_pass"  , document.all.password.value);
-            
-            document.getElementById("modal").style.display = ""; 
-            window.location.href = 'atas_list.html';
-        }
-        
     </script>
 </head>
 <body>
@@ -42,18 +27,5 @@
     <button onclick="jsAbrirAtas('JUNTA_DIACONAL')">Atas da Junta Diaconal</button> <br><br>
     <button onclick="jsAbrirAtas('SAF')">Atas da SAF</button> <br><br>
     <button onclick="jsAbrirAtas('UPJ')">Atas da UPJ</button> <br><br>
-
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="document.all.modal.style.display = 'none'">&times;</span>
-            <h2>Digite a Senha:</h2>
-            <form>
-                <label for="name"><span id=bloco_ata></span>:</label>
-                <input type="password" id="password" name="password" required>
-                <button type="button" onclick="jsLogin()">Login</button>
-            </form>
-        </div>
-    </div>
-    
 </body>
 </html>
