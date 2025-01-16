@@ -9,8 +9,8 @@
     
     <script>
         function jsAbrirAtas(soc) {
+            window.sessionStorage.setItem("soc_name"  , soc);
             if ( logged() == 1 ) {
-                window.sessionStorage.setItem("soc_name"  , soc);
                 window.location.href = 'atas_list.html';
             } else {
                 doLoginForm( soc, jsLogin );
@@ -18,7 +18,6 @@
         }
 
         function jsLogin() {
-            window.sessionStorage.setItem("soc_name"  , document.all.bloco_ata.innerHTML);
             window.location.href = 'atas_list.html';
         }
         
