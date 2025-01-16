@@ -158,8 +158,10 @@ const obterDataAtual = () => {
   return `${dia}/${mes}/${ano}`;
 };  
 
-
+//------------------------------------------------------------------------
 //--------------  criptografias
+//------------------------------------------------------------------------
+
 
 const chave  = 3;
 const s_keys = {
@@ -195,24 +197,18 @@ function desencriptarCesar(textoEncriptado) {
     }).join('');
 }
 
-function login( f ) {
-    soc = window.sessionStorage.getItem("soc_user");
-    sen = window.sessionStorage.getItem("soc_pass");
-    
-    if ( soc == null ) {
-        alert("Faça Login no App de Atas");
-        window.location.href = 'atas.html';
-        return;
-    }
-    
-    if ( encriptarCesar( sen.toLowerCase() ) != s_keys[ soc.toLowerCase() ] ) {
-        alert("Senha invalida para sociedade " + soc);
-        window.location.href = 'atas.html';
-        return;
-    }
+//------------------------------------------------------------------------
+// formulario de login generico
+//------------------------------------------------------------------------
 
-    f();
+
+function forceLogin() {
+    if ( logged() == 0 ) {
+        alert("Faça Login primeiro!");
+        window.location.href = 'index.html';
+    }
 }
+
 
 function logged() {
     soc = window.sessionStorage.getItem("soc_user");
@@ -230,10 +226,6 @@ function logged() {
 }
 
 
-
-//------------------------------------------------------------------------
-// formulario de login generico
-//------------------------------------------------------------------------
 
 
 var doLoginValidadeFunction = null;
