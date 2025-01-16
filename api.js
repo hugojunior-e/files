@@ -248,11 +248,11 @@ function logged( sociedade, funcOnLogin ) {
         islogged = 0;
     }
     
-    if ( encriptarCesar( sen.toLowerCase() ) !== s_keys[ soc.toLowerCase() ] ) {
+    else if ( encriptarCesar( sen.toLowerCase() ) !== s_keys[ soc.toLowerCase() ] ) {
         islogged = 0;
     }    
     
-    if ( soc.toLowerCase() != sociedade.toLowerCase() && soc.toLowerCase() !== "conselho" ) {
+    else if ( soc.toLowerCase() != sociedade.toLowerCase() && soc.toLowerCase() !== "conselho" ) {
         islogged = 0;
     }    
 
