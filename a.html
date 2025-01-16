@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3ªIPB - Udia</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="api.js"></script>
+    
+    <script>
+        function jsAbrirAtas(soc) {
+            if ( logged() == 1 ) {
+                window.sessionStorage.setItem("soc_name"  , soc);
+                window.location.href = 'atas_list.html';
+            } else {
+                doFormLogin(soc, jsLogin);
+            }
+        }
+
+        function jsLogin() {
+            window.sessionStorage.setItem("soc_name"  , document.all.bloco_ata.innerHTML);
+            window.location.href = 'atas_list.html';
+        }
+        
+    </script>
+</head>
+<body>
+    <h2>Atas das Sociedades</h2> 
+    
+    <p>Escolha uma das opções abaixo:</p>
+    <button onclick="jsAbrirAtas('CONSELHO')">Atas Conselho</button> <br><br>
+    <button onclick="jsAbrirAtas('UMP')">Atas da Mocidade</button> <br><br>
+    <button onclick="jsAbrirAtas('UPH')">Atas da UPH</button> <br><br>
+    <button onclick="jsAbrirAtas('UCP')">Atas da UCP</button> <br><br>
+    <button onclick="jsAbrirAtas('JUNTA_DIACONAL')">Atas da Junta Diaconal</button> <br><br>
+    <button onclick="jsAbrirAtas('SAF')">Atas da SAF</button> <br><br>
+    <button onclick="jsAbrirAtas('UPJ')">Atas da UPJ</button> <br><br>
+</body>
+</html>
