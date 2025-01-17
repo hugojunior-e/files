@@ -197,14 +197,19 @@
         <center>
             <button onclick="jsSalvar()">Salvar SEF</button>
             &nbsp;&nbsp;
-            <button onclick="jsAprovar(true)" style="background-color: green">Aprovar</button>
-            <button onclick="jsAprovar(false)" style="background-color: red">Rejeitar</button>
+            <button onclick="jsAprovar(true)" style="background-color: green" id=bt1>Aprovar</button>
+            <button onclick="jsAprovar(false)" style="background-color: red"  id=bt2>Rejeitar</button>
         </center>
     </fieldset>
 
     <script>
         parametros = { objectId: objectId };
         apiQueryData(url_doc_sef, populateTable, parametros); 
+
+        if ( objectId == "-" ) {
+            document.all.bt1.style.display = 'none';
+            document.all.bt2.style.display = 'none';
+        }
     </script>
 </body>
 </html>
