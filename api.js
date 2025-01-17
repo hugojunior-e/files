@@ -247,3 +247,9 @@ function logged( sociedade, funcOnLogin ) {
         funcOnLogin();
     }
 }
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.innerHTML += `<div class="top-right-text">Logado como Hugo</div>`;
+});
