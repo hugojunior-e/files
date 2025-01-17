@@ -251,5 +251,8 @@ function logged( sociedade, funcOnLogin ) {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.body.innerHTML += `<br><hr><div class="top-right-text">Logado como ${window.sessionStorage.getItem("soc_user")}</div><hr>`;
+    usr = window.sessionStorage.getItem("soc_user")
+    msg = (  usr == null  ) ? "Nao Logado.": `Logado como <b>${usr}</b>`;
+
+    document.body.innerHTML += `<br><hr><div class="top-right-text">Logado como ${msg}</div><hr>`;
 });
