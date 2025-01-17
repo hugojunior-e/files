@@ -21,11 +21,18 @@
             items.sort(  (a, b) => a[0].localeCompare(b[0])  );
             
             items.forEach(item => {
-                clauseWhere      = "objectId=" + item[2];
+                clauseWhere = "objectId=" + item[2];
+                status      = item[3];
+                if ( status == "APROVADO" ) {
+                    status = `<span style="color: green">${status}</span>`;
+                }
+                if ( status == "REJEITADO" ) {
+                    status = `<span style="color: red">${status}</span>`;
+                }
                 obj_l.innerHTML += `
                     <tr>
                         <td><input type=image src=imgs/edit.png onclick="jsAddOrEdit('${item[2]}')"></td>
-                        <td><inf>${item[0]}<br>${item[1]}<br>${item[3]}</inf></td>
+                        <td><inf>${item[0]}<br>${item[1]}<br>${status}</inf></td>
                     </tr>
                 `;
             });
