@@ -1,3 +1,17 @@
+.top-right-text {
+    position: fixed; /* Fixa no lugar, mesmo ao rolar a página */
+    top: 10px;      /* Distância do topo */
+    right: 10px;    /* Distância do lado direito */
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    color: #333;    /* Cor do texto */
+    background-color: #f0f0f0; /* Fundo para visibilidade */
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Sombras para estilo */
+}
+
+
 label {
     display: block;
     margin: 15px 0 5px;
