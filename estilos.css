@@ -1,5 +1,4 @@
 .top-right-text {
-    position: fixed; /* Fixa no lugar, mesmo ao rolar a página */
     top: 10px;      /* Distância do topo */
     right: 10px;    /* Distância do lado direito */
     font-size: 14px;
