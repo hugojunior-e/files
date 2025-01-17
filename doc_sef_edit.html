@@ -12,11 +12,9 @@
         params      = new URLSearchParams(queryString);
         objectId    = params.get("objectId");
 
-        function jsAprovar(status) {
-            
-        }
+
         
-        function getData() {
+        function getData(p_status) {
             informacoes = {
                 "horario_inicio":document.all.horario_inicio.value,
                 "horario_final":document.all.horario_final.value,
@@ -41,18 +39,30 @@
                 "criado_por":document.all.responsavel_programacao.value,
                 "titulo":document.all.programacao.value,
                 "informacoes": JSON.stringify( informacoes ),
-                "status":"PENDENTE"
+                "status":p_status
             };
             return data;
         }
 
+
+        function jsAprovar(status) {
+            logged( "CONSELHO", function() {
+                status_string = status ? "APROVADO" : "REJEITADO";
+                apiQueryUpdate( url_doc_sef, objectId, getData(status_string), function(cod, msg) {
+                    alert(msg + ":" + status_string);
+                    window.location.href='doc_sef.html';
+                });
+            });            
+        }
+
+        
         function jsSalvar() {
             if ( objectId !== "-" ) {
-                apiQueryUpdate( url_doc_sef, objectId, getData(), function(cod, msg) {
+                apiQueryUpdate( url_doc_sef, objectId, getData("PENDENTE"), function(cod, msg) {
                     alert("Atualizado: " + msg)
                 });
             } else {
-                apiQueryInsert( url_doc_sef , getData(), function(cod, msg) { 
+                apiQueryInsert( url_doc_sef , getData("PENDENTE"), function(cod, msg) { 
                     if (cod == 0) {
                         objectId = msg; 
                     }
