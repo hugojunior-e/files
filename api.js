@@ -254,5 +254,5 @@ document.addEventListener("DOMContentLoaded", () => {
     usr = window.sessionStorage.getItem("soc_user")
     msg = (  usr == null  ) ? "Nao Logado.": `Logado como <b>${usr}</b>`;
 
-    document.body.innerHTML += `<br><hr><div class="top-right-text">Logado como ${msg}</div><hr>`;
+    document.body.innerHTML += `<br><hr><div class="top-right-text">${msg}</div><hr>`;
 });
