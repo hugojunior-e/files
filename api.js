@@ -251,5 +251,5 @@ function logged( sociedade, funcOnLogin ) {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.body.innerHTML += `<div class="top-right-text">Logado como Hugo</div>`;
+    document.body.innerHTML += `<br><hr><div class="top-right-text">Logado como ${window.sessionStorage.getItem("soc_user")}</div><hr>`;
 });
