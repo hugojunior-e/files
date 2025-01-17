@@ -22,7 +22,12 @@
             
             items.forEach(item => {
                 clauseWhere      = "objectId=" + item[2];
-                obj_l.innerHTML += "<tr><td><input type=image src=edit.png onclick=\"jsAddOrEdit('" + item[2] + "')\"></td><td><inf>" + item[0] + "<br>" + item[1] + "<br>" + item[3] + "</inf></td></tr>";
+                obj_l.innerHTML += `
+                    <tr>
+                        <td><input type=image src=imgs/edit.png onclick="jsAddOrEdit('${item[2]}')"></td>
+                        <td><inf>${item[0]}<br>${item[1]}<br>${item[3]}</inf></td>
+                    </tr>
+                `;
             });
         }
         
