@@ -107,10 +107,10 @@
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
                         // Capturando o conteúdo da resposta
-                        const responseText = xhr.responseText;
+                        const responseText = xhr.responseText.replace(' situacao="incompleto"','');
         
                         // Extraindo o conteúdo entre as tags <hino> e </hino>
-                        const hinoMatch = responseText.match(/<hino([\s\S]*?)<\/hino>/);
+                        const hinoMatch = responseText.match(/<hino>([\s\S]*?)<\/hino>/);
         
                         if (hinoMatch) {
                             const hinoContent = hinoMatch[1].trim();
