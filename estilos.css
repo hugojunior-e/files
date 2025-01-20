@@ -27,9 +27,7 @@ label {
 /* Estilos básicos da página */
 body {
     font-family: Arial, sans-serif;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
+
     background-color: #f0f2f5;
     color: #333;
 }
