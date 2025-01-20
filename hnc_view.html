@@ -90,7 +90,11 @@
         </div>
 
         <script>
-            const url = "https://novocantico.com.br/hino" + ;
+            const queryString = window.location.search;
+            const params = new URLSearchParams(queryString);
+            const objectId   = params.get("nro"); 
+            
+            const url = "https://novocantico.com.br/hino" + objectId;
         
             // Criando uma nova requisição XMLHttpRequest
             const xhr = new XMLHttpRequest();
