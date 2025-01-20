@@ -24,10 +24,13 @@ label {
     }
 }
 
-/* Estilos básicos da página */
+/* Estilos básicos da página 
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+*/
 body {
     font-family: Arial, sans-serif;
-
     background-color: #f0f2f5;
     color: #333;
 }
