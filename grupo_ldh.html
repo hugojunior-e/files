@@ -33,6 +33,11 @@
             });
         }
 
+        function listaMusicas() {
+            parametros = { grupo: grupo_louvor };
+            apiQueryData( url_repertorios, populateTable, parametros );             
+        }
+        
         async function jsAdicionar(e) {
             var modal = document.getElementById("modal");
             modal.style.display = "block";
@@ -50,10 +55,7 @@
             };
 
             apiQueryInsert( url_repertorios, data, function( cod, objectId ) {
-                global_id = global_id + 1;
-                iid       = "tb_" + String(global_id);
-                document.getElementById(document.all.tipo.value).innerHTML += "<tr id=" + iid + "><td><input type=image src=lixo-32.png onclick=\"jsRemover('" + objectId + "','" + iid + "')\"></td><td><a href=" + document.all.youtube.value + " target=__blank>" + document.all.name.value + "</a></td></tr>"
-                document.all.modal.style.display = 'none';
+                listaMusicas();
             });
         }
 
@@ -111,8 +113,7 @@
 
 
     <script> 
-        parametros = { grupo: grupo_louvor };
-        apiQueryData( url_repertorios, populateTable, parametros ); 
+        listaMusicas(); 
     </script>
 </body>
 
