@@ -41,10 +41,12 @@
         function jsEditar(iid) {
             document.getElementById("modal").style.display = "block";
             infos = global_infos[iid];
-            
-            document.all.tipo.value    = infos.etapa;
-            document.all.name.value    = infos.musica;
-            document.all.youtube.value = infos.link_youtube;            
+
+            document.all.IU.value       = 'U';
+            document.all.objectId.value = infos.objectId;
+            document.all.tipo.value     = infos.etapa;
+            document.all.name.value     = infos.musica;
+            document.all.youtube.value  = infos.link_youtube;            
         }
 
         function listaMusicas() {
@@ -53,25 +55,12 @@
         }
         
         async function jsAdicionar(e) {
-            var modal = document.getElementById("modal");
-            modal.style.display = "block";
-            document.all.tipo.value = e;
-            document.all.name.value = '';
+            document.getElementById("modal").style.display = "block";
+            
+            document.all.IU.value      = 'I';
+            document.all.tipo.value    = e;
+            document.all.name.value    = '';
             document.all.youtube.value = '';
-        }
-
-        async function jsSalvar() {
-            data = {
-                "grupo": grupo_louvor,
-                "musica": document.all.name.value,
-                "link_youtube": document.all.youtube.value,
-                "etapa": document.all.tipo.value
-            };
-
-            apiQueryInsert( url_repertorios, data, function( cod, objectId ) {
-                document.all.modal.style.display = 'none';
-                listaMusicas();
-            });
         }
 
         async function jsRemover(e, iid) {
@@ -82,6 +71,29 @@
                 });
             }
         }    
+
+        async function jsSalvar() {
+            data = {
+                "grupo": grupo_louvor,
+                "musica": document.all.name.value,
+                "link_youtube": document.all.youtube.value,
+                "etapa": document.all.tipo.value
+            };
+
+            if ( document.all.IU.value == 'I' ) {
+                apiQueryInsert( url_repertorios, data, function( cod, objectId ) {
+                    document.all.modal.style.display = 'none';
+                    listaMusicas();
+                });
+            } 
+            else {
+                apiQueryUpdate( url_repertorios, document.all.objectId.value, data, function(cod, msg) {
+                    document.all.modal.style.display = 'none';
+                    listaMusicas();
+                });                
+            }
+        }
+        
     </script>
 
 </head>
@@ -111,6 +123,9 @@
             <span class="close" onclick="document.all.modal.style.display = 'none'">&times;</span>
             <h2>Cadastro Musica</h2>
             <form>
+                <input type=hidden id="IU" name="IU">
+                <input type=hidden id="objectId" name="objectId">
+                
                 <select id=tipo>
                     <option value=EBD>EBD</option>
                     <option value=CULTO>CULTO</option>
