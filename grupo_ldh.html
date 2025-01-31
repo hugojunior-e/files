@@ -25,13 +25,23 @@
                 iid = "tb_" + String(global_id);
                 document.getElementById(item.etapa).innerHTML += `
                    <tr id=${iid}>
-                      <td><input type=image src=imgs/edit.png onclick=\"jsEditar('${item.objectId}')\"></td>
+                      <td><input type=image src=imgs/edit.png onclick=\"jsEditar('${iid}')\"></td>
                       <td><input type=image src=imgs/delete.png onclick=\"jsRemover('${item.objectId}','${iid}')\"></td>
                       <td><input type=image src=imgs/yt.png onclick=\"window.open('${item.link_youtube}','_blank')\"></td>
                       <td><inf>${item.musica}</inf></td>
                    </tr>
                 `;
+                document.getElementById(iid).attributes['infos'] = item;
+                
             });
+        }
+
+        function jsEditar(iid) {
+            document.getElementById("modal").style.display = "block";
+            infos = document.getElementById(iid).attributes['infos'];
+            document.all.tipo.value    = infos.etapa;
+            document.all.name.value    = infos.musica;
+            document.all.youtube.value = infos.link_youtube;            
         }
 
         function listaMusicas() {
