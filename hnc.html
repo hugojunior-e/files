@@ -11,7 +11,7 @@
         function jsBuscar() {
             elementos = document.getElementsByTagName('a');
             for ( i = 0; i < elementos.length; i++ ) {
-                if ( elementos[i].innerHTML.toLowerCase().indexOf(document.all.buscar.value.toLowerCase()) ) {
+                if ( elementos[i].innerHTML.toLowerCase().indexOf(document.all.buscar.value.toLowerCase()) >= 0 ) {
                      elementos[i].style.display = 'none';
                 } else {
                      elementos[i].style.display = 'block';
