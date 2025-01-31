@@ -6,12 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3ªIPB - Udia</title>
     <link rel="stylesheet" href="estilos.css">
+    
+    <script>
+        function jsBuscar() {
+            elementos = document.getElementsByTagName('a');
+            for ( i = 0; i < elementos.length; i++ ) {
+                if ( elementos[i].innerHTML.toLowerCase().indexOf(document.all.buscar.value.toLowerCase()) ) {
+                    posicao = elementos[i].getBoundingClientRect().top + window.scrollY;
+                    window.scrollTo({ top: posicao, behavior: "smooth" });                    
+                    return;
+                }
+            }
+        }
+    </script>
 </head>
 <body>
   <fieldset>
     <legend>Louvor e Adoração</legend>
     <label for="pesquisar">Buscar:</label>
     <input type="text" id="buscar" name="buscar">
+    <input type="button" value="buscar" onclick="jsBuscar()">
     <hr>
       
     <label>Intróitos</label>
