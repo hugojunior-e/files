@@ -9,9 +9,11 @@
      <script src="api.js"></script> 
 
     <script>
-        global_id = 0;
-        dt_louvor = "2025";
+        global_id    = 0;
+        global_infos = {};
+        dt_louvor    = "2025";
         grupo_louvor = "LDH";
+        
 
         function populateTable(data) {
             document.getElementById('POS').innerHTML   = '';
@@ -31,14 +33,15 @@
                       <td><inf>${item.musica}</inf></td>
                    </tr>
                 `;
-                document.getElementById(iid).attributes['infos'] = item;
+                global_infos[iid] = item;
                 
             });
         }
 
         function jsEditar(iid) {
             document.getElementById("modal").style.display = "block";
-            infos = document.getElementById(iid).attributes['infos'];
+            infos = global_infos[iid];
+            
             document.all.tipo.value    = infos.etapa;
             document.all.name.value    = infos.musica;
             document.all.youtube.value = infos.link_youtube;            
