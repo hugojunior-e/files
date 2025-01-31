@@ -43,26 +43,23 @@
             document.getElementById("modal").style.display = "block";
             infos = global_infos[iid];
 
-            document.all.IU.value       = 'U';
-            document.all.objectId.value = infos.objectId;
-            document.all.tipo.value     = infos.etapa;
-            document.all.name.value     = infos.musica;
-            document.all.youtube.value  = infos.link_youtube;            
+            document.all.IU.value             = 'U';
+            document.all.objectId.value       = infos.objectId;
+            document.all.tipo.value           = infos.etapa;
+            document.all.name.value           = infos.musica;
+            document.all.youtube.value        = infos.link_youtube;  
+            document.all.bt2.style.visibility = '';
         }
 
-        function listaMusicas() {
-            parametros = { grupo: grupo_louvor };
-            apiQueryData( url_repertorios, populateTable, parametros );             
-        }
-        
         async function jsAdicionar(e) {
             document.getElementById("modal").style.display = "block";
             
-            document.all.IU.value       = 'I';
-            document.all.objectId.value = '-';
-            document.all.tipo.value     = e;
-            document.all.name.value     = '';
-            document.all.youtube.value  = '';
+            document.all.IU.value             = 'I';
+            document.all.objectId.value       = '-';
+            document.all.tipo.value           = e;
+            document.all.name.value           = '';
+            document.all.youtube.value        = '';
+            document.all.bt2.style.visibility = 'hidden';
         }
 
         async function jsRemover() {
@@ -95,6 +92,11 @@
                 });                
             }
         }
+
+        function listaMusicas() {
+            parametros = { grupo: grupo_louvor };
+            apiQueryData( url_repertorios, populateTable, parametros );             
+        }        
         
     </script>
 
