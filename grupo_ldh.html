@@ -59,10 +59,11 @@
         async function jsAdicionar(e) {
             document.getElementById("modal").style.display = "block";
             
-            document.all.IU.value      = 'I';
-            document.all.tipo.value    = e;
-            document.all.name.value    = '';
-            document.all.youtube.value = '';
+            document.all.IU.value       = 'I';
+            document.all.objectId.value = '-';
+            document.all.tipo.value     = e;
+            document.all.name.value     = '';
+            document.all.youtube.value  = '';
         }
 
         async function jsRemover(iid) {
@@ -141,6 +142,7 @@
                 <input type="text" id="youtube" name="youtube" required>
 
                 <button type="button" onclick="jsSalvar()">Enviar</button>
+                <input  type=image src=imgs/delete.png onclick="jsRemover()" id=bt_remover>
             </form>
         </div>
 
