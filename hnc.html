@@ -9,14 +9,20 @@
     
     <script>
         function jsBuscar() {
-            elementos = document.getElementsByTagName('a');
-            for ( i = 0; i < elementos.length; i++ ) {
-                if ( elementos[i].innerHTML.toLowerCase().indexOf(document.all.buscar.value.toLowerCase()) >= 0 ) {
-                     elementos[i].style.display = 'block';
-                } else {
-                     elementos[i].style.display = 'none';
-                }
+            elementos = document.getElementsByTagName('fieldset');
+            for ( i = 1; i < elementos.length; i++ ) {
+                elementos[i].style.display = 'none';
+                
+                elementos[i].querySelectorAll('a').forEach( el => {
+                    if ( el.innerHTML.toLowerCase().indexOf(document.all.buscar.value.toLowerCase()) >= 0 ) {
+                         el.style.display = 'block';
+                          elementos[i].style.display = 'block';
+                    } else {
+                         el.style.display = 'none';
+                    }
+                })
             }
+            
         }
     </script>
 </head>
