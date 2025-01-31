@@ -49,7 +49,7 @@
             document.all.bt2.style.visibility = '';
         }
 
-        async function jsAdicionar(e) {
+        function jsAdicionar(e) {
             document.getElementById("modal").style.display = "block";
             
             document.all.IU.value             = 'I';
@@ -60,7 +60,7 @@
             document.all.bt2.style.visibility = 'hidden';
         }
 
-        async function jsRemover() {
+        function jsRemover() {
             if (confirm('confirma exclusao da musga?')) {
                 apiQueryDelete( url_repertorios , document.all.objectId.value , function(cod, msg) {
                     alert("Excluido: " + msg);
@@ -69,7 +69,7 @@
             }
         }    
 
-        async function jsSalvar() {
+        function jsSalvar() {
             data = {
                 "grupo": grupo_louvor,
                 "musica": document.all.name.value,
