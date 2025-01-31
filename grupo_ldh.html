@@ -29,7 +29,6 @@
                    <tr id=${iid}>
                       <td>
                          <input type=image src=imgs/edit.png   onclick=\"jsEditar('${iid}')\">
-                         <input type=image src=imgs/delete.png onclick=\"jsRemover('${iid}')\">
                          <input type=image src=imgs/yt.png     onclick=\"window.open('${item.link_youtube}','_blank')\">
                       </td>
                       <td><inf>${item.musica}</inf></td>
@@ -66,9 +65,9 @@
             document.all.youtube.value  = '';
         }
 
-        async function jsRemover(iid) {
+        async function jsRemover() {
             if (confirm('confirma exclusao da musga?')) {
-                apiQueryDelete( url_repertorios , global_infos[iid].objectId , function(cod, msg) {
+                apiQueryDelete( url_repertorios , document.all.objectId.value , function(cod, msg) {
                     alert("Excluido: " + msg);
                     document.getElementById(iid).remove();
                 });
@@ -141,8 +140,8 @@
                 <label for="youtube">Link Video:</label>
                 <input type="text" id="youtube" name="youtube" required>
 
-                <button type="button" onclick="jsSalvar()">Enviar</button>
-                <input  type=image src=imgs/delete.png onclick="jsRemover()" id=bt_remover>
+                <button onclick="jsSalvar()">Salvar</button>
+                <button onclick="jsRemover()" style="background-color: red"  id=bt2>Remover</button>
             </form>
         </div>
 
