@@ -55,6 +55,7 @@
             };
 
             apiQueryInsert( url_repertorios, data, function( cod, objectId ) {
+                document.all.modal.style.display = 'none';
                 listaMusicas();
             });
         }
@@ -96,7 +97,11 @@
             <span class="close" onclick="document.all.modal.style.display = 'none'">&times;</span>
             <h2>Cadastro Musica</h2>
             <form>
-                <input type=hidden id=tipo>
+                <select id=tipo>
+                    <option value=EBD>EBD</option>
+                    <option value=CULTO>CULTO</option>
+                    <option value=POS>POS</option>
+                </select>
 
                 <label for="name">Musica:</label>
                 <input type="text" id="name" name="name" required>
