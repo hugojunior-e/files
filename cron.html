@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronômetro Regressivo - IPB</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #004080, #007000);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .logo {
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            height: 120px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+        }
+
+        .timer {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 40px 60px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid #fff;
+        }
+
+        .time {
+            font-size: 12em;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .message {
+            font-size: 3em;
+            margin-top: 20px;
+            color: #ffe600;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="timer">
+        <div class="time" id="countdown">20:00</div>
+        <div class="message" id="message"></div>
+    </div>
+
+    <script>
+        const countdownElement = document.getElementById('countdown');
+        const messageElement = document.getElementById('message');
+
+        let totalSeconds = 20 * 60;
+
+        function updateTimer() {
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            countdownElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+            if (totalSeconds <= 0) {
+                clearInterval(timerInterval);
+                messageElement.textContent = 'Tempo esgotado!';
+            }
+
+            totalSeconds--;
+        }
+
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 1000);
+    </script>
+</body>
+</html>
