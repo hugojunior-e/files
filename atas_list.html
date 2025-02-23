@@ -19,10 +19,11 @@
 
             data['results'].forEach(item => {
                 if (item.numero.length > 4) {
-                    items.push( [item.numero, item.objectId] );
+                    c =  item.numero.split("/");
+                    items.push( [item.numero, item.objectId, c[1] + "/" + c[0]] );
                 }
             });
-            items.sort((a, b) => a[0].localeCompare(b[0]));
+            items.sort((a, b, c) => c[0].localeCompare(c[0]));
             
             items.forEach(item => {
                 clauseWhere      = "objectId=" + item[1];
