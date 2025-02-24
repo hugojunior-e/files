@@ -23,7 +23,7 @@
                     items.push( [item.numero, item.objectId, c[1] + "/" + c[0]] );
                 }
             });
-            items.sort((a, b) => a[2].localeCompare(b[2]));
+            items.sort((a, b) => b[2].localeCompare(a[2]));
             
             items.forEach(item => {
                 clauseWhere      = "objectId=" + item[1];
