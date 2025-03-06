@@ -197,9 +197,10 @@
             });
     
             
-            parametros = { objectId: objectId };
-            apiQueryData(url_atas, populateTable, parametros); 
-            
+            if (objectId != "-") {
+                parametros = { objectId: objectId };
+                apiQueryData(url_atas, populateTable, parametros); 
+            }
         
         });
 
