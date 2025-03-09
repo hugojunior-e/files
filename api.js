@@ -8,6 +8,8 @@ const url_doc_relat_bimestral = 'https://parseapi.back4app.com/classes/doc_relat
 const url_repertorios = 'https://parseapi.back4app.com/classes/repertorios';
 const url_doc_sef = 'https://parseapi.back4app.com/classes/doc_sef';
 
+const url_sqlite = "https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/sql";
+const apiKey_sqlite = "uHIlKATNh7ZlHhYmqoFBSNPT3x0AKvVYTlfcBin4a98";
 
 //--------------  consulta dados
 
@@ -16,21 +18,17 @@ function apiQueryData( p_url, populateTable, paramsQuery ) {
     new_url = p_url;
     
     if ( p_url == url_repertorios ) {
-
-        const url = "https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/sql";
-        const apiKey = "uHIlKATNh7ZlHhYmqoFBSNPT3x0AKvVYTlfcBin4a98";
-        
         const requestData = {
             sql: "SELECT * FROM repertorios",
             database: "3ipb"
         };
         
-        fetch(url, {
+        fetch(url_sqlite, {
             method: "POST",
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
-                "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey}`
+                "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
             },
             body: JSON.stringify(requestData)
         })
@@ -49,6 +47,9 @@ function apiQueryData( p_url, populateTable, paramsQuery ) {
         
         return;
     }
+
+
+
     
     if ( paramsQuery !== undefined  ) {
         const query = {};
@@ -84,6 +85,48 @@ function apiQueryData( p_url, populateTable, paramsQuery ) {
 //--------------  atualizando dados
 
 function apiQueryUpdate(p_url, p_objectId, p_data, onUpdate) {
+    if ( p_url == url_repertorios ) {
+        const requestData = {
+            sql: "update repertorios where object_id='" + p_objectId + "'",
+            database: "3ipb"
+        };
+        
+        fetch(url_sqlite, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    const status_cod = 1;
+                    const status_msg = `Erro: ${errorData.error}`;
+                    if (onUpdate !== undefined) {
+                        onUpdate(status_cod, status_msg);
+                    }
+                });
+            }
+            const status_cod = 0;
+            const status_msg = "Sucesso";
+            if (onUpdate !== undefined) {
+                onUpdate(status_cod, status_msg);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            if (onUpdate !== undefined) {
+                onUpdate(1, `Erro: ${error.message}`);
+            }
+        });
+        
+        return;
+    }
+    
+    
     fetch(p_url + "/" + p_objectId, {
         method: 'PUT',
         headers: {
@@ -161,6 +204,50 @@ function apiQueryDelete(p_url, p_objectId, onDelete) {
 //--------------  inserindo dados
 
 function apiQueryInsert(p_url, p_data, onInsert) {
+
+    if ( p_url == url_repertorios ) {
+        fetch("https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/3ipb/repertorios", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
+            },
+            body: JSON.stringify(p_data)
+        })
+        .then(response => {
+            let status_cod = 0;
+            let status_msg = "Sucesso";
+            
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    status_cod = 1;
+                    status_msg = `Erro: ${errorData.error}`;
+                    if (onInsert !== undefined) {
+                        onInsert(status_cod, status_msg);
+                    }
+                });
+            }
+            
+            return response.json().then(dados => {
+                status_msg = dados.objectId;
+                if (onInsert !== undefined) {
+                    onInsert(status_cod, status_msg);
+                }
+            });
+        })
+        .catch(error => {
+            console.error(error);
+            if (onInsert !== undefined) {
+                onInsert(1, `Erro: ${error.message}`);
+            }
+        });
+        
+        return;
+    }
+    
+
+    
     fetch(p_url, {
         method: 'POST',
         headers: {
