@@ -19,7 +19,7 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
         query.where = JSON.stringify(paramsQuery);
         new_url = `${p_url}?${new URLSearchParams(query)}`;
     }
-    
+/*    
     const response = await fetch(new_url, {
         method: 'GET',
         headers: {
@@ -35,6 +35,28 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
 
     const data = await response.json();
     populateTable(data);
+    */
+
+    fetch(new_url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Parse-REST-API-Key': apiKey,
+            'X-Parse-Application-Id': appId
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Erro: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        populateTable(data);
+    })
+    .catch(error => {
+        console.error(error);
+    });
 }
 
 //--------------  atualizando dados
