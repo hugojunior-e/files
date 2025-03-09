@@ -19,23 +19,6 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
         query.where = JSON.stringify(paramsQuery);
         new_url = `${p_url}?${new URLSearchParams(query)}`;
     }
-/*    
-    const response = await fetch(new_url, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Parse-REST-API-Key': apiKey,
-            'X-Parse-Application-Id': appId
-        }
-    });
-
-    if (!response.ok) {
-        throw new Error(`Erro: ${response.status}`);
-    }
-
-    const data = await response.json();
-    populateTable(data);
-    */
 
     fetch(new_url, {
         method: 'GET',
@@ -61,88 +44,122 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
 
 //--------------  atualizando dados
 
-async function apiQueryUpdate( p_url, p_objectId, p_data, onUpdate ) {
-    const response = await fetch(p_url + "/" + p_objectId, {
+function apiQueryUpdate(p_url, p_objectId, p_data, onUpdate) {
+    fetch(p_url + "/" + p_objectId, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
             'X-Parse-REST-API-Key': apiKey,
             'X-Parse-Application-Id': appId
         },
-        body: JSON.stringify( p_data )
+        body: JSON.stringify(p_data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                const status_cod = 1;
+                const status_msg = `Erro: ${errorData.error}`;
+                if (onUpdate !== undefined) {
+                    onUpdate(status_cod, status_msg);
+                }
+            });
+        }
+        const status_cod = 0;
+        const status_msg = "Sucesso";
+        if (onUpdate !== undefined) {
+            onUpdate(status_cod, status_msg);
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        if (onUpdate !== undefined) {
+            onUpdate(1, `Erro: ${error.message}`);
+        }
     });
-            
-    if (!response.ok) {
-        const errorData = await response.json();
-        status_cod = 1;
-        status_msg = `Erro: ${errorData.error}`;
-    } else {
-        status_cod = 0;
-        status_msg = "Sucesso";
-    }        
-
-    if ( onUpdate !== undefined) {
-        onUpdate(status_cod, status_msg);
-    }
 }
+
 
 
 //--------------  excluido dados
 
-async function apiQueryDelete(p_url, p_objectId, onDelete) {
-    const response = await fetch(p_url + "/" + p_objectId, {
+function apiQueryDelete(p_url, p_objectId, onDelete) {
+    fetch(p_url + "/" + p_objectId, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
             'X-Parse-REST-API-Key': apiKey,
             'X-Parse-Application-Id': appId
         }
+    })
+    .then(response => {
+        let status_cod = 0;
+        let status_msg = "Sucesso";
+        
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                status_cod = 1;
+                status_msg = `Erro: ${errorData.error}`;
+                if (onDelete !== undefined) {
+                    onDelete(status_cod, status_msg);
+                }
+            });
+        }
+        
+        if (onDelete !== undefined) {
+            onDelete(status_cod, status_msg);
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        if (onDelete !== undefined) {
+            onDelete(1, `Erro: ${error.message}`);
+        }
     });
-
-    status_cod = 0;
-    status_msg = "Sucesso";
-    
-    if (!response.ok) {
-        const errorData = await response.json();
-        status_cod = 1;
-        status_msg = `Erro: ${errorData.error}`;
-    } 
-    
-    if ( onDelete !== undefined) {
-        onDelete(status_cod, status_msg);
-    }        
 }
+
 
 
 //--------------  inserindo dados
 
-async function apiQueryInsert(p_url, p_data, onInsert) {
-    const response = await fetch(p_url, {
+function apiQueryInsert(p_url, p_data, onInsert) {
+    fetch(p_url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'X-Parse-REST-API-Key': apiKey,
             'X-Parse-Application-Id': appId
         },
-        body: JSON.stringify( p_data )
+        body: JSON.stringify(p_data)
+    })
+    .then(response => {
+        let status_cod = 0;
+        let status_msg = "Sucesso";
+        
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                status_cod = 1;
+                status_msg = `Erro: ${errorData.error}`;
+                if (onInsert !== undefined) {
+                    onInsert(status_cod, status_msg);
+                }
+            });
+        }
+        
+        return response.json().then(dados => {
+            status_msg = dados.objectId;
+            if (onInsert !== undefined) {
+                onInsert(status_cod, status_msg);
+            }
+        });
+    })
+    .catch(error => {
+        console.error(error);
+        if (onInsert !== undefined) {
+            onInsert(1, `Erro: ${error.message}`);
+        }
     });
-
-    status_cod = 0;
-    status_msg = "Sucesso";
-    
-    if (!response.ok) {
-        const errorData = await response.json();
-        status_cod = 1;
-        status_msg = `Erro: ${errorData.error}`;
-    } else {
-        const dados = await response.json();
-        status_msg = dados.objectId;
-    }
-    
-    if ( onInsert !== undefined) {
-        onInsert(status_cod, status_msg);
-    }
 }
+
 
 
 
