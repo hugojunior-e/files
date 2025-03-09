@@ -21,6 +21,21 @@
             document.getElementById('EBD').innerHTML   = '';
             document.all.data_repertorio.innerHTML = grupo_louvor + " || " + dt_louvor;
             
+            for (i = 0; i < data.data.length; i++) {
+                item      = data.data[i];
+                
+                global_id = global_id + 1;
+                iid = "tb_" + String(global_id);
+                document.getElementById(item.etapa).innerHTML += `
+                   <tr id=${iid}>
+                      <td><input type=image src=imgs/edit.png   onclick=\"jsEditar('${iid}')\"></td>
+                      <td><input type=image src=imgs/yt.png     onclick=\"window.open('${item.link_youtube}','_blank')\"></td>
+                      <td><inf>${item.musica}</inf></td>
+                   </tr>
+                `;
+                global_infos[iid] = item;
+            }
+            /*
             data['results'].forEach(item => {
                 global_id = global_id + 1;
                 
@@ -34,7 +49,7 @@
                 `;
                 global_infos[iid] = item;
                 
-            });
+            }); */
         }
 
         function jsEditar(iid) {
@@ -42,7 +57,7 @@
             infos = global_infos[iid];
 
             document.all.IU.value             = 'U';
-            document.all.objectId.value       = infos.objectId;
+            document.all.objectId.value       = infos.object_id;
             document.all.tipo.value           = infos.etapa;
             document.all.name.value           = infos.musica;
             document.all.youtube.value        = infos.link_youtube;  
