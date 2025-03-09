@@ -11,7 +11,7 @@ const url_doc_sef = 'https://parseapi.back4app.com/classes/doc_sef';
 
 //--------------  consulta dados
 
-async function apiQueryData( p_url, populateTable, paramsQuery ) {
+function apiQueryData( p_url, populateTable, paramsQuery ) {
     new_url = p_url;
 
     if ( paramsQuery !== undefined  ) {
