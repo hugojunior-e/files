@@ -10,44 +10,46 @@ const url_doc_sef = 'https://parseapi.back4app.com/classes/doc_sef';
 
 
 //--------------  consulta dados
-function apiQueryData(p_url, populateTable, paramsQuery) {
-    let new_url = p_url;
-
-    if (paramsQuery !== undefined) {
-        const query = {};
-        query.where = JSON.stringify(paramsQuery);
-        new_url = `${p_url}?${new URLSearchParams(query)}`;
-    }
-
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', new_url, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('X-Parse-REST-API-Key', apiKey);
-    xhr.setRequestHeader('X-Parse-Application-Id', appId);
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) { // Verifica se a requisição foi concluída
-            if (xhr.status === 200) { // Sucesso
-                try {
-                    const data = JSON.parse(xhr.responseText);
-                    populateTable(data);
-                } catch (error) {
-                    console.error('Erro ao processar dados:', error);
-                }
-            } else { // Erro na requisição
-                console.error(`Erro: ${xhr.status} - ${xhr.statusText}`);
-            }
-        }
-    };
-
-    xhr.send();
-}
 
 
-
-function apiQueryData2( p_url, populateTable, paramsQuery ) {
+function apiQueryData( p_url, populateTable, paramsQuery ) {
     new_url = p_url;
+    
+    if ( p_url == url_repertorios ) {
 
+        const url = "https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/sql";
+        const apiKey = "uHIlKATNh7ZlHhYmqoFBSNPT3x0AKvVYTlfcBin4a98";
+        
+        const requestData = {
+            sql: "SELECT * FROM repertorios",
+            database: "3ipb"
+        };
+        
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey}`
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            populateTable(data);
+        })
+        .catch(error => {
+            console.error("Erro na requisição:", error);
+        });
+        
+        return;
+    }
+    
     if ( paramsQuery !== undefined  ) {
         const query = {};
         query.where = JSON.stringify(paramsQuery);
