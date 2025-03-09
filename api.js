@@ -30,6 +30,8 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
     })
     .then(response => {
         if (!response.ok) {
+            console.error(response);
+            
             throw new Error(`Erro: ${response.status}`);
         }
         return response.json();
@@ -39,6 +41,7 @@ async function apiQueryData( p_url, populateTable, paramsQuery ) {
     })
     .catch(error => {
         console.error(error);
+        
     });
 }
 
