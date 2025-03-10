@@ -3,72 +3,58 @@ const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
 
 const validateHash = '459d311e53524b5da176ebd1c856bbf6';
 
-const url_atas  = 'https://parseapi.back4app.com/classes/atas';
-const url_doc_relat_bimestral = 'https://parseapi.back4app.com/classes/doc_relat_bimestral';
-const url_repertorios = 'https://parseapi.back4app.com/classes/repertorios';
-const url_doc_sef = 'https://parseapi.back4app.com/classes/doc_sef';
+const url_atas  = 'atas';
+const url_doc_relat_bimestral = 'doc_relat_bimestral';
+const url_repertorios = 'repertorios';
+const url_doc_sef = 'doc_sef';
 
 const url_sqlite = "https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/sql";
 const apiKey_sqlite = "uHIlKATNh7ZlHhYmqoFBSNPT3x0AKvVYTlfcBin4a98";
 
 //--------------  consulta dados
 
-
-function apiQueryData( p_url, populateTable, paramsQuery ) {
-    new_url = p_url;
+async function apiGetRowid(table_name, object_id) {
+    const requestData = {
+        sql: "select rowid from " + table_name + "  where object_id = '" + object_id + "'",
+        database: "3ipb"
+    };
     
-    if ( p_url == url_repertorios ) {
-        const requestData = {
-            sql: "SELECT * FROM repertorios",
-            database: "3ipb"
-        };
-        
-        fetch(url_sqlite, {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
-            },
-            body: JSON.stringify(requestData)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erro: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            populateTable(data);
-        })
-        .catch(error => {
-            console.error("Erro na requisição:", error);
-        });
-        
-        return;
-    }
-
-
-
-    
-    if ( paramsQuery !== undefined  ) {
-        const query = {};
-        query.where = JSON.stringify(paramsQuery);
-        new_url = `${p_url}?${new URLSearchParams(query)}`;
-    }
-
-    fetch(new_url, {
-        method: 'GET',
+    response  = await fetch(url_sqlite, {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
-            'X-Parse-REST-API-Key': apiKey,
-            'X-Parse-Application-Id': appId
-        }
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
+        },
+        body: JSON.stringify(requestData)
+    }) 
+    
+    if (!response.ok) {
+        throw new Error(`Erro: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+}
+
+
+
+function apiQueryData( p_url, populateTable, paramsQuery = " ") {
+    const requestData = {
+        sql: "SELECT * FROM " + p_url + " " + paramsQuery ,
+        database: "3ipb"
+    };
+    
+    fetch(url_sqlite, {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
+        },
+        body: JSON.stringify(requestData)
     })
     .then(response => {
         if (!response.ok) {
-            console.error(response);
-            
             throw new Error(`Erro: ${response.status}`);
         }
         return response.json();
@@ -77,28 +63,27 @@ function apiQueryData( p_url, populateTable, paramsQuery ) {
         populateTable(data);
     })
     .catch(error => {
-        console.error(error);
-        
+        console.error("Erro na requisição:", error);
     });
+
 }
 
 //--------------  atualizando dados
 
 function apiQueryUpdate(p_url, p_objectId, p_data, onUpdate) {
-    if ( p_url == url_repertorios ) {
-        const requestData = {
-            sql: "update repertorios where object_id='" + p_objectId + "'",
-            database: "3ipb"
-        };
-        
-        fetch(url_sqlite, {
-            method: "POST",
+
+    apiGetRowid(p_url,p_objectId)
+    .then(data => {    
+        rowid = data.data[0].rowid;
+
+        fetch('https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/3ipb/' + p_url + '/' + rowid, {
+            method: 'PATCH',
             headers: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
                 "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
             },
-            body: JSON.stringify(requestData)
+            body: JSON.stringify(p_data)
         })
         .then(response => {
             if (!response.ok) {
@@ -122,42 +107,7 @@ function apiQueryUpdate(p_url, p_objectId, p_data, onUpdate) {
                 onUpdate(1, `Erro: ${error.message}`);
             }
         });
-        
-        return;
-    }
-    
-    
-    fetch(p_url + "/" + p_objectId, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Parse-REST-API-Key': apiKey,
-            'X-Parse-Application-Id': appId
-        },
-        body: JSON.stringify(p_data)
-    })
-    .then(response => {
-        if (!response.ok) {
-            return response.json().then(errorData => {
-                const status_cod = 1;
-                const status_msg = `Erro: ${errorData.error}`;
-                if (onUpdate !== undefined) {
-                    onUpdate(status_cod, status_msg);
-                }
-            });
-        }
-        const status_cod = 0;
-        const status_msg = "Sucesso";
-        if (onUpdate !== undefined) {
-            onUpdate(status_cod, status_msg);
-        }
-    })
-    .catch(error => {
-        console.error(error);
-        if (onUpdate !== undefined) {
-            onUpdate(1, `Erro: ${error.message}`);
-        }
-    });
+    });        
 }
 
 
@@ -165,55 +115,17 @@ function apiQueryUpdate(p_url, p_objectId, p_data, onUpdate) {
 //--------------  excluido dados
 
 function apiQueryDelete(p_url, p_objectId, onDelete) {
-    fetch(p_url + "/" + p_objectId, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Parse-REST-API-Key': apiKey,
-            'X-Parse-Application-Id': appId
-        }
-    })
-    .then(response => {
-        let status_cod = 0;
-        let status_msg = "Sucesso";
-        
-        if (!response.ok) {
-            return response.json().then(errorData => {
-                status_cod = 1;
-                status_msg = `Erro: ${errorData.error}`;
-                if (onDelete !== undefined) {
-                    onDelete(status_cod, status_msg);
-                }
-            });
-        }
-        
-        if (onDelete !== undefined) {
-            onDelete(status_cod, status_msg);
-        }
-    })
-    .catch(error => {
-        console.error(error);
-        if (onDelete !== undefined) {
-            onDelete(1, `Erro: ${error.message}`);
-        }
-    });
-}
 
+    apiGetRowid(p_url,p_objectId)
+    .then(data => {
+        rowid = data.data[0].rowid;
 
-
-//--------------  inserindo dados
-
-function apiQueryInsert(p_url, p_data, onInsert) {
-
-    if ( p_url == url_repertorios ) {
-        fetch("https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/3ipb/repertorios", {
-            method: "POST",
+        fetch("https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/3ipb/" + p_url + "/" + rowid, {
+            method: "DELETE",
             headers: {
                 "Accept": "application/json",
-                "Content-Type": "application/json",
                 "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
-            },
-            body: JSON.stringify(p_data)
+            }
         })
         .then(response => {
             let status_cod = 0;
@@ -223,39 +135,41 @@ function apiQueryInsert(p_url, p_data, onInsert) {
                 return response.json().then(errorData => {
                     status_cod = 1;
                     status_msg = `Erro: ${errorData.error}`;
-                    if (onInsert !== undefined) {
-                        onInsert(status_cod, status_msg);
+                    if (onDelete !== undefined) {
+                        onDelete(status_cod, status_msg);
                     }
                 });
             }
             
-            return response.json().then(dados => {
-                status_msg = dados.objectId;
-                if (onInsert !== undefined) {
-                    onInsert(status_cod, status_msg);
-                }
-            });
+            if (onDelete !== undefined) {
+                onDelete(status_cod, status_msg);
+            }
         })
         .catch(error => {
             console.error(error);
-            if (onInsert !== undefined) {
-                onInsert(1, `Erro: ${error.message}`);
+            if (onDelete !== undefined) {
+                onDelete(1, `Erro: ${error.message}`);
             }
-        });
-        
-        return;
-    }
-    
+        });        
+    });
 
-    
-    fetch(p_url, {
-        method: 'POST',
+
+
+}
+
+
+//--------------  inserindo dados
+
+function apiQueryInsert(p_url, p_data, onInsert) {
+
+    fetch("https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/3ipb/" + p_url, {
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
-            'X-Parse-REST-API-Key': apiKey,
-            'X-Parse-Application-Id': appId
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
         },
-        body: JSON.stringify(p_data)
+        body: JSON.stringify( [p_data] )
     })
     .then(response => {
         let status_cod = 0;
@@ -272,7 +186,6 @@ function apiQueryInsert(p_url, p_data, onInsert) {
         }
         
         return response.json().then(dados => {
-            status_msg = dados.objectId;
             if (onInsert !== undefined) {
                 onInsert(status_cod, status_msg);
             }
@@ -284,6 +197,8 @@ function apiQueryInsert(p_url, p_data, onInsert) {
             onInsert(1, `Erro: ${error.message}`);
         }
     });
+        
+
 }
 
 
@@ -414,12 +329,10 @@ function logged( sociedade, funcOnLogin ) {
 }
 
 
-
-
-document.addEventListener("DOMContentLoaded", () => {
+function jsUsuarioLogado() {
     if ( window.location.href.indexOf("atas_view") < 0 ) {
         usr = window.sessionStorage.getItem("soc_user")
         msg = (  usr == null  ) ? "Nao Logado.": `Logado como <b>${usr}</b>`;
         document.body.innerHTML += `<br><hr><div class="top-right-text">${msg}</div><hr>`;
     }
-});
+}
