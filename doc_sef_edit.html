@@ -75,7 +75,7 @@
             for (i = 0; i < data.data.length; i++) {
                 item      = data.data[i];
 
-                //setObjEditable("formulario", item.status == "PENDENTE");
+                setObjEditable("formulario", item.status == "PENDENTE");
                 
                 document.all.programacao.value = item.titulo;
                 document.all.data_programacao.value = item.criado_em;
