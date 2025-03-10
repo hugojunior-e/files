@@ -13,7 +13,8 @@
         objectId    = params.get("objectId");
 
         function populateTable(data) {
-            data['results'].forEach(item => {
+            for (i = 0; i < data.data.length; i++) {
+                item      = data.data[i];      
                 document.all.sociedade.value = item.sociedade;
                 document.all.bimestre.value = item.numero;
 
@@ -29,8 +30,8 @@
                 document.all.programacoes_evangelisticas.value  = dados.programacoes_evangelisticas;
                 document.all.observacoes.value                  = dados.observacoes;                
                 
-                objectId = item.objectId;
-            });
+                objectId = item.object_id;
+            };
         }
         
         function getData() {

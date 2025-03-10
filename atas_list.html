@@ -17,23 +17,16 @@
 
             items = []
 
-            data['results'].forEach(item => {
-                if (item.numero.length > 4) {
-                    c =  item.numero.split("/");
-                    items.push( [item.numero, item.objectId, c[1] + "/" + c[0]] );
-                }
-            });
-            items.sort((a, b) => b[2].localeCompare(a[2]));
-            
-            items.forEach(item => {
-                clauseWhere      = "objectId=" + item[1];
+            for (i = 0; i < data.data.length; i++) {
+                item      = data.data[i];  
+                clauseWhere      = "objectId=" + item.object_id;
                 obj_l.innerHTML += `
                     <tr>
-                        <td><input type=image src=imgs/edit.png onclick="jsAddOrEdit('${item[1]}')"></td>
-                        <td><a href="atas_view.html?${clauseWhere}"> ${item[0]} </a></td>
+                        <td><input type=image src=imgs/edit.png onclick="jsAddOrEdit('${item.object_id}')"></td>
+                        <td><a href="atas_view.html?${clauseWhere}"> ${item.numero} </a></td>
                     </tr>
                 `;
-            });
+            };
         }
         
 
@@ -56,8 +49,9 @@
     
     <script> 
         document.all.SOCIEDADE.innerHTML = sociedade;
-        parametros = { sociedade: sociedade };
-        apiQueryData( url_atas, populateTable, parametros ); 
+        apiQueryData( url_atas, populateTable, "where sociedade='" + sociedade + "' order by (substring(numero,4) || substring(numero,1,2)) desc" ); 
+        jsUsuarioLogado();
+
     </script>
 </body>
 

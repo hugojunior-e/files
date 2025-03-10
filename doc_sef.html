@@ -13,16 +13,11 @@
             obj_l = document.getElementById('LINK_SEF');
             obj_l.innerHTML = '';
 
-            items = []
+            for (i = 0; i < data.data.length; i++) {
+                item      = data.data[i];
 
-            data['results'].forEach(item => {
-                items.push( [item.criado_em, item.titulo, item.objectId, item.status] );
-            });
-            items.sort(  (a, b) => a[0].localeCompare(b[0])  );
-            
-            items.forEach(item => {
-                clauseWhere = "objectId=" + item[2];
-                status      = item[3];
+                clauseWhere = "objectId=" + item.object_id;
+                status      = item.status;
                 if ( status == "APROVADO" ) {
                     status = `<span style="color: green">${status}</span>`;
                 }
@@ -31,11 +26,11 @@
                 }
                 obj_l.innerHTML += `
                     <tr>
-                        <td><input type=image src=imgs/edit.png onclick="jsAddOrEdit('${item[2]}')"></td>
-                        <td><inf>${item[0]}<br>${item[1]}<br>${status}</inf></td>
+                        <td><input type=image src=imgs/edit.png onclick="jsAddOrEdit('${item.object_id}')"></td>
+                        <td><inf>${item.criado_em}<br>${item.titulo}<br>${status}</inf></td>
                     </tr>
                 `;
-            });
+            };
         }
         
 
@@ -56,7 +51,8 @@
 
     
     <script> 
-        apiQueryData( url_doc_sef, populateTable ); 
+        apiQueryData( url_doc_sef, populateTable , "order by criado_em"); 
+        jsUsuarioLogado();
     </script>
 </body>
 

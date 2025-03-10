@@ -35,6 +35,7 @@
             };
             
             data = {
+                "object_id": objectId,
                 "criado_em":document.all.data_programacao.value,
                 "criado_por":document.all.responsavel_programacao.value,
                 "titulo":document.all.programacao.value,
@@ -62,18 +63,19 @@
                     alert("Atualizado: " + msg)
                 });
             } else {
+                objectId = crypto.randomUUID();
+
                 apiQueryInsert( url_doc_sef , getData("PENDENTE"), function(cod, msg) { 
-                    if (cod == 0) {
-                        objectId = msg; 
-                    }
-                    alert("Inserido: " + msg)
+                    alert("Inserido: " + objectId)
                 });
             }
         }
 
         function populateTable(data) {
-            data['results'].forEach(item => {
-                setObjEditable("formulario", item.status == "PENDENTE");
+            for (i = 0; i < data.data.length; i++) {
+                item      = data.data[i];
+
+                //setObjEditable("formulario", item.status == "PENDENTE");
                 
                 document.all.programacao.value = item.titulo;
                 document.all.data_programacao.value = item.criado_em;
@@ -107,8 +109,8 @@
                 document.all.casa_pastoral.checked = infos.casa_pastoral;
                 document.all.salas_ebd.checked = infos.salas_ebd;                
 
-                objectId = item.objectId;
-            });
+                objectId = item.object_id;
+            };
         }        
         
     </script>
@@ -203,13 +205,13 @@
     </fieldset>
 
     <script>
-        parametros = { objectId: objectId };
-        apiQueryData(url_doc_sef, populateTable, parametros); 
+        apiQueryData(url_doc_sef, populateTable, "where object_id = '" + objectId + "'"); 
 
         if ( objectId == "-" ) {
             document.all.bt1.style.display = 'none';
             document.all.bt2.style.display = 'none';
         }
+        jsUsuarioLogado();
     </script>
 </body>
 </html>

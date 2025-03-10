@@ -13,24 +13,17 @@
             obj_l = document.getElementById('LINK_ATAS');
             obj_l.innerHTML = '';
 
-            items = []
-
-            data['results'].forEach(item => {
-                if (item.numero.length > 4) {
-                    items.push( [item.numero, item.objectId, item.sociedade] );
-                }
-            });
-            items.sort((a, b) => a[0].localeCompare(b[0]));
             
-            items.forEach(item => {
+            for (i = 0; i < data.data.length; i++) {
+                item      = data.data[i];            
                 obj_l.innerHTML += `
                     <tr>
-                        <td><input type=image src=imgs/edit.png onclick="jsAddOrEdit('${item[1]}')"></td>
-                        <td><inf>${item[2]}</inf></td>
-                        <td><inf>${item[0]}</inf></td>
+                        <td><input type=image src=imgs/edit.png onclick="jsAddOrEdit('${item.object_id}')"></td>
+                        <td><inf>${item.sociedade}</inf></td>
+                        <td><inf>${item.numero}</inf></td>
                     </tr>
                 `;
-            });
+            };
         }
         
 

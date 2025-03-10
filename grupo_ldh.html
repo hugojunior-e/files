@@ -35,21 +35,6 @@
                 `;
                 global_infos[iid] = item;
             }
-            /*
-            data['results'].forEach(item => {
-                global_id = global_id + 1;
-                
-                iid = "tb_" + String(global_id);
-                document.getElementById(item.etapa).innerHTML += `
-                   <tr id=${iid}>
-                      <td><input type=image src=imgs/edit.png   onclick=\"jsEditar('${iid}')\"></td>
-                      <td><input type=image src=imgs/yt.png     onclick=\"window.open('${item.link_youtube}','_blank')\"></td>
-                      <td><inf>${item.musica}</inf></td>
-                   </tr>
-                `;
-                global_infos[iid] = item;
-                
-            }); */
         }
 
         function jsEditar(iid) {
@@ -80,12 +65,16 @@
                 apiQueryDelete( url_repertorios , document.all.objectId.value , function(cod, msg) {
                     alert("Excluido: " + msg);
                     document.getElementById(iid).remove();
+                    document.all.modal.style.display = 'none'
                 });
             }
         }    
 
         function jsSalvar() {
+            object_id = crypto.randomUUID();
+
             data = {
+                "object_id": object_id,
                 "grupo": grupo_louvor,
                 "musica": document.all.name.value,
                 "link_youtube": document.all.youtube.value,

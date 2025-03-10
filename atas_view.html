@@ -104,34 +104,36 @@
 
         
         function populateTable(data) {
-            data['results'].forEach(item => {
-                    nro_ata = item.numero.substr(0,7);
-                    document.all.numero.innerHTML = numerosPorExtenso[ parseInt(nro_ata.substr(0,2)) ] + " de " + nro_ata.substr(3) + item.numero.substr(7);
-                    document.all.dt_inicio.innerHTML = transcreverDataLiteralmente( item.dt_inicio );
-                    document.all.hr_inicio.innerHTML = transcreverHoraLiteralmente( item.hr_inicio );
-                    document.all.hr_fim.innerHTML = transcreverHoraLiteralmente( item.hr_fim );
-                    document.all.dt_convocacao.innerHTML = transcreverDataLiteralmente( item.dt_convocacao );
-                    document.all.secretario.innerHTML = item.secretario;
-                    document.all.endereco.innerHTML = item.endereco;
-                    document.all.presidente.innerHTML = item.presidente;
-                    document.all.participantes.innerHTML = item.participantes;
-                    document.all.atv_inicial.innerHTML = item.atv_inicial;
-                    document.all.atv_final.innerHTML = item.atv_final;
-                    document.all.assuntos.innerHTML = item.assuntos;
-                    document.all.p_partic.innerHTML = "membros";
+            for (i = 0; i < data.data.length; i++) {
+                item      = data.data[i];  
                 
-                    if ( item.sociedade === "CONSELHO" ) {
-                        document.all.sociedade.innerHTML = 'do Conselho';
-                        document.all.p_partic.innerHTML = "presbiteros";
-                    }
-                
-                    if ( item.sociedade === "UMP" ) document.all.sociedade.innerHTML = 'da UMP (União de Mocidade Presbiteriana)';
-                    if ( item.sociedade === "UCP" ) document.all.sociedade.innerHTML = 'da UCP (União de Crianças Presbiterianas)';
-                    if ( item.sociedade === "UPH" ) document.all.sociedade.innerHTML = 'da UPH (União Presbiteriana de Homens)';
-                    if ( item.sociedade === "JUNTA_DIACONAL" ) document.all.sociedade.innerHTML = 'Junta Diaconal';
+                nro_ata = item.numero.substr(0,7);
+                document.all.numero.innerHTML = numerosPorExtenso[ parseInt(nro_ata.substr(0,2)) ] + " de " + nro_ata.substr(3) + item.numero.substr(7);
+                document.all.dt_inicio.innerHTML = transcreverDataLiteralmente( item.dt_inicio );
+                document.all.hr_inicio.innerHTML = transcreverHoraLiteralmente( item.hr_inicio );
+                document.all.hr_fim.innerHTML = transcreverHoraLiteralmente( item.hr_fim );
+                document.all.dt_convocacao.innerHTML = transcreverDataLiteralmente( item.dt_convocacao );
+                document.all.secretario.innerHTML = item.secretario;
+                document.all.endereco.innerHTML = item.endereco;
+                document.all.presidente.innerHTML = item.presidente;
+                document.all.participantes.innerHTML = item.participantes;
+                document.all.atv_inicial.innerHTML = item.atv_inicial;
+                document.all.atv_final.innerHTML = item.atv_final;
+                document.all.assuntos.innerHTML = item.assuntos;
+                document.all.p_partic.innerHTML = "membros";
+            
+                if ( item.sociedade === "CONSELHO" ) {
+                    document.all.sociedade.innerHTML = 'do Conselho';
+                    document.all.p_partic.innerHTML = "presbiteros";
+                }
+            
+                if ( item.sociedade === "UMP" ) document.all.sociedade.innerHTML = 'da UMP (União de Mocidade Presbiteriana)';
+                if ( item.sociedade === "UCP" ) document.all.sociedade.innerHTML = 'da UCP (União de Crianças Presbiterianas)';
+                if ( item.sociedade === "UPH" ) document.all.sociedade.innerHTML = 'da UPH (União Presbiteriana de Homens)';
+                if ( item.sociedade === "JUNTA_DIACONAL" ) document.all.sociedade.innerHTML = 'Junta Diaconal';
 
                 
-            });
+            };
         }
     </script>
 
@@ -155,8 +157,7 @@
                document.all.mpage.className = '';
          }
          
-         parametros = { objectId: objectId };
-         apiQueryData( url_atas, populateTable, parametros ); 
+         apiQueryData( url_atas, populateTable, "where object_id='" + objectId + "'" ); 
      </script>
 </body>
 </html>

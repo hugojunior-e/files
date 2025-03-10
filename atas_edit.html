@@ -70,7 +70,8 @@
         
         
         function populateTable(data) {
-            data['results'].forEach(item => {
+            for (i = 0; i < data.data.length; i++) {
+                item      = data.data[i];  
                 document.all.numero.value = item.numero;
                 document.all.dt_inicio.value = item.dt_inicio;
                 document.all.hr_inicio.value = item.hr_inicio;
@@ -84,13 +85,14 @@
                 document.all.atv_final.value = item.atv_final;
                 document.all.assuntos.value = item.assuntos;
 
-                objectId = item.objectId;
+                objectId = item.object_id;
                 document.all.numero.readOnly = true;
-            });
+            };
         }
 
         function getData() {
             data = {
+                "object_id" : objectId,
                 "sociedade":sociedade,
                 "numero":document.all.numero.value,
                 "dt_inicio":document.all.dt_inicio.value,
@@ -116,12 +118,11 @@
                     alert("Atualizado: " + msg)
                 });
             } else {
+                objectId = crypto.randomUUID();
+
                 document.all.numero.readOnly = false;
                 apiQueryInsert( url_atas, getData(), function(cod, msg) { 
-                    if (cod == 0) {
-                        objectId = msg; 
-                    }
-                    alert("Inserido: " + msg)
+                    alert("Inserido: " + objectId)
                 });
             }
         }
@@ -196,16 +197,18 @@
         
         const inputs = document.all.form_campos.querySelectorAll('input, textarea');
 
-        inputs.forEach(input => {
-            vv = valores_default[sociedade][input.id]
-            input.value =  vv == undefined ? "" : vv;
-        });
+
+        for (const key in valores_default[sociedade]) {
+            input = document.getElementById( key );
+            input.value = valores_default[sociedade][key]
+        }        
 
         
         if (objectId != "-") {
-            parametros = { objectId: objectId };
-            apiQueryData(url_atas, populateTable, parametros); 
+            apiQueryData(url_atas, populateTable, "where object_id='" + objectId + "'"); 
         }
+
+        jsUsuarioLogado();
     </script>
 </body>
 </html>
