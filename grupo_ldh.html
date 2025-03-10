@@ -30,6 +30,7 @@
                    <tr id=${iid}>
                       <td><input type=image src=imgs/edit.png   onclick=\"jsEditar('${iid}')\"></td>
                       <td><input type=image src=imgs/yt.png     onclick=\"window.open('${item.link_youtube}','_blank')\"></td>
+                      <td><input type=image src=imgs/yt.png     onclick=\"window.open('${item.link_letra}','_blank')\"></td>
                       <td><inf>${item.musica}</inf></td>
                    </tr>
                 `;
@@ -46,6 +47,7 @@
             document.all.tipo.value           = infos.etapa;
             document.all.name.value           = infos.musica;
             document.all.youtube.value        = infos.link_youtube;  
+            document.all.letra.value          = infos.link_letra;  
             document.all.bt2.style.visibility = '';
         }
 
@@ -57,6 +59,7 @@
             document.all.tipo.value           = e;
             document.all.name.value           = '';
             document.all.youtube.value        = '';
+            document.all.letra.value          = '';
             document.all.bt2.style.visibility = 'hidden';
         }
 
@@ -143,6 +146,9 @@
 
                 <label for="youtube">Link Video:</label>
                 <input type="text" id="youtube" name="youtube" required>
+                
+                <label for="youtube">Link Letra:</label>
+                <input type="text" id="letra" name="letra">
 
                 <input type=button onclick="jsSalvar()" value="Salvar">
                 <input type=button onclick="jsRemover()" style="background-color: red"  id=bt2 value="Remover">
