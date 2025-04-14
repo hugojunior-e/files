@@ -50,9 +50,9 @@
     <script> 
         document.all.SOCIEDADE.innerHTML = sociedade;
         apiQueryData( url_atas, populateTable, "where sociedade='" + sociedade + "' order by (substring(numero,4) || substring(numero,1,2)) desc" ); 
-        jsUsuarioLogado();
-
     </script>
+
+    <SPAN id=usuarioLogado></SPAN>
 </body>
 
 </html>
