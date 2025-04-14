@@ -21,7 +21,7 @@
                 item      = data.data[i];  
                 ano       = item.numero.slice(-4);
                 lin       = '';
-                if ( i > 0 && ano <> anoAnt ) {
+                if ( i > 0 && ano !== anoAnt ) {
                     lin = '<tr><td colspan=2><hr></td></tr>';
                 }
                 anoAnt = ano;
