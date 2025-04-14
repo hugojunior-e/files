@@ -333,6 +333,9 @@ function jsUsuarioLogado() {
     if ( window.location.href.indexOf("atas_view") < 0 ) {
         usr = window.sessionStorage.getItem("soc_user")
         msg = (  usr == null  ) ? "Nao Logado.": `Logado como <b>${usr}</b>`;
-        document.body.innerHTML += `<br><hr><div class="top-right-text">${msg}</div><hr>`;
+        el = document.getElementById("usuarioLogado");
+        if ( el != null ) {
+          el.innerhtml = `<br><hr><div class="top-right-text">${msg}</div><hr>`;
+        }
     }
 }
