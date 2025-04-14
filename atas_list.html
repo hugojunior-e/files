@@ -15,12 +15,20 @@
             obj_l = document.getElementById('LINK_ATAS');
             obj_l.innerHTML = '';
 
-            items = []
-
+            items  = []
+            anoAnt = '-';
             for (i = 0; i < data.data.length; i++) {
                 item      = data.data[i];  
+                ano       = item.numero.slice(-4);
+                lin       = '';
+                if ( i > 0 && ano <> anoAnt ) {
+                    lin = '<tr><td colspan=2><hr></td></tr>';
+                }
+                anoAnt = ano;
+                
                 clauseWhere      = "objectId=" + item.object_id;
                 obj_l.innerHTML += `
+                    ${lin}
                     <tr>
                         <td><input type=image src=imgs/edit.png onclick="jsAddOrEdit('${item.object_id}')"></td>
                         <td><a href="atas_view.html?${clauseWhere}"> ${item.numero} </a></td>
