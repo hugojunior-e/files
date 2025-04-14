@@ -329,7 +329,7 @@ function logged( sociedade, funcOnLogin ) {
 }
 
 
-function jsUsuarioLogado() {
+window.onload = function() {
     if ( window.location.href.indexOf("atas_view") < 0 ) {
         usr = window.sessionStorage.getItem("soc_user")
         msg = (  usr == null  ) ? "Nao Logado.": `Logado como <b>${usr}</b>`;
@@ -338,4 +338,5 @@ function jsUsuarioLogado() {
           el.innerhtml = `<br><hr><div class="top-right-text">${msg}</div><hr>`;
         }
     }
-}
+};
+
