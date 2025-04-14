@@ -335,7 +335,7 @@ window.onload = function() {
         msg = (  usr == null  ) ? "Nao Logado.": `Logado como <b>${usr}</b>`;
         el = document.getElementById("usuarioLogado");
         if ( el != null ) {
-          el.innerhtml = `<br><hr><div class="top-right-text">${msg}</div><hr>`;
+          el.innerHTML = `<br><hr><div class="top-right-text">${msg}</div><hr>`;
         }
     }
 };
