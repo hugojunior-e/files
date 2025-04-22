@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3ªIPB - Udia</title>
+     <link rel="stylesheet" href="estilos.css"> 
+     <script src="api.js"></script> 
+
+    <script>
+        global_id    = 0;
+        global_infos = {};
+                
+
+        function populateTable(data) {
+            document.getElementById('EVENTO').innerHTML   = '';
+            
+            for (i = 0; i < data.data.length; i++) {
+                item      = data.data[i];
+                
+                global_id = global_id + 1;
+                iid = "tb_" + String(global_id);
+                document.getElementById(item.etapa).innerHTML += `
+                   <tr id=${iid}>
+                      <td><input type=image src=imgs/edit.png   onclick=\"jsEditar('${iid}')\"></td>
+                      <td><input type=image src=imgs/yt.png     onclick=\"window.open('${item.link_youtube}','_blank')\"></td>
+                      <td><inf>${item.musica}</inf></td>
+                   </tr>
+                `;
+                global_infos[iid] = item;
+            }
+        }
+
+
+        function jsEditar(iid) {
+            document.getElementById("modal").style.display = "block";
+            infos = global_infos[iid];
+
+            document.all.IU.value             = 'U';
+            document.all.objectId.value       = infos.object_id;
+            document.all.name.value           = infos.musica;
+            document.all.youtube.value        = infos.link_youtube;  
+            document.all.bt2.style.visibility = '';
+        }
+
+        function jsAdicionar() {
+            document.getElementById("modal").style.display = "block";
+            
+            document.all.IU.value             = 'I';
+            document.all.objectId.value       = '-';
+            document.all.tipo.value           = "EVENTO";
+            document.all.name.value           = '';
+            document.all.youtube.value        = '';
+            document.all.bt2.style.visibility = 'hidden';
+        }
+
+        function jsRemover() {
+            if (confirm('confirma exclusao da musga?')) {
+                apiQueryDelete( url_repertorios , document.all.objectId.value , function(cod, msg) {
+                    alert("Excluido: " + msg);
+                    document.getElementById(iid).remove();
+                    document.all.modal.style.display = 'none';
+                });
+            }
+        }    
+
+        function jsSalvar() {
+            object_id = crypto.randomUUID();
+
+            data = {
+                "object_id": object_id,
+                "grupo": grupo_louvor,
+                "musica": document.all.name.value,
+                "link_youtube": document.all.youtube.value,
+                "etapa": "EVENTO"
+            };
+
+            if ( document.all.IU.value == 'I' ) {
+                apiQueryInsert( url_repertorios, data, function( cod, objectId ) {
+                    document.all.modal.style.display = 'none';
+                    listaMusicas();
+                });
+            } 
+            else {
+                apiQueryUpdate( url_repertorios, document.all.objectId.value, data, function(cod, msg) {
+                    document.all.modal.style.display = 'none';
+                    listaMusicas();
+                });                
+            }
+        }
+
+        function listaMusicas() {
+            parametros = { grupo: "EVENTO" };
+            apiQueryData( url_repertorios, populateTable, parametros );             
+        }        
+        
+    </script>
+
+</head>
+
+<body>
+    <fieldset>
+        <legend><input type="button" value="adicionar" onclick="jsAdicionar()"> || Musicas</legend>
+        <table id="EVENTO" class=table_rounded></table>
+    </fieldset>
+
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="document.all.modal.style.display = 'none'">&times;</span>
+            <h2>Cadastro Musica</h2>
+            <form>
+                <input type=hidden id="IU" name="IU">
+                <input type=hidden id="objectId" name="objectId">
+
+                <label for="name">Musica:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="youtube">Link Video:</label>
+                <input type="text" id="youtube" name="youtube" required>
+                
+                <input type=button onclick="jsSalvar()" value="Salvar">
+                <input type=button onclick="jsRemover()" style="background-color: red"  id=bt2 value="Remover">
+            </form>
+        </div>
+
+    </div>
+
+
+
+    <script> 
+        listaMusicas(); 
+    </script>
+</body>
+
+</html>
