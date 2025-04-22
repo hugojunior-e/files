@@ -11,10 +11,14 @@
     <script>
         global_id    = 0;
         global_infos = {};
-                
+        grupo_louvor = "EVENTO MOCIDADE";
+        
 
         function populateTable(data) {
-            document.getElementById('EVENTO').innerHTML   = '';
+            document.getElementById('POS').innerHTML   = '';
+            document.getElementById('CULTO').innerHTML = '';
+            document.getElementById('EBD').innerHTML   = '';
+            document.all.titulo.innerHTML              = grupo_louvor;
             
             for (i = 0; i < data.data.length; i++) {
                 item      = data.data[i];
@@ -25,6 +29,7 @@
                    <tr id=${iid}>
                       <td><input type=image src=imgs/edit.png   onclick=\"jsEditar('${iid}')\"></td>
                       <td><input type=image src=imgs/yt.png     onclick=\"window.open('${item.link_youtube}','_blank')\"></td>
+                      <td><input type=image src=imgs/lnk.png    onclick=\"window.open('${item.link_letra}','_blank')\"></td>
                       <td><inf>${item.musica}</inf></td>
                    </tr>
                 `;
@@ -39,27 +44,30 @@
 
             document.all.IU.value             = 'U';
             document.all.objectId.value       = infos.object_id;
+            document.all.tipo.value           = infos.etapa;
             document.all.name.value           = infos.musica;
             document.all.youtube.value        = infos.link_youtube;  
+            document.all.letra.value          = infos.link_letra;  
             document.all.bt2.style.visibility = '';
         }
 
-        function jsAdicionar() {
+        function jsAdicionar(e) {
             document.getElementById("modal").style.display = "block";
             
             document.all.IU.value             = 'I';
             document.all.objectId.value       = '-';
+            document.all.tipo.value           = e;
             document.all.name.value           = '';
             document.all.youtube.value        = '';
+            document.all.letra.value          = '';
             document.all.bt2.style.visibility = 'hidden';
         }
 
         function jsRemover() {
             if (confirm('confirma exclusao da musga?')) {
                 apiQueryDelete( url_repertorios , document.all.objectId.value , function(cod, msg) {
-                    alert("Excluido: " + msg);
-                    document.getElementById(iid).remove();
                     document.all.modal.style.display = 'none';
+                    listaMusicas();
                 });
             }
         }    
@@ -69,10 +77,11 @@
 
             data = {
                 "object_id": object_id,
-                "grupo": "EVENTO",
+                "grupo": grupo_louvor,
                 "musica": document.all.name.value,
                 "link_youtube": document.all.youtube.value,
-                "etapa": "EVENTO"
+                "link_letra": document.all.letra.value,
+                "etapa": document.all.tipo.value
             };
 
             if ( document.all.IU.value == 'I' ) {
@@ -90,7 +99,7 @@
         }
 
         function listaMusicas() {
-            parametros = " where grupo = 'EVENTO' ";
+            parametros = " where grupo = '" + grupo_louvor + "' ";
             apiQueryData( url_repertorios, populateTable, parametros );             
         }        
         
@@ -99,11 +108,29 @@
 </head>
 
 <body>
+    <h2 id=titulo></h2> 
+    
     <fieldset>
-        <legend><input type="button" value="adicionar" onclick="jsAdicionar()"> || Sabado dia 26</legend>
-        <table id="EVENTO" class=table_rounded></table>
+        <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('EBD')"> || EBD</legend>
+        <table id="EBD" class=table_rounded></table>
     </fieldset>
 
+    <fieldset>
+        <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('CULTO')"> || CULTO</legend>
+        <table id="CULTO" class=table_rounded></table>
+    </fieldset>
+
+    <fieldset>
+        <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('POS')"> || FINAL</legend>
+        <table id="POS" class=table_rounded></table>
+    </fieldset>
+    
+    <br><br><br>
+
+    <fieldset>
+        <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('OUTROS')"> || OUTROS</legend>
+        <table id="OUTROS" class=table_rounded></table>
+    </fieldset>
 
     <div id="modal" class="modal">
         <div class="modal-content">
@@ -112,6 +139,13 @@
             <form>
                 <input type=hidden id="IU" name="IU">
                 <input type=hidden id="objectId" name="objectId">
+                
+                <select id=tipo>
+                    <option value=EBD>EBD</option>
+                    <option value=CULTO>CULTO</option>
+                    <option value=POS>POS</option>
+                    <option value=OUTROS>OUTROS</option>
+                </select>
 
                 <label for="name">Musica:</label>
                 <input type="text" id="name" name="name" required>
@@ -119,6 +153,9 @@
                 <label for="youtube">Link Video:</label>
                 <input type="text" id="youtube" name="youtube" required>
                 
+                <label for="youtube">Link Letra:</label>
+                <input type="text" id="letra" name="letra">
+
                 <input type=button onclick="jsSalvar()" value="Salvar">
                 <input type=button onclick="jsRemover()" style="background-color: red"  id=bt2 value="Remover">
             </form>
