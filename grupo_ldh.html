@@ -15,10 +15,11 @@
         
 
         function populateTable(data) {
-            document.getElementById('POS').innerHTML   = '';
-            document.getElementById('CULTO').innerHTML = '';
-            document.getElementById('EBD').innerHTML   = '';
-            document.all.titulo.innerHTML              = grupo_louvor;
+            document.getElementById('POS').innerHTML     = '';
+            document.getElementById('CULTO').innerHTML   = '';
+            document.getElementById('EBD').innerHTML     = '';
+            document.getElementById('OUTROS').innerHTML  = '';
+            document.all.titulo.innerHTML                = grupo_louvor;
             
             for (i = 0; i < data.data.length; i++) {
                 item      = data.data[i];
