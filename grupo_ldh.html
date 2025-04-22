@@ -99,7 +99,7 @@
         }
 
         function listaMusicas() {
-            parametros = { grupo: grupo_louvor };
+            parametros = " where grupo = '" + grupo_louvor + "' ";
             apiQueryData( url_repertorios, populateTable, parametros );             
         }        
         
