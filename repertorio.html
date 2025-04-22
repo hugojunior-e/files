@@ -90,7 +90,7 @@
         }
 
         function listaMusicas() {
-            parametros = { grupo: "EVENTO" };
+            parametros = " where grupo = 'EVENTO' ";
             apiQueryData( url_repertorios, populateTable, parametros );             
         }        
         
