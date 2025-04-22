@@ -18,6 +18,7 @@
             document.getElementById('POS').innerHTML   = '';
             document.getElementById('CULTO').innerHTML = '';
             document.getElementById('EBD').innerHTML   = '';
+            document.all.titulo.innerHTML              = grupo_louvor;
             
             for (i = 0; i < data.data.length; i++) {
                 item      = data.data[i];
@@ -98,7 +99,7 @@
         }
 
         function listaMusicas() {
-            parametros = " where grupo = '" + grupo_louvor + "' ";
+            parametros = { grupo: grupo_louvor };
             apiQueryData( url_repertorios, populateTable, parametros );             
         }        
         
@@ -107,13 +108,14 @@
 </head>
 
 <body>
+    <h2 id=titulo></h2> 
+    
     <fieldset>
         <legend><input type="button" value="adicionar" onclick="jsAdicionar('EBD')"> || EBD</legend>
         <table id="EBD" class=table_rounded></table>
     </fieldset>
 
     <fieldset>
-
         <legend><input type="button" value="adicionar" onclick="jsAdicionar('CULTO')"> || CULTO</legend>
         <table id="CULTO" class=table_rounded></table>
     </fieldset>
@@ -122,7 +124,13 @@
         <legend><input type="button" value="adicionar" onclick="jsAdicionar('POS')"> || FINAL</legend>
         <table id="POS" class=table_rounded></table>
     </fieldset>
+    
+    <hr>
 
+    <fieldset>
+        <legend><input type="button" value="adicionar" onclick="jsAdicionar('OUTROS')"> || OUTROS</legend>
+        <table id="OUTROS" class=table_rounded></table>
+    </fieldset>
 
     <div id="modal" class="modal">
         <div class="modal-content">
@@ -136,6 +144,7 @@
                     <option value=EBD>EBD</option>
                     <option value=CULTO>CULTO</option>
                     <option value=POS>POS</option>
+                    <option value=OUTROS>OUTROS</option>
                 </select>
 
                 <label for="name">Musica:</label>
