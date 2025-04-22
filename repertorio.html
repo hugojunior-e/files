@@ -31,7 +31,7 @@
                       <td><input type=image src=imgs/edit.png   onclick=\"jsEditar('${iid}')\"></td>
                       <td><input type=image src=imgs/yt.png     onclick=\"window.open('${item.link_youtube}','_blank')\"></td>
                       <td><input type=image src=imgs/lnk.png    onclick=\"window.open('${item.link_letra}','_blank')\"></td>
-                      <td><inf>${item.musica}</inf></td>
+                      <td><inf onclick=\"jsEditar('${iid}')\">${item.musica}</inf></td>
                    </tr>
                 `;
                 global_infos[iid] = item;
