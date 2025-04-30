@@ -46,6 +46,7 @@ legend {
     background-color: #007BFF;
     border-radius: 8px;
     padding: 5px 15px;
+    text-transform: uppercase;
 }
 
 .table_rounded {
