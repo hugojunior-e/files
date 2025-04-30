@@ -14,13 +14,46 @@
     </head>
 
     <body>
-        <iframe id=h_114></iframe>
+        <span id=h_114></span>
+
 
         <script>
-            queryString = window.location.search;
-            params      = new URLSearchParams(queryString);
-            url_cifra   = params.get("u");
-            document.all.h_114.src = url_cifra;
+            const queryString = window.location.search;
+            const params = new URLSearchParams(queryString);
+            const objectId   = params.get("nro"); 
+            
+            const url = "https://www.cifraclub.com.br/thalles-roberto/a-alegria-esta-no-coracao/#instrument=guitar&key=3";
+        
+            // Criando uma nova requisição XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+        
+            // Configurando o tipo de requisição e a URL
+            xhr.open("GET", url, true);
+        
+            // Configurando o callback para tratar a resposta
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        // Capturando o conteúdo da resposta
+                        const responseText = xhr.responseText.replace(' situacao="incompleto"','');
+        
+                        // Extraindo o conteúdo entre as tags <hino> e </hino>
+                        const hinoMatch = responseText.match(/<pre>([\s\S]*?)<\/pre>/);
+        
+                        if (hinoMatch) {
+                            const hinoContent = hinoMatch[1].trim();
+                            document.all.h_114.innerHTML = "<pre>" + hinoContent + "</pre>";
+                        } else {
+                            console.log("Tag <hino> não encontrada.");
+                        }
+                    } else {
+                        console.error("Erro ao acessar o conteúdo:", xhr.status, xhr.statusText);
+                    }
+                }
+            };
+        
+            // Enviando a requisição
+            xhr.send();            
         </script>
     </body>
 
