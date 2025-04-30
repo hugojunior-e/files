@@ -18,7 +18,7 @@
             document.getElementById('POS').innerHTML     = '';
             document.getElementById('CULTO').innerHTML   = '';
             document.getElementById('EBD').innerHTML     = '';
-document.getElementById('GERAL').innerHTML     = '';
+            document.getElementById('GERAL').innerHTML   = '';
             document.getElementById('OUTROS').innerHTML  = '';
             document.all.titulo.innerHTML                = grupo_louvor;
             
@@ -114,29 +114,39 @@ document.getElementById('GERAL').innerHTML     = '';
     
     <fieldset>
         <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('EBD')"> || EBD</legend>
-        <table id="EBD" class=table_rounded></table>
+        <table class=table_rounded>
+            <tbody id=EBD></tbody>
+        </table>
     </fieldset>
 
     <fieldset>
         <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('CULTO')"> || CULTO</legend>
-        <table id="CULTO" class=table_rounded></table>
+        <table class=table_rounded>
+            <tbody id=CULTO></tbody>
+        </table>
     </fieldset>
 
     <fieldset>
         <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('POS')"> || FINAL</legend>
-        <table id="POS" class=table_rounded></table>
+        <table class=table_rounded>
+            <tbody id=POS></tbody>
+        </table>
     </fieldset>
     
     <br>
 
     <fieldset>
         <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('OUTROS')"> || OUTROS</legend>
-        <table id="OUTROS" class=table_rounded></table>
+        <table class=table_rounded>
+            <tbody id=OUTROS></tbody>
+        </table>
     </fieldset>
 
     <fieldset>
         <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('GERAL')"> || GERAL</legend>
-        <table id="GERAL" class=table_rounded></table>
+        <table class=table_rounded>
+            <tbody id=GERAL></tbody>
+        </table>
     </fieldset>
 
     <div id="modal" class="modal">
