@@ -140,7 +140,7 @@
                 if ( item.sociedade === "UPJ" )            document.all.sociedade.innerHTML = 'da SAF (União Presbiteriana de Juvenis)';
                 if ( item.sociedade === "JUNTA_DIACONAL" ) document.all.sociedade.innerHTML = 'Junta Diaconal';
 
-                
+                document.all.edital_convocacao.style.visibility = ( item.sociedade === "CONSELHO" ) ? "" : "hidden";
             };
         }
     </script>
@@ -152,7 +152,7 @@
     <div class="pagina" id=mpage>
         <p>
             Ata de Número <span id=numero></span> da reunião <span id=sociedade></span> da Terceira Igreja Presbiteriana de Uberlândia, 
-            <sup>[1]</sup>reunido no dia <span id=dt_inicio></span>, com edital de convocação datado em <span id=dt_convocacao></span>, 
+            <sup>[1]</sup>reunido no dia <span id=dt_inicio></span><span id="edital_convocacao">, com edital de convocação datado em <span id=dt_convocacao></span></span>, 
             <span id=endereco></span>. A reunião é presidida por <span id=presidente></span>,<span id=p_partic></span><sup>[2]</sup><span id=participantes></span>.
             <sup>[3]</sup>A reunião tem início às <span id=hr_inicio></span>. <sup>[4]</sup><span id=atv_inicial></span>
             <sup>[5]</sup><span id=assuntos></span>
