@@ -18,8 +18,7 @@
             document.getElementById('POS').innerHTML     = '';
             document.getElementById('CULTO').innerHTML   = '';
             document.getElementById('EBD').innerHTML     = '';
-            document.getElementById('GERAL').innerHTML   = '';
-            document.getElementById('OUTROS').innerHTML  = '';
+          document.getElementById('GERAL').innerHTML   = '';
             document.all.titulo.innerHTML                = grupo_louvor;
             
             for (i = 0; i < data.data.length; i++) {
@@ -134,13 +133,6 @@
     </fieldset>
     
     <br>
-
-    <fieldset>
-        <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('OUTROS')"> || OUTROS</legend>
-        <table class=table_rounded>
-            <tbody id=OUTROS></tbody>
-        </table>
-    </fieldset>
 
     <fieldset>
         <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('GERAL')"> || GERAL</legend>
