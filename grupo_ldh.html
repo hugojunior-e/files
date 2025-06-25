@@ -19,6 +19,8 @@
             document.getElementById('CULTO').innerHTML   = '';
             document.getElementById('EBD').innerHTML     = '';
             document.getElementById('GERAL').innerHTML   = '';
+            document.getElementById('PROXIMO').innerHTML = '';
+            
             document.all.titulo.innerHTML                = grupo_louvor;
             
             for (i = 0; i < data.data.length; i++) {
@@ -132,8 +134,16 @@
         </table>
     </fieldset>
     
-    <br>
+    <HR>
 
+    <fieldset>
+        <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('PROXIMO')"> || PROXIMO</legend>
+        <table class=table_rounded>
+            <tbody id=PROXIMO></tbody>
+        </table>
+    </fieldset>
+    
+    <HR>    
     <fieldset>
         <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('GERAL')"> || GERAL</legend>
         <table class=table_rounded>
@@ -153,7 +163,7 @@
                     <option value=EBD>EBD</option>
                     <option value=CULTO>CULTO</option>
                     <option value=POS>POS</option>
-    
+                    <option value=PROXIMO>PROXIMO</option>
                     <option value=GERAL>GERAL</option>
                 </select>
 
