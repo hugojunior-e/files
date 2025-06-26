@@ -26,14 +26,16 @@
             for (i = 0; i < data.data.length; i++) {
                 item      = data.data[i];
                 
+                title     = "<br><span class=subtitle>" + item.etapa + "</span>";
+
                 global_id = global_id + 1;
                 iid = "tb_" + String(global_id);
                 document.getElementById(item.etapa).innerHTML += `
-                   <tr id=${iid}>
-                      <td><input type=image src=imgs/yt.png     onclick=\"window.open('${item.link_youtube}','_blank')\"></td>
-                      <td><input type=image src=imgs/lnk.png    onclick=\"window.open('${item.link_letra}','_blank')\"></td>
-                      <td><inf style="cursor: pointer;" onclick=\"jsEditar('${iid}')\">${item.musica}</inf></td>
-                   </tr>
+                <div class="grid_div_row" id=${iid}>
+                    <div class="grid_div_cell" style="width: 50px"><input type=image src=imgs/yt.png     onclick=\"window.open('${item.link_youtube}','_blank')\"></div>
+                    <div class="grid_div_cell" style="width: 50px"><input type=image src=imgs/lnk.png    onclick=\"window.open('${item.link_letra}','_blank')\"></div>
+                    <div class="grid_div_cell"><inf style="cursor: pointer;" onclick=\"jsEditar('${iid}')\">${item.musica}</inf>${title}</div>
+                </div>
                 `;
                 global_infos[iid] = item;
                 global_infos[iid] = item;
@@ -114,41 +116,23 @@
     <h2 id=titulo></h2> 
     
     <fieldset>
-        <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('EBD')"> || EBD</legend>
-        <table class=table_rounded>
-            <tbody id=EBD></tbody>
-        </table>
+        <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('EBD')"> || CULTO</legend>
+        <div class="grid_div" id="EBD"></div>
+        <div class="grid_div" id="CULTO"></div>
+        <div class="grid_div" id="POS"></div>
     </fieldset>
 
-    <fieldset>
-        <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('CULTO')"> || CULTO</legend>
-        <table class=table_rounded>
-            <tbody id=CULTO></tbody>
-        </table>
-    </fieldset>
-
-    <fieldset>
-        <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('POS')"> || FINAL</legend>
-        <table class=table_rounded>
-            <tbody id=POS></tbody>
-        </table>
-    </fieldset>
-    
     <HR>
 
     <fieldset>
         <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('PROXIMO')"> || PROXIMO</legend>
-        <table class=table_rounded>
-            <tbody id=PROXIMO></tbody>
-        </table>
+        <div class="grid_div" id="PROXIMO"></div>
     </fieldset>
     
     <HR>    
     <fieldset>
         <legend style="width:230px"><input type="button" value="adicionar" onclick="jsAdicionar('GERAL')"> || GERAL</legend>
-        <table class=table_rounded>
-            <tbody id=GERAL></tbody>
-        </table>
+        <div class="grid_div" id="GERAL"></div>
     </fieldset>
 
     <div id="modal" class="modal">
