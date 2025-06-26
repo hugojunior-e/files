@@ -34,7 +34,7 @@
                 <div class="grid_div_row" id=${iid}>
                     <div class="grid_div_cell" style="width: 50px"><input type=image src=imgs/yt.png     onclick=\"window.open('${item.link_youtube}','_blank')\"></div>
                     <div class="grid_div_cell" style="width: 50px"><input type=image src=imgs/lnk.png    onclick=\"window.open('${item.link_letra}','_blank')\"></div>
-                    <div class="grid_div_cell"><inf style="cursor: pointer;" onclick=\"jsEditar('${iid}')\">${item.musica}${title}</inf></div>
+                    <div class="grid_div_cell"><inf style="cursor: pointer;" onclick=\"jsEditar('${iid}')\">${item.musica}</inf>${title}</div>
                 </div>
                 `;
                 global_infos[iid] = item;
