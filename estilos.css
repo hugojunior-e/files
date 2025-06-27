@@ -22,6 +22,7 @@ label {
 .subtitle {
     color: red;
     font-size: xx-small;
+    font-weight: bold;
 }
 
 @keyframes blink-animation {
@@ -191,7 +192,10 @@ button:hover {
 
 
 
-
+.w100 {
+    width: 100px; 
+    min-width: 100px;
+}
 
 .grid_div {
     display: flex;
