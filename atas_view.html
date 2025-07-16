@@ -112,7 +112,6 @@
                 document.all.dt_inicio.innerHTML = transcreverDataLiteralmente( item.dt_inicio );
                 document.all.hr_inicio.innerHTML = transcreverHoraLiteralmente( item.hr_inicio );
                 document.all.hr_fim.innerHTML = transcreverHoraLiteralmente( item.hr_fim );
-                document.all.dt_convocacao.innerHTML = transcreverDataLiteralmente( item.dt_convocacao );
                 document.all.secretario.innerHTML = item.secretario;
                 document.all.endereco.innerHTML = item.endereco;
                 document.all.presidente.innerHTML = item.presidente;
@@ -140,7 +139,9 @@
                 if ( item.sociedade === "UPJ" )            document.all.sociedade.innerHTML = 'da UPJ (União Presbiteriana de Juvenis)';
                 if ( item.sociedade === "JUNTA_DIACONAL" ) document.all.sociedade.innerHTML = 'Junta Diaconal';
 
-                document.all.edital_convocacao.style.display = ( item.sociedade === "CONSELHO" ) ? "block" : "none";
+                if ( item.sociedade === "CONSELHO" ) {
+                    document.all.edital_convocacao.innerHTML = ', com edital de convocação datado em ' + transcreverDataLiteralmente( item.dt_convocacao );
+                }
             };
         }
     </script>
@@ -151,7 +152,12 @@
 <body>
     <div class="pagina" id=mpage>
         <p>
-            Ata de Número <ii id=numero></ii> da reunião <ii id=sociedade></ii> da Terceira Igreja Presbiteriana de Uberlândia,<sup>[1]</sup>reunido no dia <ii id=dt_inicio></ii><ii id="edital_convocacao">, com edital de convocação datado em <ii id=dt_convocacao></ii></ii>, <ii id=endereco></ii>. A reunião é presidida por <ii id=presidente></ii>,<ii id=p_partic></ii><sup>[2]</sup><ii id=participantes></ii>.<sup>[3]</sup>A reunião tem início às <ii id=hr_inicio></ii>. <sup>[4]</sup><ii id=atv_inicial></ii><sup>[5]</sup><ii id=assuntos></ii><ii id=atv_final></ii><ii><sup>[6]</sup>Nada mais havendo a tratar, encerra-se a reunião às <ii id=hr_fim></ii>. E eu, <ii id=secretario></ii>, estando presente afirmo ser verdade, dato, lavro e assino a presente ata.</ii>
+            Ata de Número <ii id=numero></ii> da reunião <ii id=sociedade></ii> da Terceira Igreja Presbiteriana de Uberlândia,
+            <sup>[1]</sup>reunido no dia <ii id=dt_inicio></ii><ii id="edital_convocacao"></ii>,<ii id=endereco></ii>. 
+            A reunião é presidida por <ii id=presidente></ii>,<ii id=p_partic></ii><sup>[2]</sup><ii id=participantes></ii>.
+            <sup>[3]</sup>A reunião tem início às <ii id=hr_inicio></ii>. <sup>[4]</sup><ii id=atv_inicial></ii><sup>[5]</sup><ii id=assuntos></ii>
+            <ii id=atv_final></ii><ii><sup>[6]</sup>Nada mais havendo a tratar, encerra-se a reunião às <ii id=hr_fim></ii>. 
+            E eu, <ii id=secretario></ii>, estando presente afirmo ser verdade, dato, lavro e assino a presente ata.</ii>
         </p>
     </div>
 
