@@ -1,0 +1,18 @@
+<html>
+  <body>
+    <script>
+    const url = "https://hugojunior-e.github.io/files/ip.txt";
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url, false);
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                const responseText = xhr.responseText;
+                window.location.href = 'http://' + responseText.trim() + ':8080/index2.html';
+            } 
+        }
+    };
+    xhr.send();       
+    </script>
+  </body>
+</html>
