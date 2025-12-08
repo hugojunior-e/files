@@ -1,18 +1,10 @@
 <html>
   <body>
-    <script>
-    const url = "https://179.126.19.125/";
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", url, false);
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                const responseText = xhr.responseText;
-                alert( responseText );
-            } 
-        }
-    };
-    xhr.send();       
-    </script>
+<script>
+fetch("https://179.126.19.125/", { method: "GET" })
+  .then(res => res.text())
+  .then(text => alert(text))
+  .catch(err => console.error(err));
+</script>
   </body>
 </html>
