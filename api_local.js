@@ -7,7 +7,7 @@ const url_doc_sef = 'doc_sef';
 
 function get_url_api() {
   console.log(window.sessionStorage.getItem("global_ip"));
-  return "http://" + window.sessionStorage.getItem("global_ip") + ":8080/api";
+  return "https://" + window.sessionStorage.getItem("global_ip") + "/api";
 }
 
 //--------------  consulta dados
