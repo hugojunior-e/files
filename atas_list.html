@@ -11,14 +11,26 @@
     <script>
         const sociedade   = window.sessionStorage.getItem("soc_name");
         
-        function populateTable(data) {
+        function populateTable(codigo, mensagem, data) {
+
+            if ( codigo != 0 ) {
+                alert(mensagem);
+                return;
+            }
+            data.results.sort((a, b) => {
+                const numA = Number(a.numero.substring(3) + a.numero.substring(0, 2));
+                const numB = Number(b.numero.substring(3) + b.numero.substring(0, 2));
+
+                return numB - numA;
+            });
+
             obj_l = document.getElementById('LINK_ATAS');
             obj_l.innerHTML = '';
 
             items  = []
             anoAnt = '-';
-            for (i = 0; i < data.data.length; i++) {
-                item      = data.data[i];  
+            for (i = 0; i < data.results.length; i++) {
+                item      = data.results[i];  
                 ano       = item.numero.slice(-4);
                 lin       = '';
                 if ( i > 0 && ano !== anoAnt ) {
@@ -26,11 +38,11 @@
                 }
                 anoAnt = ano;
                 
-                clauseWhere      = "objectId=" + item.object_id;
+                clauseWhere      = "objectId=" + item.objectId;
                 obj_l.innerHTML += `
                     ${lin}
                     <tr>
-                        <td><input type=image src=imgs/edit.png onclick="jsAddOrEdit('${item.object_id}')"></td>
+                        <td><input type=image src=imgs/edit.png onclick="jsAddOrEdit('${item.objectId}')"></td>
                         <td><a href="atas_view.html?${clauseWhere}"> ${item.numero} </a></td>
                     </tr>
                 `;
@@ -59,7 +71,12 @@
     
     <script> 
         document.all.SOCIEDADE.innerHTML = sociedade;
-        apiQueryData( url_atas, populateTable, "where sociedade='" + sociedade + "' order by (substring(numero,4) || substring(numero,1,2)) desc" ); 
+        parametros = {
+            where: JSON.stringify({
+                sociedade: sociedade
+            })
+        };        
+        apiQueryData( url_atas, populateTable, parametros); 
     </script>
 
     <SPAN id=usuarioLogado></SPAN>

@@ -14,7 +14,12 @@
         grupo_louvor = "LDH";
         
 
-        function populateTable(data) {
+        function populateTable(codigo, message, data) {
+            if ( codigo != 0 ) {
+                alert(message);
+                return;
+            }
+
             document.getElementById('POS').innerHTML     = '';
             document.getElementById('CULTO').innerHTML   = '';
             document.getElementById('EBD').innerHTML     = '';
@@ -23,9 +28,8 @@
             
             document.all.titulo.innerHTML                = grupo_louvor;
             
-            for (i = 0; i < data.data.length; i++) {
-                item      = data.data[i];
-                
+            for (i = 0; i < data.results.length; i++) {
+                item      = data.results[i];
                 title     = "<br><span class=subtitle>" + item.etapa + "</span>";
 
                 global_id = global_id + 1;
@@ -51,7 +55,7 @@
             infos = global_infos[iid];
 
             document.all.IU.value             = 'U';
-            document.all.objectId.value       = infos.object_id;
+            document.all.objectId.value       = infos.objectId;
             document.all.tipo.value           = infos.etapa;
             document.all.name.value           = infos.musica;
             document.all.youtube.value        = infos.link_youtube;  
@@ -73,7 +77,7 @@
 
         function jsRemover() {
             if (confirm('confirma exclusao da musga?')) {
-                apiQueryDelete( url_repertorios , document.all.objectId.value , function(cod, msg) {
+                apiQueryDelete( url_repertorios , document.all.objectId.value , function(codigo, message) {
                     document.all.modal.style.display = 'none';
                     listaMusicas();
                 });
@@ -81,10 +85,7 @@
         }    
 
         function jsSalvar() {
-            object_id = crypto.randomUUID();
-
             data = {
-                "object_id": object_id,
                 "grupo": grupo_louvor,
                 "musica": document.all.name.value,
                 "link_youtube": document.all.youtube.value,
@@ -93,7 +94,8 @@
             };
 
             if ( document.all.IU.value == 'I' ) {
-                apiQueryInsert( url_repertorios, data, function( cod, objectId ) {
+                apiQueryInsert( url_repertorios, data, function( cod, message ) {
+                    alert(message);
                     document.all.modal.style.display = 'none';
                     listaMusicas();
                 });
@@ -106,9 +108,14 @@
             }
         }
 
-        function listaMusicas() {
-            parametros = " where grupo = '" + grupo_louvor + "' order by musica ";
-            apiQueryData( url_repertorios, populateTable, parametros );             
+        async function listaMusicas() {
+            parametros = {
+                where: JSON.stringify({
+                    grupo: grupo_louvor
+                }),
+                order: "ordem"
+            };
+            await apiQueryData( url_repertorios, populateTable, parametros );             
         }        
         
     </script>

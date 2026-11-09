@@ -103,9 +103,14 @@
         }        
 
         
-        function populateTable(data) {
-            for (i = 0; i < data.data.length; i++) {
-                item      = data.data[i];  
+        function populateTable(codigo, mensagem, data) {
+            if ( codigo != 0 ) {
+                alert(mensagem);
+                return;
+            }
+            
+            for (i = 0; i < data.results.length; i++) {
+                item      = data.results[i];  
                 
                 nro_ata = item.numero.substr(0,7);
                 document.all.numero.innerHTML = numerosPorExtenso[ parseInt(nro_ata.substr(0,2)) ] + " de " + nro_ata.substr(3) + item.numero.substr(7);
@@ -167,8 +172,13 @@
          if (isMobile) {
                document.all.mpage.className = '';
          }
-         
-         apiQueryData( url_atas, populateTable, "where object_id='" + objectId + "'" ); 
+        parametros = {
+            where: JSON.stringify({
+                objectId: objectId
+            })
+        };   
+
+         apiQueryData( url_atas, populateTable, parametros ); 
      </script>
 </body>
 </html>

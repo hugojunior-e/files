@@ -69,9 +69,14 @@
         };
         
         
-        function populateTable(data) {
-            for (i = 0; i < data.data.length; i++) {
-                item      = data.data[i];  
+        function populateTable(codigo, mensagem, data) {
+            if ( codigo != 0 ) {
+                alert(mensagem);
+                return;
+            }
+            
+            for (i = 0; i < data.results.length; i++) {
+                item      = data.results[i];  
                 document.all.numero.value = item.numero;
                 document.all.dt_inicio.value = item.dt_inicio;
                 document.all.hr_inicio.value = item.hr_inicio;
@@ -85,14 +90,14 @@
                 document.all.atv_final.value = item.atv_final;
                 document.all.assuntos.value = item.assuntos;
 
-                objectId = item.object_id;
+                objectId = item.objectId;
                 document.all.numero.readOnly = true;
             };
         }
 
         function getData() {
             data = {
-                "object_id" : objectId,
+                "objectIid" : objectId,
                 "sociedade":sociedade,
                 "numero":document.all.numero.value,
                 "dt_inicio":document.all.dt_inicio.value,
@@ -115,14 +120,12 @@
             if ( objectId !== "-" ) {
                 document.all.numero.readOnly = true;
                 apiQueryUpdate( url_atas, objectId, getData(), function(cod, msg) {
-                    alert("Atualizado: " + msg)
+                    alert(msg)
                 });
             } else {
-                objectId = crypto.randomUUID();
-
                 document.all.numero.readOnly = false;
                 apiQueryInsert( url_atas, getData(), function(cod, msg) { 
-                    alert("Inserido: " + objectId)
+                    alert(msg)
                 });
             }
         }
@@ -205,7 +208,12 @@
 
         
         if (objectId != "-") {
-            apiQueryData(url_atas, populateTable, "where object_id='" + objectId + "'"); 
+            parametros = {
+                where: JSON.stringify({
+                    objectId: objectId
+                })
+            };               
+            apiQueryData(url_atas, populateTable, parametros); 
         }
     </script>
 

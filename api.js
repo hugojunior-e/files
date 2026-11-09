@@ -1,209 +1,152 @@
-const apiKey = 'R5fwh1O0R3YYAeYs5i0Kw70Z0Fmc6IgDhK6TieIF';
-const appId = 'tkjFBrhcX0rN9AlcdyzgFUjwroLm0NZ8xWnntqBi';
-
 const validateHash = '459d311e53524b5da176ebd1c856bbf6';
-
 const url_atas  = 'atas';
-const url_doc_relat_bimestral = 'doc_relat_bimestral';
-const url_repertorios = 'repertorios';
+const url_repertorios = 'repertorio';
 const url_doc_sef = 'doc_sef';
-
-const url_sqlite = "https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/sql";
-const apiKey_sqlite = "uHIlKATNh7ZlHhYmqoFBSNPT3x0AKvVYTlfcBin4a98";
-
-//--------------  consulta dados
-
-async function apiGetRowid(table_name, object_id) {
-    const requestData = {
-        sql: "select rowid from " + table_name + "  where object_id = '" + object_id + "'",
-        database: "3ipb"
-    };
-    
-    response  = await fetch(url_sqlite, {
-        method: "POST",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
-        },
-        body: JSON.stringify(requestData)
-    }) 
-    
-    if (!response.ok) {
-        throw new Error(`Erro: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-}
+const applicationId = "te9QqZVo3HJ51JT9JFhFgz9kbNhENh8KroHGlohe";
+const apiRestKey = "PsteTWDkTPQiKw1s5Nq8XadII9Gmla4DEpuGkX2A";
 
 
+//################################################################################################
+// OPERACOES COM O BANCO DE DADOS
+//################################################################################################
 
-function apiQueryData( p_url, populateTable, paramsQuery = " ") {
-    const requestData = {
-        sql: "SELECT * FROM " + p_url + " " + paramsQuery ,
-        database: "3ipb"
-    };
-    
-    fetch(url_sqlite, {
-        method: "POST",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
-        },
-        body: JSON.stringify(requestData)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Erro: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        populateTable(data);
-    })
-    .catch(error => {
-        console.error("Erro na requisição:", error);
-    });
+// SELECT
 
-}
-
-//--------------  atualizando dados
-
-function apiQueryUpdate(p_url, p_objectId, p_data, onUpdate) {
-
-    apiGetRowid(p_url,p_objectId)
-    .then(data => {    
-        rowid = data.data[0].rowid;
-
-        fetch('https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/3ipb/' + p_url + '/' + rowid, {
-            method: 'PATCH',
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
-            },
-            body: JSON.stringify(p_data)
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(errorData => {
-                    const status_cod = 1;
-                    const status_msg = `Erro: ${errorData.error}`;
-                    if (onUpdate !== undefined) {
-                        onUpdate(status_cod, status_msg);
-                    }
-                });
-            }
-            const status_cod = 0;
-            const status_msg = "Sucesso";
-            if (onUpdate !== undefined) {
-                onUpdate(status_cod, status_msg);
-            }
-        })
-        .catch(error => {
-            console.error(error);
-            if (onUpdate !== undefined) {
-                onUpdate(1, `Erro: ${error.message}`);
-            }
-        });
-    });        
-}
-
-
-
-//--------------  excluido dados
-
-function apiQueryDelete(p_url, p_objectId, onDelete) {
-
-    apiGetRowid(p_url,p_objectId)
-    .then(data => {
-        rowid = data.data[0].rowid;
-
-        fetch("https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/3ipb/" + p_url + "/" + rowid, {
-            method: "DELETE",
-            headers: {
-                "Accept": "application/json",
-                "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
-            }
-        })
-        .then(response => {
-            let status_cod = 0;
-            let status_msg = "Sucesso";
-            
-            if (!response.ok) {
-                return response.json().then(errorData => {
-                    status_cod = 1;
-                    status_msg = `Erro: ${errorData.error}`;
-                    if (onDelete !== undefined) {
-                        onDelete(status_cod, status_msg);
-                    }
-                });
-            }
-            
-            if (onDelete !== undefined) {
-                onDelete(status_cod, status_msg);
-            }
-        })
-        .catch(error => {
-            console.error(error);
-            if (onDelete !== undefined) {
-                onDelete(1, `Erro: ${error.message}`);
-            }
-        });        
-    });
-
-
-
-}
-
-
-//--------------  inserindo dados
-
-function apiQueryInsert(p_url, p_data, onInsert) {
-
-    fetch("https://cda5hp2khz.g4.sqlite.cloud/v2/weblite/3ipb/" + p_url, {
-        method: "POST",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            "Authorization": `Bearer sqlitecloud://cda5hp2khz.g4.sqlite.cloud:8860?apikey=${apiKey_sqlite}`
-        },
-        body: JSON.stringify( [p_data] )
-    })
-    .then(response => {
-        let status_cod = 0;
-        let status_msg = "Sucesso";
-        
-        if (!response.ok) {
-            return response.json().then(errorData => {
-                status_cod = 1;
-                status_msg = `Erro: ${errorData.error}`;
-                if (onInsert !== undefined) {
-                    onInsert(status_cod, status_msg);
-                }
+async function apiQueryData(p_url, populateTable, paramsQuery = {}) {
+    const limit = 1000;
+    let skip = 0;
+    let allResults = [];
+    let results;
+    try {
+        do {
+            const params = new URLSearchParams({
+                limit: limit,
+                skip: skip,
+                ...paramsQuery
             });
-        }
-        
-        return response.json().then(dados => {
-            if (onInsert !== undefined) {
-                onInsert(status_cod, status_msg);
-            }
-        });
-    })
-    .catch(error => {
-        console.error(error);
-        if (onInsert !== undefined) {
-            onInsert(1, `Erro: ${error.message}`);
-        }
-    });
-        
 
+            const response = await fetch(
+                `https://parseapi.back4app.com/classes/${p_url}?${params}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                        "X-Parse-Application-Id": applicationId,
+                        "X-Parse-REST-API-Key": apiRestKey
+                    }
+                }
+            );
+
+            if (!response.ok) {
+                const result = await response.json();
+                populateTable(1, `${response.status} - ${result.error}`, {});
+                return;
+            }
+            const data = await response.json();
+            results = data.results || [];
+            allResults.push(...results);
+            console.log(`Registros encontrados: ${allResults.length}`);
+            skip += results.length;
+        } while (results.length === limit);
+
+        populateTable(0, 'Sucesso', { results: allResults });
+    } catch (error) {
+        populateTable(1, error.message, {});
+    }
+}
+
+// UPDATE
+
+async function apiQueryUpdate(p_url, p_objectId, p_data, onUpdate) {
+    try {
+        const response = await fetch(
+            `https://parseapi.back4app.com/classes/${p_url}/${p_objectId}`,
+            {
+                method: "PUT",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "X-Parse-Application-Id": applicationId,
+                    "X-Parse-REST-API-Key": apiRestKey
+                },
+                body: JSON.stringify(p_data)
+            }
+        );
+        if (!response.ok) {
+           const result = await response.json();
+           onUpdate(1, `${response.status} - ${result.error}`);
+           return;
+        }
+        onUpdate(0,`${response.status} - Atualizado com sucesso!`);
+    } catch (error) {
+        onUpdate(1, error.message);
+    }
+}
+
+
+// DELETE
+
+async function apiQueryDelete(p_url, p_objectId, onDelete) {
+    try {
+        const response = await fetch(
+            `https://parseapi.back4app.com/classes/${p_url}/${p_objectId}`,
+            {
+                method: "DELETE",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "X-Parse-Application-Id": applicationId,
+                    "X-Parse-REST-API-Key": apiRestKey
+                }
+            }
+        );
+        if (!response.ok) {
+           const result = await response.json();
+           onDelete(1, `${response.status} - ${result.error}`) ;
+           return;
+        }
+        onDelete(0,`${response.status} - Deletado com sucesso!`);
+    } catch (error) {
+        onDelete(1, error.message);
+    }        
+}
+
+
+// INSERT
+
+async function apiQueryInsert(p_url, p_data, onInsert) {
+    try {
+        const response = await fetch(
+            `https://parseapi.back4app.com/classes/${p_url}`,
+            {
+                method: "POST",
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "X-Parse-Application-Id": applicationId,
+                    "X-Parse-REST-API-Key": apiRestKey
+                },
+                body: JSON.stringify(p_data)
+            }
+        );
+        if (!response.ok) {
+           const result = await response.json();
+           onInsert(1, `${response.status} - ${result.error}`) ;
+           return;
+        }
+        onInsert(0,`${response.status} - Inserido com sucesso!`);
+    } catch (error) {
+        onInsert(1, error.message);
+    }     
 }
 
 
 
 
+//################################################################################################
+//
+//################################################################################################
 
 
 
