@@ -111,6 +111,9 @@
             
             for (i = 0; i < data.results.length; i++) {
                 item      = data.results[i];  
+
+
+                document.title = 'ATA_' + item.sociedade + "_" + item.numero.replace("/","_");
                 
                 nro_ata = item.numero.substr(0,7);
                 document.all.numero.innerHTML = numerosPorExtenso[ parseInt(nro_ata.substr(0,2)) ] + " de " + nro_ata.substr(3) + item.numero.substr(7);
