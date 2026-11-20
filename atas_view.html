@@ -119,13 +119,13 @@
                 document.all.hr_fim.innerHTML = transcreverHoraLiteralmente( item.hr_fim );
                 document.all.secretario.innerHTML = item.secretario;
                 document.all.endereco.innerHTML = item.endereco;
-                document.all.presidente.innerHTML = (item.sociedade === "CONSELHO" ? "pelo" : "por") + item.presidente;
+                document.all.presidente.innerHTML = (item.sociedade === "CONSELHO" ? "pelo " : "por") + item.presidente;
                 document.all.participantes.innerHTML = item.participantes;
                 document.all.atv_inicial.innerHTML = item.atv_inicial;
                 document.all.atv_final.innerHTML = item.atv_final;
                 document.all.assuntos.innerHTML = item.assuntos.replaceAll("**", "<li>").replaceAll("*","<br>");
 
-                document.all.p_partic.innerHTML = "estando presentes os seguintes membros: ";
+                document.all.p_partic.innerHTML = " estando presentes os seguintes membros: ";
                 
                 if ( item.sociedade === "SAF" || item.sociedade === "UPH" ) {
                   document.all.p_partic.innerHTML = "";    
